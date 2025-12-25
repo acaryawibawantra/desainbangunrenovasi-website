@@ -64,7 +64,7 @@ export function Portfolio() {
                 <div className="z-20 px-8 py-12 md:px-16"
                     style={{ backgroundColor: '#E8E4DE' }}>
                     <div className="divider-left mb-8" />
-                    <h2 className="mb-8 text-5xl font-light text-charcoal md:text-7xl">
+                    <h2 className="mb-8 text-5xl font-medium text-charcoal md:text-7xl">
                         Portfolio
                     </h2>
 

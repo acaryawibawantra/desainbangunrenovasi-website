@@ -1,351 +1,167 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
-
-interface PhilosophyStep {
-    title: string;
-    subtitle: string;
-    description: string;
-    points: string[];
-}
-
-const philosophySteps: PhilosophyStep[] = [
-    {
-        title: "DESAIN",
-        subtitle: "Layanan Desain Arsitektur",
-        description: "Menciptakan blueprint impian Anda dengan ketelitian dan kreativitas tinggi.",
-        points: [
-            "Desain rumah tinggal",
-            "3D visual & gambar kerja",
-            "Desain sesuai budget",
-            "Siap dibangun tanpa revisi berulang"
-        ]
-    },
-    {
-        title: "BANGUN",
-        subtitle: "Jasa Bangun Rumah",
-        description: "Mewujudkan desain menjadi kenyataan dengan standar konstruksi terbaik.",
-        points: [
-            "Rumah baru 1-3 lantai",
-            "Sistem kerja transparan",
-            "Material sesuai spesifikasi",
-            "Pengawasan langsung tim internal"
-        ]
-    },
-    {
-        title: "RENOVASI",
-        subtitle: "Jasa Renovasi Rumah",
-        description: "Mentransformasi ruang lama menjadi pengalaman baru yang lebih baik.",
-        points: [
-            "Renovasi sebagian / total",
-            "Upgrade fasad & interior",
-            "Penambahan lantai / ruangan",
-            "Solusi renovasi bertahap"
-        ]
-    }
-];
-
-// Mobile Step with timeline
-function MobileStepSection({ step, index, isLast }: { step: PhilosophyStep; index: number; isLast: boolean }) {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-10%" });
-
-    return (
-        <div ref={ref} className="relative pl-12">
-            {/* Timeline line - fills on scroll */}
-            <div
-                className="absolute left-4 top-0 bottom-0 w-px"
-                style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}
-            >
-                <motion.div
-                    initial={{ scaleY: 0 }}
-                    animate={isInView ? { scaleY: 1 } : {}}
-                    transition={{ duration: 1, ease: "easeOut" }}
-                    className="absolute inset-0 origin-top"
-                    style={{ backgroundColor: 'rgba(255,255,255,0.5)' }}
-                />
-            </div>
-
-            {/* Timeline dot */}
-            <motion.div
-                initial={{ scale: 0 }}
-                animate={isInView ? { scale: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.2 }}
-                className="absolute left-2 top-0 w-5 h-5 rounded-full border-2 flex items-center justify-center"
-                style={{
-                    borderColor: 'rgba(255,255,255,0.5)',
-                    backgroundColor: '#1A5F5F'
-                }}
-            >
-                <motion.div
-                    initial={{ scale: 0 }}
-                    animate={isInView ? { scale: 1 } : {}}
-                    transition={{ duration: 0.3, delay: 0.4 }}
-                    className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: 'rgba(255,255,255,0.8)' }}
-                />
-            </motion.div>
-
-            {/* Content */}
-            <div className="pb-16">
-                <motion.span
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className="text-xs uppercase tracking-widest mb-3 block"
-                    style={{ color: 'rgba(255,255,255,0.4)', letterSpacing: '0.15em' }}
-                >
-                    Step {index + 1}
-                </motion.span>
-
-                <motion.h3
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                    className="text-4xl font-light tracking-wide mb-3"
-                    style={{ color: '#FFFFFF', fontWeight: 200 }}
-                >
-                    {step.title}
-                </motion.h3>
-
-                <motion.p
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                    className="text-sm mb-4"
-                    style={{ color: 'rgba(255,255,255,0.5)' }}
-                >
-                    {step.subtitle}
-                </motion.p>
-
-                <motion.p
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.5, delay: 0.6 }}
-                    className="text-sm mb-4 leading-relaxed"
-                    style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.7 }}
-                >
-                    {step.description}
-                </motion.p>
-
-                <ul className="space-y-2">
-                    {step.points.map((point, pointIndex) => (
-                        <motion.li
-                            key={pointIndex}
-                            initial={{ opacity: 0, x: 10 }}
-                            animate={isInView ? { opacity: 1, x: 0 } : {}}
-                            transition={{ duration: 0.4, delay: 0.7 + pointIndex * 0.08 }}
-                            className="flex items-center gap-3 text-sm"
-                        >
-                            <span
-                                className="w-1 h-1 rounded-full flex-shrink-0"
-                                style={{ backgroundColor: 'rgba(255,255,255,0.4)' }}
-                            />
-                            <span style={{ color: 'rgba(255,255,255,0.5)' }}>
-                                {point}
-                            </span>
-                        </motion.li>
-                    ))}
-                </ul>
-            </div>
-        </div>
-    );
-}
-
-// Desktop Step (original)
-function DesktopStepSection({ step, index, isLast }: { step: PhilosophyStep; index: number; isLast: boolean }) {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-20%" });
-
-    return (
-        <div ref={ref} className="relative py-24 md:py-32 flex items-center">
-            {/* Content */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-32 xl:gap-40 items-start">
-                    {/* Left - Title */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        className={index % 2 === 1 ? "lg:order-2" : ""}
-                    >
-                        <motion.span
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={isInView ? { opacity: 1, y: 0 } : {}}
-                            transition={{ duration: 0.6, delay: 0.5 }}
-                            className="text-xs uppercase tracking-widest mb-4 block"
-                            style={{ color: 'rgba(255,255,255,0.4)', letterSpacing: '0.2em' }}
-                        >
-                            Step {index + 1}
-                        </motion.span>
-                        <motion.h2
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={isInView ? { opacity: 1, y: 0 } : {}}
-                            transition={{ duration: 0.8, delay: 0.6 }}
-                            className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-light tracking-wide mb-8"
-                            style={{ color: '#FFFFFF', fontWeight: 200 }}
-                        >
-                            {step.title}
-                        </motion.h2>
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={isInView ? { opacity: 1, y: 0 } : {}}
-                            transition={{ duration: 0.6, delay: 0.7 }}
-                            className="text-lg"
-                            style={{ color: 'rgba(255,255,255,0.5)' }}
-                        >
-                            {step.subtitle}
-                        </motion.p>
-                    </motion.div>
-
-                    {/* Right - Description */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ duration: 0.8, delay: 0.5 }}
-                        className={index % 2 === 1 ? "lg:order-1" : ""}
-                    >
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={isInView ? { opacity: 1, y: 0 } : {}}
-                            transition={{ duration: 0.6, delay: 0.7 }}
-                            className="text-lg mb-8 leading-relaxed"
-                            style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}
-                        >
-                            {step.description}
-                        </motion.p>
-
-                        <ul className="space-y-4">
-                            {step.points.map((point, pointIndex) => (
-                                <motion.li
-                                    key={pointIndex}
-                                    initial={{ opacity: 0, x: 20 }}
-                                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                                    transition={{
-                                        duration: 0.5,
-                                        delay: 0.8 + pointIndex * 0.1
-                                    }}
-                                    className="flex items-center gap-4"
-                                >
-                                    <span
-                                        className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                                        style={{ backgroundColor: 'rgba(255,255,255,0.5)' }}
-                                    />
-                                    <span style={{ color: 'rgba(255,255,255,0.6)' }}>
-                                        {point}
-                                    </span>
-                                </motion.li>
-                            ))}
-                        </ul>
-                    </motion.div>
-                </div>
-            </div>
-
-            {/* Connecting line to next step */}
-            {!isLast && (
-                <motion.div
-                    initial={{ scaleY: 0 }}
-                    animate={isInView ? { scaleY: 1 } : {}}
-                    transition={{ duration: 0.8, delay: 1.2 }}
-                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-16 origin-top"
-                    style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}
-                />
-            )}
-        </div>
-    );
-}
+import { useRef, useState } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 
 export function Tagline() {
     const containerRef = useRef(null);
-    const headerInView = useInView(containerRef, { once: true, margin: "-100px" });
+    const isInView = useInView(containerRef, { once: true, margin: "-20%" });
 
     return (
         <section
-            id="philosophy"
             ref={containerRef}
-            className="relative overflow-hidden"
-            style={{ backgroundColor: '#1A5F5F' }}
+            className="relative bg-[#1A5F5F] min-h-[70vh] flex flex-col items-center justify-center py-20 px-4 md:px-8 overflow-hidden"
         >
+            {/* Subtle Background Gradient */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15)_0%,rgba(255,255,255,0)_70%)] pointer-events-none" />
+
             {/* Header */}
-            <div className="py-16 md:py-24 flex items-center justify-center">
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={headerInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.8 }}
-                    className="text-center px-8"
-                >
-                    <span
-                        className="text-xs uppercase tracking-widest mb-6 block"
-                        style={{ color: 'rgba(255,255,255,0.4)', letterSpacing: '0.3em' }}
-                    >
-                        Our Process
-                    </span>
-                    <h2
-                        className="text-3xl md:text-5xl lg:text-6xl font-light"
-                        style={{ color: '#FFFFFF', fontWeight: 200 }}
-                    >
-                        Bagaimana Kami Bekerja
-                    </h2>
-                </motion.div>
-            </div>
+            <motion.p
+                initial={{ opacity: 0, y: -20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="absolute top-10 md:top-20 text-white/40 text-xs md:text-sm tracking-[0.4em] font-light uppercase z-10"
+            >
+                Workflow
+            </motion.p>
 
-            {/* Mobile Steps with Timeline */}
-            <div className="lg:hidden px-6 pb-8">
-                {philosophySteps.map((step, index) => (
-                    <MobileStepSection
-                        key={index}
-                        step={step}
-                        index={index}
-                        isLast={index === philosophySteps.length - 1}
-                    />
-                ))}
-            </div>
+            <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 md:gap-0 mt-10 relative z-10">
 
-            {/* Desktop Steps */}
-            <div className="hidden lg:block">
-                {philosophySteps.map((step, index) => (
-                    <DesktopStepSection
-                        key={index}
-                        step={step}
-                        index={index}
-                        isLast={index === philosophySteps.length - 1}
-                    />
-                ))}
-            </div>
+                {/* STEP 1: DESAIN */}
+                <StepItem
+                    text="DESAIN"
+                    description="Visualisasi & Konsep"
+                    detail="Kami menerjemahkan impian Anda menjadi blueprint visual yang presisi dan estetis."
+                    index={0}
+                    isInView={isInView}
+                />
 
-            {/* Bottom CTA */}
-            <div className="py-16 md:py-28 flex items-center justify-center">
-                <motion.a
-                    href="#contact"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                    className="group inline-flex items-center gap-4"
-                >
-                    <span
-                        className="text-sm uppercase tracking-widest transition-all duration-300 group-hover:tracking-[0.3em]"
-                        style={{ color: 'rgba(255,255,255,0.7)', letterSpacing: '0.15em' }}
-                    >
-                        Mulai Proyek Anda
-                    </span>
-                    <span
-                        className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border transition-all duration-500 group-hover:w-20 group-hover:bg-white overflow-hidden"
-                        style={{ borderColor: 'rgba(255,255,255,0.3)' }}
-                    >
-                        <svg
-                            className="h-4 w-4 md:h-5 md:w-5 transition-all duration-300 group-hover:text-[#1A5F5F] group-hover:translate-x-1"
-                            style={{ color: 'rgba(255,255,255,0.7)' }}
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </span>
-                </motion.a>
+                {/* ARROW 1 */}
+                <Arrow index={0} isInView={isInView} />
+
+                {/* STEP 2: BANGUN */}
+                <StepItem
+                    text="BANGUN"
+                    description="Konstruksi & Material"
+                    detail="Realisasi fisik dengan standar mutu terbaik dan pengawasan ketat."
+                    index={1}
+                    isInView={isInView}
+                />
+
+                {/* ARROW 2 */}
+                <Arrow index={1} isInView={isInView} />
+
+                {/* STEP 3: RENOVASI */}
+                <StepItem
+                    text="RENOVASI"
+                    description="Transformasi & Upgrade"
+                    detail="Memberikan nafas baru pada bangunan lama untuk nilai dan kenyamanan lebih."
+                    index={2}
+                    isInView={isInView}
+                />
+
             </div>
         </section>
+    );
+}
+
+function StepItem({ text, description, detail, index, isInView }: { text: string; description: string; detail: string; index: number; isInView: boolean }) {
+    const [isHovered, setIsHovered] = useState(false);
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 + (index * 0.3), ease: "easeOut" }}
+            className="relative flex flex-col items-center justify-center w-full md:w-auto group cursor-pointer"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {/* Text with Outline Effect */}
+            <h2
+                className={`text-5xl md:text-6xl lg:text-7xl font-light tracking-tight transition-all duration-500 ${isHovered ? 'text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]' : 'text-transparent bg-clip-text bg-gradient-to-b from-white/80 to-white/40'}`}
+                style={{
+                    WebkitTextStroke: isHovered ? '0px' : '1px rgba(255,255,255,0.3)'
+                }}
+            >
+                {text}
+            </h2>
+
+            {/* Simple label (always visible, fades out on hover) */}
+            <span className={`mt-4 text-xs tracking-widest uppercase text-white/40 transition-opacity duration-300 absolute -bottom-8 ${isHovered ? 'opacity-0' : 'opacity-100'}`}>
+                {description}
+            </span>
+
+            {/* Hover Detail Card */}
+            <AnimatePresence>
+                {isHovered && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 5, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute top-full mt-6 w-64 p-4 bg-black/40 backdrop-blur-md border border-white/10 rounded-xl text-center shadow-2xl z-20"
+                    >
+                        <p className="text-white/90 text-sm font-light leading-relaxed">
+                            {detail}
+                        </p>
+                        <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-black/40 border-t border-l border-white/10 rotate-45" />
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
+    );
+}
+
+function Arrow({ index, isInView }: { index: number; isInView: boolean }) {
+    return (
+        <>
+            {/* Desktop Horizontal Arrow */}
+            <div className="hidden md:block flex-1 mx-4 relative h-[2px] bg-white/10 overflow-hidden rounded-full">
+                {/* Drawing Line Animation */}
+                <motion.div
+                    initial={{ scaleX: 0, originX: 0 }}
+                    animate={isInView ? { scaleX: 1 } : {}}
+                    transition={{ duration: 1.5, delay: 0.6 + (index * 0.3), ease: "easeInOut" }}
+                    className="absolute inset-0 bg-white/20"
+                />
+
+                {/* Moving Particle - Infinite Loop */}
+                <motion.div
+                    initial={{ x: "-100%" }}
+                    animate={isInView ? { x: "200%" } : {}}
+                    transition={{
+                        duration: 2,
+                        ease: "linear",
+                        repeat: Infinity,
+                        repeatDelay: 0.5,
+                        delay: 1.5 + (index * 0.3) // Wait for line to draw first
+                    }}
+                    className="absolute top-0 bottom-0 w-20 bg-gradient-to-r from-transparent via-white to-transparent opacity-80 blur-[2px]"
+                />
+            </div>
+
+            {/* Mobile Vertical Arrow */}
+            <div className="md:hidden w-[2px] h-20 my-4 bg-white/10 relative overflow-hidden rounded-full">
+                <motion.div
+                    initial={{ scaleY: 0, originY: 0 }}
+                    animate={isInView ? { scaleY: 1 } : {}}
+                    transition={{ duration: 1.5, delay: 0.6 + (index * 0.3), ease: "easeInOut" }}
+                    className="absolute inset-0 bg-white/20"
+                />
+                <motion.div
+                    initial={{ y: "-100%" }}
+                    animate={isInView ? { y: "200%" } : {}}
+                    transition={{
+                        duration: 2,
+                        ease: "linear",
+                        repeat: Infinity,
+                        repeatDelay: 0.5,
+                        delay: 1.5 + (index * 0.3)
+                    }}
+                    className="absolute left-0 right-0 h-20 bg-gradient-to-b from-transparent via-white to-transparent opacity-80 blur-[2px]"
+                />
+            </div>
+        </>
     );
 }

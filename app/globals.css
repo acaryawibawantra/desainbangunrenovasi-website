@@ -1,0 +1,351 @@
+@import "tailwindcss";
+
+/* INSIGN Color Palette */
+:root {
+  /* Primary Colors */
+  --color-charcoal: #2C2C2C;
+  --color-beige: #D4C5B9;
+  --color-teal: #1A5F5F;
+  --color-teal-light: #2A7F7F;
+  --color-teal-dark: #0F4040;
+
+  /* Neutral Colors */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-cream: #E8E4DE;
+  --color-cream-light: #F5F3F0;
+  --color-cream-dark: #DDD7CF;
+  --color-gray-light: #F5F5F5;
+  --color-gray-medium: #E0E0E0;
+  --color-gray-dark: #4A4A4A;
+
+  /* Accent Colors */
+  --color-gold: #C9A961;
+  --color-bronze: #8B7355;
+
+  /* Semantic Colors */
+  --color-primary: #2C2C2C;
+  --color-secondary: #D4C5B9;
+  --color-accent: #1A5F5F;
+
+  /* Background & Text */
+  --background: #E8E4DE;
+  --foreground: var(--color-charcoal);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #1A5F5F 0%, #2C2C2C 100%);
+  --gradient-accent: linear-gradient(135deg, #2A7F7F 0%, #1A5F5F 100%);
+  --gradient-warm: linear-gradient(135deg, #D4C5B9 0%, #C9A961 100%);
+  --gradient-overlay: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(44, 44, 44, 0.9) 100%);
+}
+
+@theme inline {
+  --color-primary: var(--color-charcoal);
+  --color-secondary: var(--color-beige);
+  --color-accent: var(--color-teal);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+}
+
+/* Smooth Scrolling Setup */
+html {
+  scroll-behavior: auto;
+  /* Will be overridden by Lenis */
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* Hide Scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for IE/Edge */
+body {
+  -ms-overflow-style: none;
+}
+
+/* Selection Styling */
+::selection {
+  background: var(--color-teal);
+  color: var(--color-white);
+}
+
+::-moz-selection {
+  background: var(--color-teal);
+  color: var(--color-white);
+}
+
+/* Utility Classes */
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-warm {
+  background: var(--gradient-warm);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+.glassmorphism-dark {
+  background: rgba(44, 44, 44, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Premium Shadows */
+.shadow-premium {
+  box-shadow: var(--shadow-xl);
+}
+
+.shadow-glow {
+  box-shadow: 0 0 30px rgba(26, 95, 95, 0.3);
+}
+
+.shadow-glow-gold {
+  box-shadow: 0 0 40px rgba(201, 169, 97, 0.4);
+}
+
+/* Section Spacing */
+section {
+  position: relative;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Gradient Overlays for Images */
+.gradient-overlay-bottom {
+  position: relative;
+}
+
+.gradient-overlay-bottom::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: var(--gradient-overlay);
+  pointer-events: none;
+}
+
+/* Button Styles */
+/* Commented out due to @apply issues with custom colors */
+/* .btn-primary {
+  @apply inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-white font-medium text-lg transition-all duration-300 hover:bg-teal-light hover:scale-105 active:scale-95;
+  box-shadow: 0 4px 16px rgba(26, 95, 95, 0.3);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 6px 24px rgba(26, 95, 95, 0.4);
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-white text-white font-medium text-lg transition-all duration-300 hover:bg-white hover:text-charcoal;
+} */
+
+/* Card Styles */
+.card {
+  @apply bg-white rounded-2xl p-8 transition-all duration-300;
+  box-shadow: var(--shadow-md);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+/* Image Hover Effects */
+.image-zoom {
+  overflow: hidden;
+}
+
+.image-zoom img {
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.image-zoom:hover img {
+  transform: scale(1.08);
+}
+
+/* Typography Enhancements */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.02em;
+  font-weight: 300;
+}
+
+h1 {
+  line-height: 1.1;
+}
+
+h2 {
+  line-height: 1.2;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Divider */
+.divider {
+  width: 60px;
+  height: 4px;
+  background: var(--gradient-accent);
+  border-radius: 2px;
+  margin: 2rem auto;
+}
+
+.divider-left {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Accent Line */
+.accent-line {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.accent-line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--gradient-accent);
+  border-radius: 2px;
+}

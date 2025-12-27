@@ -115,3 +115,11 @@ export const TESTIMONIALS = [
         image: "/images/testimonials/client-3.jpg",
     },
 ];
+
+export const CONTACT_INFO = {
+    email: "info@insign.co.id",
+    phone: "+62 812 3456 7890",
+    whatsapp: "+6281234567890",
+    address: "Jakarta, Indonesia",
+    note: "Dengan perjanjian",
+};

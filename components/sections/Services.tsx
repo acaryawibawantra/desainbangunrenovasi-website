@@ -136,7 +136,7 @@ export function Services() {
                         <span className="text-teal text-sm font-medium tracking-widest uppercase">Layanan Kami</span>
                         <span className="w-12 h-[1px] bg-teal" />
                     </div>
-                    <h2 className="section-title text-4xl md:text-6xl lg:text-7xl font-light text-charcoal mb-6">
+                    <h2 className="section-title text-4xl md:text-6xl lg:text-7xl font-medium text-charcoal mb-6">
                         Solusi <span className="text-gradient">Konstruksi</span> Terbaik
                     </h2>
                     <p className="section-subtitle text-lg md:text-xl text-gray-dark max-w-2xl mx-auto">
@@ -229,7 +229,17 @@ export function Services() {
                         <p className="text-gray-dark">Butuh layanan khusus?</p>
                         <a
                             href="#contact"
-                            className="group inline-flex items-center gap-3 px-8 py-4 bg-charcoal text-white rounded-full font-medium transition-all duration-300 hover:bg-teal hover:shadow-lg hover:shadow-teal/25 hover:scale-105"
+                            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-medium transition-all duration-300 hover:shadow-lg hover:shadow-teal/25 hover:scale-105 text-white"
+                            style={{
+                                background: 'linear-gradient(135deg, #1A5F5F 0%, #2A7A7A 50%, #1A5F5F 100%)',
+                                backgroundSize: '200% 200%',
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundPosition = '100% 100%';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundPosition = '0% 0%';
+                            }}
                         >
                             <span>Hubungi Kami</span>
                             <svg

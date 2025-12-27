@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 import { PORTFOLIO_PROJECTS } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -12,6 +13,7 @@ type FilterType = "all" | "residential" | "commercial";
 
 export function Portfolio() {
     const [activeFilter, setActiveFilter] = useState<FilterType>("all");
+    const [hoveredId, setHoveredId] = useState<number | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -60,57 +62,114 @@ export function Portfolio() {
             style={{ backgroundColor: '#E8E4DE' }}
         >
             <div className="sticky top-0 flex h-screen flex-col">
-                {/* Header with Filter */}
-                <div className="z-20 px-8 py-12 md:px-16"
-                    style={{ backgroundColor: '#E8E4DE' }}>
-                    <div className="divider-left mb-8" />
-                    <h2 className="mb-8 text-5xl font-medium text-charcoal md:text-7xl">
-                        Portfolio
-                    </h2>
-
-                    <div className="flex gap-4">
-                        {["all", "residential", "commercial"].map((filter) => (
-                            <button
-                                key={filter}
-                                onClick={() => setActiveFilter(filter as FilterType)}
-                                className={`rounded-full px-6 py-2 text-sm font-medium transition-all ${activeFilter === filter
-                                    ? "bg-accent text-white"
-                                    : "bg-white text-charcoal hover:bg-accent/10"
-                                    }`}
+                {/* Header */}
+                <div
+                    className="z-20 px-4 md:px-12 py-6 md:py-16"
+                    style={{ backgroundColor: '#E8E4DE' }}
+                >
+                    <div className="max-w-7xl mx-auto">
+                        {/* Title and VIEW ALL row */}
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-3xl md:text-5xl lg:text-6xl font-medium">
+                                <span className="text-gradient">PROJECTS</span>
+                            </h2>
+                            <Link
+                                href="/portfolio"
+                                className="group inline-flex items-center gap-2 text-charcoal/60 hover:text-teal transition-colors duration-300"
                             >
-                                {filter.charAt(0).toUpperCase() + filter.slice(1)}
-                            </button>
-                        ))}
+                                <span className="text-xs md:text-sm font-medium tracking-wider uppercase">
+                                    VIEW ALL
+                                </span>
+                                <svg
+                                    className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </Link>
+                        </div>
+
+                        {/* Filter Pills */}
+                        <div className="flex flex-wrap gap-2 md:gap-3 mt-4">
+                            {[
+                                { key: "all", label: "Semua" },
+                                { key: "residential", label: "Residential" },
+                                { key: "commercial", label: "Commercial" },
+                            ].map((filter) => (
+                                <button
+                                    key={filter.key}
+                                    onClick={() => setActiveFilter(filter.key as FilterType)}
+                                    className={`px-3 md:px-5 py-1.5 md:py-2 text-[10px] md:text-xs font-medium tracking-wider uppercase transition-all duration-300 rounded-full ${activeFilter === filter.key
+                                        ? "bg-white shadow-md"
+                                        : "bg-charcoal/5 text-charcoal/60 hover:bg-charcoal/10"
+                                        }`}
+                                >
+                                    <span className={activeFilter === filter.key ? "text-gradient" : ""}>
+                                        {filter.label}
+                                    </span>
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
                 {/* Horizontal Scroll Container */}
                 <div className="flex flex-1 items-center overflow-hidden">
-                    <div ref={scrollRef} className="flex gap-8 px-8">
+                    <div ref={scrollRef} className="flex gap-6 lg:gap-8 px-6 md:px-12">
                         {filteredProjects.map((project) => (
                             <div
                                 key={project.id}
-                                className="group relative h-[60vh] w-[85vw] flex-shrink-0 overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 md:w-[70vw] lg:w-[55vw]"
+                                className="group flex-shrink-0 w-[80vw] md:w-[50vw] lg:w-[40vw] cursor-pointer"
+                                onMouseEnter={() => setHoveredId(project.id)}
+                                onMouseLeave={() => setHoveredId(null)}
                             >
-                                <Image
-                                    src={project.image}
-                                    alt={project.title}
-                                    fill
-                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/40 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
+                                {/* Image Container */}
+                                <div className="relative aspect-[4/3] overflow-hidden rounded-lg mb-5">
+                                    <Image
+                                        src={project.image}
+                                        alt={project.title}
+                                        fill
+                                        className={`object-cover transition-all duration-700 ${hoveredId === project.id ? 'scale-110' : 'scale-100'
+                                            }`}
+                                    />
 
-                                <div className="absolute bottom-0 left-0 right-0 translate-y-4 p-8 opacity-100 transition-all duration-500 group-hover:translate-y-0 md:p-10">
-                                    <p className="mb-3 text-xs font-bold tracking-wider text-accent uppercase">
-                                        {project.category}
-                                    </p>
-                                    <h3 className="mb-4 text-3xl font-light text-white md:text-5xl drop-shadow-lg">
+                                    {/* Hover Overlay */}
+                                    <div className={`absolute inset-0 bg-teal/20 transition-opacity duration-500 ${hoveredId === project.id ? 'opacity-100' : 'opacity-0'
+                                        }`} />
+
+                                    {/* View Button on Hover */}
+                                    <div className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${hoveredId === project.id ? 'opacity-100' : 'opacity-0'
+                                        }`}>
+                                        <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-xl transform transition-transform duration-500 group-hover:scale-100 scale-75">
+                                            <svg className="w-6 h-6 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Project Info */}
+                                <div className="flex items-start justify-between gap-4">
+                                    <h3 className={`text-xl md:text-2xl font-medium transition-colors duration-300 ${hoveredId === project.id ? 'text-teal' : 'text-charcoal'
+                                        }`}>
                                         {project.title}
                                     </h3>
-                                    <p className="text-lg text-white/90 font-light">
-                                        {project.location}
-                                    </p>
+                                    <span className="text-xs font-medium tracking-wider uppercase text-charcoal/40 pt-1.5">
+                                        {project.category}
+                                    </span>
                                 </div>
+
+                                {/* Location */}
+                                <p className="mt-2 text-sm text-charcoal/50 flex items-center gap-1.5">
+                                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                    </svg>
+                                    {project.location}
+                                </p>
                             </div>
                         ))}
 

@@ -11,6 +11,7 @@ export function Tagline() {
 
     return (
         <section
+            id="tagline"
             ref={containerRef}
             className="relative min-h-[70vh] flex flex-col items-center justify-center py-20 px-4 md:px-8 overflow-hidden"
             style={{
@@ -224,8 +225,8 @@ function StepItem({ text, description, detail, index, isInView, isMobile }: { te
                         {/* Arrow indicator - flip for cards showing above */}
                         <div
                             className={`absolute left-1/2 -translate-x-1/2 w-3 h-3 bg-black/40 border-white/20 ${isMobile && isLast
-                                    ? "-bottom-2 border-b border-r rotate-45"
-                                    : "-top-2 border-t border-l rotate-45"
+                                ? "-bottom-2 border-b border-r rotate-45"
+                                : "-top-2 border-t border-l rotate-45"
                                 }`}
                         />
                         {/* Tap hint for mobile */}

@@ -28,25 +28,31 @@ export function Navigation() {
     // Track active section on scroll
     useEffect(() => {
         const handleScroll = () => {
-            // Only track sections that are anchor links (start with #)
-            const anchorItems = menuItems.filter(item => item.href.startsWith('#'));
-            const sections = anchorItems.map((item) =>
-                document.querySelector(item.href)
-            );
+            // All sections to track (including non-menu sections like tagline)
+            const allSectionsToTrack = ['hero', 'about', 'tagline', 'services', 'portfolio', 'testimonials'];
             const scrollPosition = window.scrollY + 100;
 
-            sections.forEach((section, index) => {
+            // If at very top, force hero
+            if (scrollPosition < 200) {
+                setActiveSection('hero');
+                return;
+            }
+
+            allSectionsToTrack.forEach((sectionId) => {
+                const section = document.getElementById(sectionId);
                 if (section) {
-                    const sectionTop = (section as HTMLElement).offsetTop;
-                    const sectionBottom =
-                        sectionTop + (section as HTMLElement).offsetHeight;
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
 
                     if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                        setActiveSection(anchorItems[index].href.substring(1));
+                        setActiveSection(sectionId);
                     }
                 }
             });
         };
+
+        // Call immediately to detect current section
+        handleScroll();
 
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
@@ -56,33 +62,73 @@ export function Navigation() {
     const isDarkSection = darkSections.includes(activeSection);
     const burgerColor = isDarkSection ? '#FFFFFF' : '#2C2C2C';
 
+    // Delay navigation appearance until after intro animation
+    const [showNav, setShowNav] = useState(false);
+    useEffect(() => {
+        const timer = setTimeout(() => setShowNav(true), 2000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    // Hide on scroll down, show on scroll up
+    const [isHidden, setIsHidden] = useState(false);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScrollDirection = () => {
+            const currentScrollY = window.scrollY;
+
+            // Always show at top of page
+            if (currentScrollY < 100) {
+                setIsHidden(false);
+            } else if (currentScrollY > lastScrollY) {
+                // Scrolling down
+                setIsHidden(true);
+            } else {
+                // Scrolling up
+                setIsHidden(false);
+            }
+
+            setLastScrollY(currentScrollY);
+        };
+
+        window.addEventListener("scroll", handleScrollDirection, { passive: true });
+        return () => window.removeEventListener("scroll", handleScrollDirection);
+    }, [lastScrollY]);
+
     return (
         <>
             {/* Hamburger Button - Minimalist Style with Dynamic Color */}
-            <button
+            <motion.button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed top-8 right-8 z-50 flex h-12 w-12 flex-col items-center justify-center gap-[6px] transition-all duration-300 hover:opacity-70"
+                className="fixed top-8 right-8 z-50 flex h-14 w-14 flex-col items-center justify-center gap-[7px] hover:opacity-70"
                 aria-label="Toggle menu"
+                initial={{ opacity: 0, y: 0 }}
+                animate={{
+                    opacity: showNav ? 1 : 0,
+                    y: isHidden && !isOpen ? -80 : 0
+                }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                style={{ pointerEvents: showNav && !isHidden ? 'auto' : 'none' }}
             >
                 <motion.span
-                    animate={isOpen ? { rotate: 45, y: 8, backgroundColor: '#FFFFFF' } : { rotate: 0, y: 0, backgroundColor: burgerColor }}
+                    animate={isOpen ? { rotate: 45, y: 9 } : { rotate: 0, y: 0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="h-[2px] w-7"
+                    className="h-[2px] w-8 transition-colors duration-300"
                     style={{ backgroundColor: isOpen ? '#FFFFFF' : burgerColor }}
                 />
                 <motion.span
                     animate={isOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
                     transition={{ duration: 0.2 }}
-                    className="h-[2px] w-7"
+                    className="h-[2px] w-8 transition-colors duration-300"
                     style={{ backgroundColor: isOpen ? '#FFFFFF' : burgerColor }}
                 />
                 <motion.span
-                    animate={isOpen ? { rotate: -45, y: -8, backgroundColor: '#FFFFFF' } : { rotate: 0, y: 0, backgroundColor: burgerColor }}
+                    animate={isOpen ? { rotate: -45, y: -9 } : { rotate: 0, y: 0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="h-[2px] w-7"
+                    className="h-[2px] w-8 transition-colors duration-300"
                     style={{ backgroundColor: isOpen ? '#FFFFFF' : burgerColor }}
                 />
-            </button>
+            </motion.button>
 
             {/* Full-Screen Menu Overlay - Samma Studio Style */}
             <AnimatePresence>

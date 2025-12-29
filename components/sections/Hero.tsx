@@ -4,10 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import Image from "next/image";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function Hero() {
     const imageRef = useRef<HTMLDivElement>(null);
     const [animationComplete, setAnimationComplete] = useState(false);
+    const isMobile = useIsMobile();
 
     // Initial positions for each word
     const initialPositions = [
@@ -26,20 +28,22 @@ export function Hero() {
     }, []);
 
     useEffect(() => {
-        // Subtle parallax effect on hero image
+        // Skip parallax on mobile for better performance
+        if (isMobile) return;
+
+        // Subtle parallax effect on hero image - DESKTOP ONLY
         const handleScroll = () => {
             if (imageRef.current) {
                 const scrolled = window.scrollY;
-                gsap.to(imageRef.current, {
-                    y: scrolled * 0.3,
-                    duration: 0,
-                });
+                // Use transform3d for hardware acceleration
+                imageRef.current.style.transform = `translate3d(0, ${scrolled * 0.3}px, 0)`;
             }
         };
 
-        window.addEventListener("scroll", handleScroll);
+        // Add passive listener for better scroll performance
+        window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [isMobile]);
 
     const words = ["Desain", "Bangun", "Renovasi"];
 

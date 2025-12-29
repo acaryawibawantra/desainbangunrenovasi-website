@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
 import { PORTFOLIO_PROJECTS } from "@/lib/constants";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,6 +17,7 @@ export function Portfolio() {
     const [hoveredId, setHoveredId] = useState<number | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
+    const isMobile = useIsMobile();
 
     const filteredProjects =
         activeFilter === "all"
@@ -35,10 +37,13 @@ export function Portfolio() {
                     trigger: containerRef.current,
                     start: "top top",
                     end: () => `+=${scrollWidth}`,
-                    scrub: 1,
+                    // Higher scrub value for mobile = smoother but less precise
+                    scrub: isMobile ? 2 : 1,
                     pin: true,
                     anticipatePin: 1,
                     invalidateOnRefresh: true,
+                    // Reduce frequency of updates on mobile
+                    fastScrollEnd: isMobile,
                 },
             });
 
@@ -52,7 +57,7 @@ export function Portfolio() {
         return () => {
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         };
-    }, [filteredProjects]);
+    }, [filteredProjects, isMobile]);
 
     return (
         <section

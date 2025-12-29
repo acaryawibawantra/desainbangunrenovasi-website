@@ -3,19 +3,21 @@
 import { useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function About() {
     const containerRef = useRef(null);
     const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+    const isMobile = useIsMobile();
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start end", "end start"]
     });
 
-    const imageScale = useTransform(scrollYProgress, [0, 0.5], [1.2, 1]);
-    const textY = useTransform(scrollYProgress, [0, 1], [100, -100]);
-    const opacity = useTransform(scrollYProgress, [0, 0.3], [0.5, 1]);
+    // Only apply parallax transforms on desktop
+    const imageScale = useTransform(scrollYProgress, [0, 0.5], isMobile ? [1, 1] : [1.2, 1]);
+    const textY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [100, -100]);
 
     const stats = [
         { number: "10", suffix: "+", label: "Years" },
@@ -40,33 +42,44 @@ export function About() {
                 }}
             />
 
-            {/* Floating gradient orbs */}
-            <motion.div
-                animate={{
-                    x: [0, 50, 0],
-                    y: [0, -30, 0],
-                }}
-                transition={{
-                    duration: 15,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                }}
-                className="absolute top-20 right-20 w-96 h-96 rounded-full opacity-20 blur-3xl"
-                style={{ background: 'radial-gradient(circle, #2A7F7F 0%, transparent 70%)' }}
-            />
-            <motion.div
-                animate={{
-                    x: [0, -30, 0],
-                    y: [0, 50, 0],
-                }}
-                transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                }}
-                className="absolute bottom-20 left-20 w-80 h-80 rounded-full opacity-20 blur-3xl"
-                style={{ background: 'radial-gradient(circle, #0F4040 0%, transparent 70%)' }}
-            />
+            {/* Floating gradient orbs - simplified on mobile */}
+            {!isMobile && (
+                <>
+                    <motion.div
+                        animate={{
+                            x: [0, 50, 0],
+                            y: [0, -30, 0],
+                        }}
+                        transition={{
+                            duration: 15,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                        className="absolute top-20 right-20 w-96 h-96 rounded-full opacity-20 blur-3xl"
+                        style={{ background: 'radial-gradient(circle, #2A7F7F 0%, transparent 70%)' }}
+                    />
+                    <motion.div
+                        animate={{
+                            x: [0, -30, 0],
+                            y: [0, 50, 0],
+                        }}
+                        transition={{
+                            duration: 20,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                        className="absolute bottom-20 left-20 w-80 h-80 rounded-full opacity-20 blur-3xl"
+                        style={{ background: 'radial-gradient(circle, #0F4040 0%, transparent 70%)' }}
+                    />
+                </>
+            )}
+            {/* Static subtle glow for mobile */}
+            {isMobile && (
+                <div
+                    className="absolute inset-0 opacity-10"
+                    style={{ background: 'radial-gradient(ellipse at center, #2A7F7F 0%, transparent 70%)' }}
+                />
+            )}
 
             <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 md:px-12 md:py-40 lg:px-16">
 

@@ -96,6 +96,58 @@ body {
   color: var(--color-white);
 }
 
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Force hardware acceleration for smoother scrolling */
+  section {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  /* Reduce animation complexity on mobile */
+  .animate-float {
+    animation: none;
+  }
+
+  /* Disable heavy blur effects on mobile */
+  .blur-3xl {
+    filter: none !important;
+    -webkit-filter: none !important;
+  }
+
+  /* Optimize backdrop-blur for mobile */
+  .backdrop-blur-xl {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
+
+/* GPU Acceleration for smooth animations */
+.will-change-transform {
+  will-change: transform;
+}
+
+/* Touch scrolling optimization */
+@supports (-webkit-overflow-scrolling: touch) {
+  .overflow-hidden {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 /* Utility Classes */
 .text-gradient {
   background: var(--gradient-primary);

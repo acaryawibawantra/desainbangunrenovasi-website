@@ -249,7 +249,7 @@ export function Services() {
                     <div className="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
                         <p className="text-gray-dark">Butuh layanan khusus?</p>
                         <a
-                            href="#contact"
+                            href="/contact"
                             className="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-medium transition-all duration-300 hover:shadow-lg hover:shadow-teal/25 hover:scale-105 text-white"
                             style={{
                                 background: 'linear-gradient(135deg, #1A5F5F 0%, #2A7A7A 50%, #1A5F5F 100%)',

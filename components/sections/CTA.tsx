@@ -55,7 +55,7 @@ export function CTA() {
                                 exit={{ opacity: 0, y: -20 }}
                                 transition={{ duration: 0.5, ease: "easeInOut" }}
                             >
-                                <h2 className="text-5xl md:text-6xl lg:text-8xl font-medium leading-tight">
+                                <h2 className="text-3xl md:text-6xl lg:text-8xl font-medium leading-tight">
                                     <span className="text-gradient">{currentTranslation.text}</span>
                                 </h2>
                                 {/* Language indicator */}

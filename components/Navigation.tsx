@@ -10,7 +10,7 @@ const menuItems = [
     { label: "Services", href: "#services" },
     { label: "Portfolio", href: "#portfolio" },
     { label: "Testimonials", href: "#testimonials" },
-    { label: "Contact", href: "#contact" },
+    { label: "Contact", href: "/contact" },
 ];
 
 // Sections with dark backgrounds where burger should be white

@@ -73,16 +73,17 @@ export function Portfolio() {
                     style={{ backgroundColor: '#E8E4DE' }}
                 >
                     <div className="max-w-7xl mx-auto">
-                        {/* Title and VIEW ALL row */}
+                        {/* Title row - VIEW ALL hidden on mobile, shown on md+ */}
                         <div className="flex items-center justify-between mb-4">
                             <h2 className="text-3xl md:text-5xl lg:text-6xl font-medium">
                                 <span className="text-gradient">PROJECTS</span>
                             </h2>
+                            {/* Desktop VIEW ALL */}
                             <Link
                                 href="/portfolio"
-                                className="group inline-flex items-center gap-2 text-charcoal/60 hover:text-teal transition-colors duration-300"
+                                className="hidden md:inline-flex group items-center gap-2 text-charcoal/60 hover:text-teal transition-colors duration-300"
                             >
-                                <span className="text-xs md:text-sm font-medium tracking-wider uppercase">
+                                <span className="text-sm font-medium tracking-wider uppercase">
                                     VIEW ALL
                                 </span>
                                 <svg
@@ -98,7 +99,7 @@ export function Portfolio() {
                         </div>
 
                         {/* Filter Pills */}
-                        <div className="flex flex-wrap gap-2 md:gap-3 mt-4">
+                        <div className="flex flex-wrap items-center gap-2 md:gap-3 mt-4">
                             {[
                                 { key: "all", label: "Semua" },
                                 { key: "residential", label: "Residential" },
@@ -118,6 +119,25 @@ export function Portfolio() {
                                 </button>
                             ))}
                         </div>
+
+                        {/* Mobile VIEW ALL - below filters */}
+                        <Link
+                            href="/portfolio"
+                            className="md:hidden inline-flex items-center gap-1.5 mt-4 text-charcoal/60 hover:text-teal transition-colors duration-300"
+                        >
+                            <span className="text-[10px] font-medium tracking-wider uppercase">
+                                VIEW ALL PROJECTS
+                            </span>
+                            <svg
+                                className="w-3 h-3"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </Link>
                     </div>
                 </div>
 

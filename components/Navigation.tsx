@@ -13,6 +13,9 @@ const menuItems = [
     { label: "Contact", href: "#contact" },
 ];
 
+// Sections with dark backgrounds where burger should be white
+const darkSections = ["hero", "about", "tagline"];
+
 export function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("hero");
@@ -43,35 +46,39 @@ export function Navigation() {
             });
         };
 
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Determine burger color based on current section
+    const isDarkSection = darkSections.includes(activeSection);
+    const burgerColor = isDarkSection ? '#FFFFFF' : '#2C2C2C';
+
     return (
         <>
-            {/* Hamburger Button - Minimalist Style */}
+            {/* Hamburger Button - Minimalist Style with Dynamic Color */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="fixed top-8 right-8 z-50 flex h-12 w-12 flex-col items-center justify-center gap-[6px] transition-all duration-300 hover:opacity-70"
                 aria-label="Toggle menu"
             >
                 <motion.span
-                    animate={isOpen ? { rotate: 45, y: 8, backgroundColor: '#FFFFFF' } : { rotate: 0, y: 0, backgroundColor: '#2C2C2C' }}
+                    animate={isOpen ? { rotate: 45, y: 8, backgroundColor: '#FFFFFF' } : { rotate: 0, y: 0, backgroundColor: burgerColor }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="h-[2px] w-7"
-                    style={{ backgroundColor: isOpen ? '#FFFFFF' : '#2C2C2C' }}
+                    style={{ backgroundColor: isOpen ? '#FFFFFF' : burgerColor }}
                 />
                 <motion.span
                     animate={isOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
                     transition={{ duration: 0.2 }}
                     className="h-[2px] w-7"
-                    style={{ backgroundColor: isOpen ? '#FFFFFF' : '#2C2C2C' }}
+                    style={{ backgroundColor: isOpen ? '#FFFFFF' : burgerColor }}
                 />
                 <motion.span
-                    animate={isOpen ? { rotate: -45, y: -8, backgroundColor: '#FFFFFF' } : { rotate: 0, y: 0, backgroundColor: '#2C2C2C' }}
+                    animate={isOpen ? { rotate: -45, y: -8, backgroundColor: '#FFFFFF' } : { rotate: 0, y: 0, backgroundColor: burgerColor }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="h-[2px] w-7"
-                    style={{ backgroundColor: isOpen ? '#FFFFFF' : '#2C2C2C' }}
+                    style={{ backgroundColor: isOpen ? '#FFFFFF' : burgerColor }}
                 />
             </button>
 

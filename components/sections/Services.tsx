@@ -181,22 +181,25 @@ export function Services() {
                                     fill
                                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
-                                {/* Gradient Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent" />
+                                {/* Gradient Overlay - stronger for better text visibility */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
 
                                 {/* Number Badge */}
-                                <div className="absolute top-6 left-6 w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white font-light text-2xl">
+                                <div className="absolute top-6 left-6 w-14 h-14 rounded-2xl bg-black/30 backdrop-blur-md border border-white/30 flex items-center justify-center text-white font-medium text-2xl shadow-lg">
                                     {String(index + 1).padStart(2, '0')}
                                 </div>
 
                                 {/* Icon Badge */}
-                                <div className="absolute top-6 right-6 w-14 h-14 rounded-2xl bg-teal/90 backdrop-blur-md flex items-center justify-center text-white transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-12">
+                                <div className="absolute top-6 right-6 w-14 h-14 rounded-2xl bg-teal/90 backdrop-blur-md flex items-center justify-center text-white transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 shadow-lg">
                                     {ServiceIcons[index]}
                                 </div>
 
                                 {/* Title Overlay */}
                                 <div className="absolute bottom-6 left-6 right-6">
-                                    <h3 className="text-2xl md:text-3xl font-light text-white mb-2 transition-transform duration-500 group-hover:translate-x-2">
+                                    <h3
+                                        className="text-2xl md:text-3xl font-medium text-white mb-2 transition-transform duration-500 group-hover:translate-x-2"
+                                        style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}
+                                    >
                                         {service.title}
                                     </h3>
                                 </div>

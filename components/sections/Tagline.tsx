@@ -160,7 +160,28 @@ export function Tagline() {
 }
 
 function StepItem({ text, description, detail, index, isInView, isMobile }: { text: string; description: string; detail: string; index: number; isInView: boolean; isMobile: boolean }) {
-    const [isHovered, setIsHovered] = useState(false);
+    const [isActive, setIsActive] = useState(false);
+    const isLast = index === 2; // RENOVASI is the last item
+
+    // Handle tap for mobile, hover for desktop
+    const handleClick = () => {
+        if (isMobile) {
+            setIsActive(!isActive);
+        }
+    };
+
+    // For desktop hover
+    const handleMouseEnter = () => {
+        if (!isMobile) setIsActive(true);
+    };
+    const handleMouseLeave = () => {
+        if (!isMobile) setIsActive(false);
+    };
+
+    // Card position classes - last item on mobile shows card above
+    const cardPositionClass = isMobile && isLast
+        ? "bottom-full mb-6"
+        : "top-full mt-6";
 
     return (
         <motion.div
@@ -168,43 +189,52 @@ function StepItem({ text, description, detail, index, isInView, isMobile }: { te
             animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 + (index * 0.3), ease: "easeOut" }}
             className="relative flex flex-col items-center justify-center w-full md:w-auto group cursor-pointer"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            onClick={handleClick}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
         >
             {/* Text with Outline Effect */}
             <h2
-                className={`text-5xl md:text-6xl lg:text-7xl font-light tracking-tight transition-all duration-500 ${isHovered ? 'text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]' : 'text-transparent bg-clip-text bg-gradient-to-b from-white/90 to-white/50'}`}
+                className={`text-5xl md:text-6xl lg:text-7xl font-light tracking-tight transition-all duration-500 ${isActive ? 'text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]' : 'text-transparent bg-clip-text bg-gradient-to-b from-white/90 to-white/50'}`}
                 style={{
-                    WebkitTextStroke: isHovered ? '0px' : '1px rgba(255,255,255,0.4)'
+                    WebkitTextStroke: isActive ? '0px' : '1px rgba(255,255,255,0.4)'
                 }}
             >
                 {text}
             </h2>
 
-            {/* Simple label (always visible, fades out on hover) */}
-            <span className={`mt-4 text-xs tracking-widest uppercase text-white/50 transition-opacity duration-300 absolute -bottom-8 ${isHovered ? 'opacity-0' : 'opacity-100'}`}>
+            {/* Simple label (always visible, fades out when active) */}
+            <span className={`mt-4 text-xs tracking-widest uppercase text-white/50 transition-opacity duration-300 absolute -bottom-8 ${isActive ? 'opacity-0' : 'opacity-100'}`}>
                 {description}
             </span>
 
-            {/* Hover Detail Card - Desktop Only */}
-            {!isMobile && (
-                <AnimatePresence>
-                    {isHovered && (
-                        <motion.div
-                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 5, scale: 0.95 }}
-                            transition={{ duration: 0.2 }}
-                            className="absolute top-full mt-6 w-64 p-4 bg-black/30 backdrop-blur-xl border border-white/20 rounded-xl text-center shadow-2xl z-20"
-                        >
-                            <p className="text-white/90 text-sm font-light leading-relaxed">
-                                {detail}
-                            </p>
-                            <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-black/30 border-t border-l border-white/20 rotate-45" />
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            )}
+            {/* Detail Card - Works for both mobile (tap) and desktop (hover) */}
+            <AnimatePresence>
+                {isActive && (
+                    <motion.div
+                        initial={{ opacity: 0, y: isMobile && isLast ? -10 : 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: isMobile && isLast ? -5 : 5, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                        className={`absolute ${cardPositionClass} w-64 p-4 bg-black/40 backdrop-blur-md border border-white/20 rounded-xl text-center shadow-2xl z-20`}
+                    >
+                        <p className="text-white/90 text-sm font-light leading-relaxed">
+                            {detail}
+                        </p>
+                        {/* Arrow indicator - flip for cards showing above */}
+                        <div
+                            className={`absolute left-1/2 -translate-x-1/2 w-3 h-3 bg-black/40 border-white/20 ${isMobile && isLast
+                                    ? "-bottom-2 border-b border-r rotate-45"
+                                    : "-top-2 border-t border-l rotate-45"
+                                }`}
+                        />
+                        {/* Tap hint for mobile */}
+                        {isMobile && (
+                            <p className="text-white/40 text-[10px] mt-3 uppercase tracking-widest">Tap untuk tutup</p>
+                        )}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </motion.div>
     );
 }

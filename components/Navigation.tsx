@@ -28,7 +28,9 @@ export function Navigation() {
     // Track active section on scroll
     useEffect(() => {
         const handleScroll = () => {
-            const sections = menuItems.map((item) =>
+            // Only track sections that are anchor links (start with #)
+            const anchorItems = menuItems.filter(item => item.href.startsWith('#'));
+            const sections = anchorItems.map((item) =>
                 document.querySelector(item.href)
             );
             const scrollPosition = window.scrollY + 100;
@@ -40,7 +42,7 @@ export function Navigation() {
                         sectionTop + (section as HTMLElement).offsetHeight;
 
                     if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                        setActiveSection(menuItems[index].href.substring(1));
+                        setActiveSection(anchorItems[index].href.substring(1));
                     }
                 }
             });

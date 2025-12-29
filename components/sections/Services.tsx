@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 import { SERVICES } from "@/lib/constants";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
@@ -165,10 +166,11 @@ export function Services() {
                 {/* Services Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-6 lg:gap-8">
                     {SERVICES.map((service, index) => (
-                        <div
+                        <Link
                             key={service.id}
-                            ref={(el) => { if (el) cardsRef.current[index] = el }}
-                            className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2"
+                            href={`/services/${service.id}`}
+                            ref={(el) => { if (el) cardsRef.current[index] = el as unknown as HTMLDivElement }}
+                            className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:-translate-y-2 block"
                             style={{
                                 boxShadow: '0 10px 40px -10px rgba(0, 0, 0, 0.1)'
                             }}
@@ -240,7 +242,7 @@ export function Services() {
                                     boxShadow: 'inset 0 0 0 2px rgba(26, 95, 95, 0.2)'
                                 }}
                             />
-                        </div>
+                        </Link>
                     ))}
                 </div>
 

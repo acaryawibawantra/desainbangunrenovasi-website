@@ -162,8 +162,9 @@ export function Portfolio() {
                 <div className="flex flex-1 items-center overflow-hidden">
                     <div ref={scrollRef} className="flex gap-6 lg:gap-8 px-6 md:px-12">
                         {filteredProjects.map((project) => (
-                            <div
+                            <Link
                                 key={project.id}
+                                href={`/portfolio/${project.slug}`}
                                 className="group flex-shrink-0 w-[80vw] md:w-[50vw] lg:w-[40vw] cursor-pointer"
                                 onMouseEnter={() => setHoveredId(project.id)}
                                 onMouseLeave={() => setHoveredId(null)}
@@ -212,7 +213,7 @@ export function Portfolio() {
                                     </svg>
                                     {project.location}
                                 </p>
-                            </div>
+                            </Link>
                         ))}
 
                         {/* End spacing */}

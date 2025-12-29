@@ -36,7 +36,9 @@ export function CTA() {
             ref={ref}
             id="contact"
             className="relative py-24 md:py-32"
-            style={{ backgroundColor: '#E8E4DE' }}
+            style={{
+                background: 'linear-gradient(135deg, #0F4040 0%, #1A5F5F 30%, #2A7A7A 60%, #1A5F5F 80%, #0F4040 100%)',
+            }}
         >
             <div className="mx-auto max-w-7xl px-6 md:px-12">
                 <motion.div
@@ -55,12 +57,14 @@ export function CTA() {
                                 exit={{ opacity: 0, y: -20 }}
                                 transition={{ duration: 0.5, ease: "easeInOut" }}
                             >
-                                <h2 className="text-3xl md:text-6xl lg:text-8xl font-medium leading-tight">
-                                    <span className="text-gradient">{currentTranslation.text}</span>
+                                <h2 className="text-3xl md:text-6xl lg:text-8xl font-medium leading-tight text-white"
+                                    style={{ textShadow: '0 0 40px rgba(255,255,255,0.2)' }}
+                                >
+                                    {currentTranslation.text}
                                 </h2>
                                 {/* Language indicator */}
                                 <div className="mt-4 flex items-center gap-2">
-                                    <span className="text-xs text-charcoal/40 uppercase tracking-widest">
+                                    <span className="text-xs text-white/50 uppercase tracking-widest">
                                         {currentTranslation.lang}
                                     </span>
                                     {/* Progress dots */}
@@ -69,8 +73,8 @@ export function CTA() {
                                             <div
                                                 key={idx}
                                                 className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex
-                                                    ? 'bg-teal w-4'
-                                                    : 'bg-charcoal/20'
+                                                    ? 'bg-white w-4'
+                                                    : 'bg-white/30'
                                                     }`}
                                             />
                                         ))}
@@ -83,9 +87,9 @@ export function CTA() {
                     {/* Contact Link */}
                     <Link
                         href="/contact"
-                        className="group inline-flex items-center gap-3 text-charcoal hover:text-teal transition-colors duration-300 flex-shrink-0"
+                        className="group inline-flex items-center gap-3 text-white hover:text-white/80 transition-colors duration-300 flex-shrink-0"
                     >
-                        <span className="text-sm font-medium tracking-widest uppercase border-b border-charcoal group-hover:border-teal pb-1">
+                        <span className="text-sm font-medium tracking-widest uppercase border-b border-white/50 group-hover:border-white pb-1">
                             HUBUNGI KAMI
                         </span>
                         <svg

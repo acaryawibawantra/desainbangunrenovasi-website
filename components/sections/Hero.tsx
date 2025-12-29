@@ -226,8 +226,9 @@ export function Hero() {
                                     }}
                                     className="block text-5xl font-bold text-white md:text-7xl lg:text-8xl xl:text-9xl"
                                     style={{
-                                        fontWeight: 500,
+                                        fontWeight: 700,
                                         letterSpacing: '-0.02em',
+                                        textShadow: '0 4px 30px rgba(0,0,0,0.4)',
                                     }}
                                 >
                                     {word}
@@ -253,8 +254,9 @@ export function Hero() {
                             }}
                             className="block text-5xl font-bold text-white md:text-7xl lg:text-8xl xl:text-9xl"
                             style={{
-                                fontWeight: 500,
+                                fontWeight: 700,
                                 letterSpacing: '-0.02em',
+                                textShadow: '0 4px 30px rgba(0,0,0,0.4)',
                             }}
                         >
                             {words[2]}

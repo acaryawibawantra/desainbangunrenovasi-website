@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { SERVICES } from "@/lib/constants";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,11 +39,28 @@ const ServiceIcons = [
 export function Services() {
     const containerRef = useRef<HTMLDivElement>(null);
     const cardsRef = useRef<HTMLDivElement[]>([]);
+    const isMobile = useIsMobile();
 
     useEffect(() => {
         if (!containerRef.current) return;
 
-        // Animate section title
+        // Skip complex GSAP animations on mobile for better performance
+        if (isMobile) {
+            // Simply show all elements immediately on mobile
+            const title = containerRef.current.querySelector('.section-title') as HTMLElement;
+            const subtitle = containerRef.current.querySelector('.section-subtitle') as HTMLElement;
+            if (title) title.style.opacity = '1';
+            if (subtitle) subtitle.style.opacity = '1';
+            cardsRef.current.forEach((card) => {
+                if (card) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'none';
+                }
+            });
+            return;
+        }
+
+        // Animate section title - DESKTOP ONLY
         const title = containerRef.current.querySelector('.section-title');
         const subtitle = containerRef.current.querySelector('.section-subtitle');
 
@@ -104,7 +122,7 @@ export function Services() {
         return () => {
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         };
-    }, []);
+    }, [isMobile]);
 
     return (
         <section

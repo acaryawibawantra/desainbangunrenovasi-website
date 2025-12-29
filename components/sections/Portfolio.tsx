@@ -120,24 +120,41 @@ export function Portfolio() {
                             ))}
                         </div>
 
-                        {/* Mobile VIEW ALL - below filters */}
-                        <Link
-                            href="/portfolio"
-                            className="md:hidden inline-flex items-center gap-1.5 mt-4 text-charcoal/60 hover:text-teal transition-colors duration-300"
-                        >
-                            <span className="text-[10px] font-medium tracking-wider uppercase">
-                                VIEW ALL PROJECTS
-                            </span>
-                            <svg
-                                className="w-3 h-3"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth={2}
+                        {/* Mobile VIEW ALL + Scroll Hint */}
+                        <div className="md:hidden flex items-center justify-between mt-6">
+                            {/* Lihat Semua Link */}
+                            <Link
+                                href="/portfolio"
+                                className="inline-flex items-center gap-2 text-teal font-medium group/link"
                             >
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </Link>
+                                <span className="text-sm font-medium tracking-wider uppercase">
+                                    VIEW ALL
+                                </span>
+                                <svg
+                                    className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1 group-hover/link:-translate-y-1"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                                </svg>
+                            </Link>
+
+                            {/* Scroll Hint */}
+                            <div className="flex items-center gap-2 text-charcoal/50 animate-pulse">
+                                <span className="text-xs tracking-wider uppercase">Scroll</span>
+                                <svg
+                                    className="w-4 h-4 animate-bounce"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={1.5}
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

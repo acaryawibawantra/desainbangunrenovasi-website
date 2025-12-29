@@ -163,7 +163,7 @@ export function Services() {
                 </div>
 
                 {/* Services Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-6 lg:gap-8">
                     {SERVICES.map((service, index) => (
                         <div
                             key={service.id}

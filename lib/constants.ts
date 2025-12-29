@@ -87,6 +87,13 @@ export const PORTFOLIO_PROJECTS = [
         image: "/images/portfolio/commercial/project-3.png",
         location: "Senayan",
     },
+    {
+        id: 8,
+        title: "Space Design",
+        category: "commercial",
+        image: "/images/portfolio/commercial/project-3.png",
+        location: "Denpasar",
+    },
 ];
 
 export const TESTIMONIALS = [

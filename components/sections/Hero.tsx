@@ -67,37 +67,79 @@ export function Hero() {
             className="relative min-h-screen overflow-hidden"
             style={{ backgroundColor: '#1a1a1a' }}
         >
-            {/* Preloader Overlay */}
+            {/* Preloader Overlay - Multi Panel Animation */}
             <AnimatePresence>
                 {isLoading && (
-                    <motion.div
-                        className="fixed inset-0 z-50 flex items-center justify-center"
-                        style={{ backgroundColor: '#0F4040' }}
-                        initial={{ y: 0 }}
-                        exit={{ y: '-100%' }}
-                        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-                    >
-                        {/* Loading Animation */}
-                        <div className="flex flex-col items-center gap-6">
-                            <motion.div
-                                initial={{ scale: 0.8, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ duration: 0.5 }}
-                                className="text-4xl md:text-5xl font-light text-white tracking-widest"
-                            >
-                                INSIGN
-                            </motion.div>
-                            {/* Loading bar */}
-                            <div className="w-32 h-[2px] bg-white/20 overflow-hidden rounded-full">
-                                <motion.div
-                                    className="h-full bg-white"
-                                    initial={{ width: 0 }}
-                                    animate={{ width: '100%' }}
-                                    transition={{ duration: 1.3, ease: 'easeInOut' }}
-                                />
+                    <>
+                        {/* Panel 1 - From Top (White) */}
+                        <motion.div
+                            className="fixed inset-0 z-[52]"
+                            style={{ backgroundColor: '#FFFFFF' }}
+                            initial={{ y: 0 }}
+                            exit={{ y: '-100%' }}
+                            transition={{ duration: 1, delay: 0.1, ease: [0.76, 0, 0.24, 1] }}
+                        />
+
+                        {/* Panel 2 - From Left (Teal/Green) */}
+                        <motion.div
+                            className="fixed inset-0 z-[51]"
+                            style={{ backgroundColor: '#1A5F5F' }}
+                            initial={{ x: 0 }}
+                            exit={{ x: '-100%' }}
+                            transition={{ duration: 1, delay: 0.25, ease: [0.76, 0, 0.24, 1] }}
+                        />
+
+                        {/* Panel 3 - From Bottom (Cream) */}
+                        <motion.div
+                            className="fixed inset-0 z-[50]"
+                            style={{ backgroundColor: '#E8E4DE' }}
+                            initial={{ y: 0 }}
+                            exit={{ y: '100%' }}
+                            transition={{ duration: 1, delay: 0.4, ease: [0.76, 0, 0.24, 1] }}
+                        />
+
+                        {/* Center Content - Logo & Loader */}
+                        <motion.div
+                            className="fixed inset-0 z-[53] flex items-center justify-center"
+                            initial={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <div className="flex flex-col items-center gap-8">
+                                {/* Logo with stagger animation */}
+                                <div className="overflow-hidden">
+                                    <motion.div
+                                        initial={{ y: 60, opacity: 0 }}
+                                        animate={{ y: 0, opacity: 1 }}
+                                        transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+                                        className="text-5xl md:text-6xl font-bold tracking-wider"
+                                        style={{ color: '#1A5F5F' }}
+                                    >
+                                        INSIGN
+                                    </motion.div>
+                                </div>
+
+                                {/* Elegant loading indicator */}
+                                <div className="flex gap-2">
+                                    {[0, 1, 2].map((i) => (
+                                        <motion.div
+                                            key={i}
+                                            className="w-2 h-2 rounded-full"
+                                            style={{ backgroundColor: '#1A5F5F' }}
+                                            initial={{ scale: 0 }}
+                                            animate={{ scale: [0, 1, 0] }}
+                                            transition={{
+                                                duration: 1,
+                                                delay: i * 0.15,
+                                                repeat: Infinity,
+                                                ease: 'easeInOut'
+                                            }}
+                                        />
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    </motion.div>
+                        </motion.div>
+                    </>
                 )}
             </AnimatePresence>
 

@@ -1,31 +1,107 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export function Tagline() {
-    const containerRef = useRef(null);
-    const isInView = useInView(containerRef, { once: true, margin: "-20%" });
+    const containerRef = useRef<HTMLDivElement>(null);
+    const word1Ref = useRef<HTMLDivElement>(null);
+    const word2Ref = useRef<HTMLDivElement>(null);
+    const word3Ref = useRef<HTMLDivElement>(null);
+    const arrow1Ref = useRef<HTMLDivElement>(null);
+    const arrow2Ref = useRef<HTMLDivElement>(null);
     const isMobile = useIsMobile();
+
+    useEffect(() => {
+        if (!containerRef.current) return;
+
+        const ctx = gsap.context(() => {
+            // Pin the section
+            ScrollTrigger.create({
+                trigger: containerRef.current,
+                start: "top top",
+                end: "+=200%",
+                pin: true,
+                pinSpacing: true,
+            });
+
+            // Timeline for sequential reveal
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top top",
+                    end: "+=200%",
+                    scrub: 0.5,
+                }
+            });
+
+            // Word 1 - DESAIN
+            tl.fromTo(word1Ref.current,
+                { opacity: 0, y: 50, scale: 0.9 },
+                { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power2.out" },
+                0
+            );
+
+            // Arrow 1
+            tl.fromTo(arrow1Ref.current,
+                { scaleX: 0, scaleY: 0, opacity: 0 },
+                { scaleX: 1, scaleY: 1, opacity: 1, duration: 0.5, ease: "power2.out" },
+                0.5
+            );
+
+            // Word 2 - BANGUN
+            tl.fromTo(word2Ref.current,
+                { opacity: 0, y: 50, scale: 0.9 },
+                { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power2.out" },
+                1
+            );
+
+            // Arrow 2
+            tl.fromTo(arrow2Ref.current,
+                { scaleX: 0, scaleY: 0, opacity: 0 },
+                { scaleX: 1, scaleY: 1, opacity: 1, duration: 0.5, ease: "power2.out" },
+                1.5
+            );
+
+            // Word 3 - RENOVASI
+            tl.fromTo(word3Ref.current,
+                { opacity: 0, y: 50, scale: 0.9 },
+                { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power2.out" },
+                2
+            );
+
+        }, containerRef);
+
+        return () => ctx.revert();
+    }, [isMobile]);
+
+    const words = [
+        { ref: word1Ref, text: "DESAIN", description: "Visualisasi & Konsep" },
+        { ref: word2Ref, text: "BANGUN", description: "Konstruksi & Material" },
+        { ref: word3Ref, text: "RENOVASI", description: "Transformasi & Upgrade" }
+    ];
 
     return (
         <section
             id="tagline"
             ref={containerRef}
-            className="relative min-h-[70vh] flex flex-col items-center justify-center py-20 px-4 md:px-8 overflow-hidden"
+            className="relative min-h-screen flex flex-col items-center justify-center py-20 px-4 md:px-8 overflow-hidden"
             style={{
                 background: 'linear-gradient(135deg, #0F4040 0%, #1A5F5F 30%, #2A7A7A 60%, #1A5F5F 80%, #0F4040 100%)',
             }}
         >
-            {/* Animated Light Orbs - DESKTOP ONLY */}
+            {/* Background Effects */}
             {!isMobile && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    {/* Floating Light 1 */}
                     <motion.div
                         className="absolute w-[500px] h-[500px] rounded-full"
                         style={{
-                            background: 'radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%)',
+                            background: 'radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%)',
                             filter: 'blur(40px)',
                         }}
                         animate={{
@@ -33,253 +109,101 @@ export function Tagline() {
                             y: ['0%', '50%', '0%'],
                         }}
                         transition={{
-                            duration: 15,
+                            duration: 20,
                             repeat: Infinity,
                             ease: 'easeInOut',
-                        }}
-                    />
-
-                    {/* Floating Light 2 */}
-                    <motion.div
-                        className="absolute w-[400px] h-[400px] rounded-full"
-                        style={{
-                            background: 'radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%)',
-                            filter: 'blur(50px)',
-                        }}
-                        animate={{
-                            x: ['100%', '-20%', '100%'],
-                            y: ['80%', '20%', '80%'],
-                        }}
-                        transition={{
-                            duration: 18,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                        }}
-                    />
-
-                    {/* Floating Light 3 - Subtle top */}
-                    <motion.div
-                        className="absolute w-[600px] h-[300px] rounded-full top-0"
-                        style={{
-                            background: 'radial-gradient(ellipse, rgba(255,255,255,0.08) 0%, transparent 60%)',
-                            filter: 'blur(60px)',
-                        }}
-                        animate={{
-                            x: ['30%', '70%', '30%'],
-                        }}
-                        transition={{
-                            duration: 12,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                        }}
-                    />
-
-                    {/* Shimmer Effect */}
-                    <motion.div
-                        className="absolute inset-0"
-                        style={{
-                            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%)',
-                        }}
-                        animate={{
-                            x: ['-100%', '100%'],
-                        }}
-                        transition={{
-                            duration: 8,
-                            repeat: Infinity,
-                            ease: 'linear',
                         }}
                     />
                 </div>
             )}
 
-            {/* Mobile: Static subtle overlay instead of heavy animations */}
+            {/* Mobile: Static overlay */}
             {isMobile && (
-                <div className="absolute inset-0 pointer-events-none">
-                    <div
-                        className="absolute inset-0"
-                        style={{
-                            background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.08) 0%, transparent 70%)',
-                        }}
-                    />
-                </div>
+                <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                        background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.06) 0%, transparent 70%)',
+                    }}
+                />
             )}
 
-            {/* Subtle Radial Gradient Overlay */}
+            {/* Radial Overlay */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.05)_0%,rgba(0,0,0,0.2)_100%)] pointer-events-none" />
 
             {/* Header */}
-            <motion.p
-                initial={{ opacity: 0, y: -20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="absolute top-10 md:top-20 text-white/40 text-xs md:text-sm tracking-[0.4em] font-light uppercase z-10"
-            >
+            <p className="absolute top-10 md:top-20 text-white/40 text-xs md:text-sm tracking-[0.4em] font-light uppercase z-10">
                 Workflow
-            </motion.p>
+            </p>
 
-            <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 md:gap-0 mt-10 relative z-10">
+            {/* Main Content */}
+            <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-6 md:gap-0 mt-10 relative z-10">
 
-                {/* STEP 1: DESAIN */}
-                <StepItem
-                    text="DESAIN"
-                    description="Visualisasi & Konsep"
-                    detail="Kami menerjemahkan impian Anda menjadi blueprint visual yang presisi dan estetis."
-                    index={0}
-                    isInView={isInView}
-                    isMobile={isMobile}
-                />
+                {/* Word 1 - DESAIN */}
+                <div ref={word1Ref} className="flex flex-col items-center opacity-0">
+                    <h2 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-white/90 hover:text-white transition-all duration-300"
+                        style={{ textShadow: '0 0 40px rgba(255,255,255,0.2)' }}
+                    >
+                        DESAIN
+                    </h2>
+                    <span className="mt-3 text-xs tracking-widest uppercase text-white/50">
+                        Visualisasi & Konsep
+                    </span>
+                </div>
 
-                {/* ARROW 1 */}
-                <Arrow index={0} isInView={isInView} isMobile={isMobile} />
+                {/* Arrow 1 */}
+                <div ref={arrow1Ref} className="opacity-0 origin-left md:origin-center">
+                    {/* Desktop Arrow */}
+                    <div className="hidden md:block mx-6 lg:mx-10 w-20 lg:w-32 h-[1px] bg-white/30" />
+                    {/* Mobile Arrow */}
+                    <div className="md:hidden h-10 w-[1px] bg-white/30 my-2" />
+                </div>
 
-                {/* STEP 2: BANGUN */}
-                <StepItem
-                    text="BANGUN"
-                    description="Konstruksi & Material"
-                    detail="Realisasi fisik dengan standar mutu terbaik dan pengawasan ketat."
-                    index={1}
-                    isInView={isInView}
-                    isMobile={isMobile}
-                />
+                {/* Word 2 - BANGUN */}
+                <div ref={word2Ref} className="flex flex-col items-center opacity-0">
+                    <h2 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-white/90 hover:text-white transition-all duration-300"
+                        style={{ textShadow: '0 0 40px rgba(255,255,255,0.2)' }}
+                    >
+                        BANGUN
+                    </h2>
+                    <span className="mt-3 text-xs tracking-widest uppercase text-white/50">
+                        Konstruksi & Material
+                    </span>
+                </div>
 
-                {/* ARROW 2 */}
-                <Arrow index={1} isInView={isInView} isMobile={isMobile} />
+                {/* Arrow 2 */}
+                <div ref={arrow2Ref} className="opacity-0 origin-left md:origin-center">
+                    {/* Desktop Arrow */}
+                    <div className="hidden md:block mx-6 lg:mx-10 w-20 lg:w-32 h-[1px] bg-white/30" />
+                    {/* Mobile Arrow */}
+                    <div className="md:hidden h-10 w-[1px] bg-white/30 my-2" />
+                </div>
 
-                {/* STEP 3: RENOVASI */}
-                <StepItem
-                    text="RENOVASI"
-                    description="Transformasi & Upgrade"
-                    detail="Memberikan nafas baru pada bangunan lama untuk nilai dan kenyamanan lebih."
-                    index={2}
-                    isInView={isInView}
-                    isMobile={isMobile}
-                />
+                {/* Word 3 - RENOVASI */}
+                <div ref={word3Ref} className="flex flex-col items-center opacity-0">
+                    <h2 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-white/90 hover:text-white transition-all duration-300"
+                        style={{ textShadow: '0 0 40px rgba(255,255,255,0.2)' }}
+                    >
+                        RENOVASI
+                    </h2>
+                    <span className="mt-3 text-xs tracking-widest uppercase text-white/50">
+                        Transformasi & Upgrade
+                    </span>
+                </div>
 
+            </div>
+
+            {/* Scroll Indicator */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30">
+                <span className="text-[10px] tracking-widest uppercase">Scroll</span>
+                <motion.div
+                    animate={{ y: [0, 6, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+                    </svg>
+                </motion.div>
             </div>
         </section>
-    );
-}
-
-function StepItem({ text, description, detail, index, isInView, isMobile }: { text: string; description: string; detail: string; index: number; isInView: boolean; isMobile: boolean }) {
-    const [isActive, setIsActive] = useState(false);
-    const isLast = index === 2; // RENOVASI is the last item
-
-    // Handle tap for mobile, hover for desktop
-    const handleClick = () => {
-        if (isMobile) {
-            setIsActive(!isActive);
-        }
-    };
-
-    // For desktop hover
-    const handleMouseEnter = () => {
-        if (!isMobile) setIsActive(true);
-    };
-    const handleMouseLeave = () => {
-        if (!isMobile) setIsActive(false);
-    };
-
-    // Card position classes - last item on mobile shows card above
-    const cardPositionClass = isMobile && isLast
-        ? "bottom-full mb-6"
-        : "top-full mt-6";
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 + (index * 0.3), ease: "easeOut" }}
-            className="relative flex flex-col items-center justify-center w-full md:w-auto group cursor-pointer"
-            onClick={handleClick}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-        >
-            {/* Text with Outline Effect */}
-            <h2
-                className={`text-5xl md:text-6xl lg:text-7xl font-light tracking-tight transition-all duration-500 ${isActive ? 'text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]' : 'text-transparent bg-clip-text bg-gradient-to-b from-white/90 to-white/50'}`}
-                style={{
-                    WebkitTextStroke: isActive ? '0px' : '1px rgba(255,255,255,0.4)'
-                }}
-            >
-                {text}
-            </h2>
-
-            {/* Simple label (always visible, fades out when active) */}
-            <span className={`mt-4 text-xs tracking-widest uppercase text-white/50 transition-opacity duration-300 absolute -bottom-8 ${isActive ? 'opacity-0' : 'opacity-100'}`}>
-                {description}
-            </span>
-
-            {/* Detail Card - Works for both mobile (tap) and desktop (hover) */}
-            <AnimatePresence>
-                {isActive && (
-                    <motion.div
-                        initial={{ opacity: 0, y: isMobile && isLast ? -10 : 10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: isMobile && isLast ? -5 : 5, scale: 0.95 }}
-                        transition={{ duration: 0.2 }}
-                        className={`absolute ${cardPositionClass} w-64 p-4 bg-black/40 backdrop-blur-md border border-white/20 rounded-xl text-center shadow-2xl z-20`}
-                    >
-                        <p className="text-white/90 text-sm font-light leading-relaxed">
-                            {detail}
-                        </p>
-                        {/* Arrow indicator - flip for cards showing above */}
-                        <div
-                            className={`absolute left-1/2 -translate-x-1/2 w-3 h-3 bg-black/40 border-white/20 ${isMobile && isLast
-                                ? "-bottom-2 border-b border-r rotate-45"
-                                : "-top-2 border-t border-l rotate-45"
-                                }`}
-                        />
-                        {/* Tap hint for mobile */}
-                        {isMobile && (
-                            <p className="text-white/40 text-[10px] mt-3 uppercase tracking-widest">Tap untuk tutup</p>
-                        )}
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </motion.div>
-    );
-}
-
-function Arrow({ index, isInView, isMobile }: { index: number; isInView: boolean; isMobile: boolean }) {
-    return (
-        <>
-            {/* Desktop Horizontal Arrow */}
-            <div className="hidden md:block flex-1 mx-4 relative h-[2px] bg-white/10 overflow-hidden rounded-full">
-                {/* Drawing Line Animation */}
-                <motion.div
-                    initial={{ scaleX: 0, originX: 0 }}
-                    animate={isInView ? { scaleX: 1 } : {}}
-                    transition={{ duration: 1.5, delay: 0.6 + (index * 0.3), ease: "easeInOut" }}
-                    className="absolute inset-0 bg-white/30"
-                />
-
-                {/* Moving Particle - Infinite Loop - Desktop Only */}
-                {!isMobile && (
-                    <motion.div
-                        initial={{ x: "-100%" }}
-                        animate={isInView ? { x: "200%" } : {}}
-                        transition={{
-                            duration: 2,
-                            ease: "linear",
-                            repeat: Infinity,
-                            repeatDelay: 0.5,
-                            delay: 1.5 + (index * 0.3)
-                        }}
-                        className="absolute top-0 bottom-0 w-20 bg-gradient-to-r from-transparent via-white to-transparent opacity-90 blur-[2px]"
-                    />
-                )}
-            </div>
-
-            {/* Mobile Vertical Arrow - Simplified */}
-            <div className="md:hidden w-[2px] h-16 my-2 bg-white/10 relative overflow-hidden rounded-full">
-                <motion.div
-                    initial={{ scaleY: 0, originY: 0 }}
-                    animate={isInView ? { scaleY: 1 } : {}}
-                    transition={{ duration: 1, delay: 0.4 + (index * 0.2), ease: "easeOut" }}
-                    className="absolute inset-0 bg-white/30"
-                />
-                {/* No infinite particle animation on mobile */}
-            </div>
-        </>
     );
 }

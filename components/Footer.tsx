@@ -8,12 +8,6 @@ export function Footer() {
 
     return (
         <footer className="relative overflow-hidden" style={{ backgroundColor: '#E8E4DE' }}>
-            {/* Large Background Logo */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
-                <span className="text-[20rem] md:text-[30rem] font-bold tracking-tighter text-charcoal">
-                    {COMPANY_INFO.name.charAt(0)}
-                </span>
-            </div>
 
             {/* Grid Pattern */}
             <div
@@ -140,7 +134,7 @@ export function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="border-t border-charcoal/10 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="py-8 flex flex-col md:flex-row items-center justify-between gap-4">
                     <p className="text-charcoal/50 text-xs">
                         © {currentYear} {COMPANY_INFO.name}. All rights reserved.
                     </p>

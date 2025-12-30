@@ -186,7 +186,7 @@ export function Hero() {
             />
 
             {/* Logo - Top Left */}
-            <motion.div
+            <motion.h1
                 className="absolute top-8 left-8 md:top-12 md:left-12 z-10"
                 initial={{ opacity: 0, scale: 0 }}
                 animate={showContent ? { opacity: 1, scale: 1 } : {}}
@@ -200,7 +200,7 @@ export function Hero() {
                         INSIGN
                     </span>
                 </a>
-            </motion.div>
+            </motion.h1>
 
             {/* Main Words with Animation */}
             <div className="absolute inset-0 z-10 flex items-center justify-center overflow-visible">

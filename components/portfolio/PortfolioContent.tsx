@@ -39,7 +39,7 @@ export default function PortfolioContent() {
     return (
         <main className="min-h-screen bg-[#F4F1EE] text-charcoal">
             {/* Full Screen Featured Projects Carousel */}
-            <section className="relative h-screen w-full overflow-hidden bg-gradient-to-br from-[#1a3c3c] to-[#0f1f1f]">
+            <section className="relative h-screen w-full overflow-hidden bg-gradient-to-br from-[#6B2D2E] to-[#9E4244]">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentFeatured}
@@ -169,8 +169,8 @@ export default function PortfolioContent() {
                             <button
                                 onClick={() => setActiveFilter("all")}
                                 className={`px-6 py-2 rounded-full text-sm transition-all duration-300 capitalize ${activeFilter === "all"
-                                        ? "bg-gradient-to-r from-[#1a3c3c] to-[#0f1f1f] text-white shadow-md border border-transparent"
-                                        : "text-charcoal/60 hover:text-charcoal border border-transparent hover:border-charcoal/10"
+                                    ? "bg-gradient-to-r from-[#6B2D2E] to-[#9E4244] text-white shadow-md border border-transparent"
+                                    : "text-charcoal/60 hover:text-charcoal border border-transparent hover:border-charcoal/10"
                                     }`}
                             >
                                 All Work
@@ -178,8 +178,8 @@ export default function PortfolioContent() {
                             <button
                                 onClick={() => setActiveFilter("residential")}
                                 className={`px-6 py-2 rounded-full text-sm transition-all duration-300 capitalize ${activeFilter === "residential"
-                                        ? "bg-gradient-to-r from-[#1a3c3c] to-[#0f1f1f] text-white shadow-md border border-transparent"
-                                        : "text-charcoal/60 hover:text-charcoal border border-transparent hover:border-charcoal/10"
+                                    ? "bg-gradient-to-r from-[#6B2D2E] to-[#9E4244] text-white shadow-md border border-transparent"
+                                    : "text-charcoal/60 hover:text-charcoal border border-transparent hover:border-charcoal/10"
                                     }`}
                             >
                                 Residential
@@ -187,8 +187,8 @@ export default function PortfolioContent() {
                             <button
                                 onClick={() => setActiveFilter("commercial")}
                                 className={`px-6 py-2 rounded-full text-sm transition-all duration-300 capitalize ${activeFilter === "commercial"
-                                        ? "bg-gradient-to-r from-[#1a3c3c] to-[#0f1f1f] text-white shadow-md border border-transparent"
-                                        : "text-charcoal/60 hover:text-charcoal border border-transparent hover:border-charcoal/10"
+                                    ? "bg-gradient-to-r from-[#521a1a] to-[#8a2c2c] text-white shadow-md border border-transparent"
+                                    : "text-charcoal/60 hover:text-charcoal border border-transparent hover:border-charcoal/10"
                                     }`}
                             >
                                 Commercial

@@ -14,7 +14,7 @@ interface ServiceClientProps {
 
 export function ServiceClient({ service, relatedProjects, otherServices }: ServiceClientProps) {
     return (
-        <main className="min-h-screen" style={{ backgroundColor: '#E8E4DE' }}>
+        <main className="min-h-screen" style={{ backgroundColor: 'var(--background)' }}>
             <Navigation />
 
             {/* Hero Section */}
@@ -239,7 +239,7 @@ export function ServiceClient({ service, relatedProjects, otherServices }: Servi
             <section
                 className="py-16 md:py-24 px-6 md:px-12 lg:px-16"
                 style={{
-                    background: 'linear-gradient(135deg, #0F4040 0%, #1A5F5F 30%, #2A7A7A 60%, #1A5F5F 80%, #0F4040 100%)',
+                    background: 'linear-gradient(135deg, #6B2D2E 0%, #9E4244 30%, #C56B6D 60%, #9E4244 80%, #6B2D2E 100%)',
                 }}
             >
                 <div className="max-w-4xl mx-auto text-center">

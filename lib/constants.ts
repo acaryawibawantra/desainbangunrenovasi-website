@@ -264,6 +264,7 @@ export const TESTIMONIALS = [
         content:
             "INSIGN mengubah visi rumah impian kami menjadi kenyataan. Profesionalisme dan perhatian terhadap detail mereka sangat luar biasa.",
         image: "/images/testimonials/client-1.jpg",
+        projectImage: "/images/portfolio/residential/project-1.png",
     },
     {
         id: 2,
@@ -272,6 +273,7 @@ export const TESTIMONIALS = [
         content:
             "Kerjasama dengan INSIGN selalu memuaskan. Mereka selalu tepat waktu dan hasil pekerjaannya berkualitas tinggi.",
         image: "/images/testimonials/client-2.jpg",
+        projectImage: "/images/portfolio/commercial/project-1.png",
     },
     {
         id: 3,
@@ -280,6 +282,7 @@ export const TESTIMONIALS = [
         content:
             "Renovasi kantor kami dikerjakan dengan sangat baik. Tim INSIGN sangat responsif dan hasilnya melebihi ekspektasi.",
         image: "/images/testimonials/client-3.jpg",
+        projectImage: "/images/portfolio/commercial/project-2.png",
     },
 ];
 
@@ -287,6 +290,6 @@ export const CONTACT_INFO = {
     email: "info@insign.co.id",
     phone: "+62 812 3456 7890",
     whatsapp: "+6281234567890",
-    address: "Jakarta, Indonesia",
+    address: "JL. Peta Barat No. 61, Jakarta, Indonesia",
     note: "Dengan perjanjian",
 };

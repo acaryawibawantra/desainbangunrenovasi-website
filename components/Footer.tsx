@@ -7,7 +7,7 @@ export function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="relative overflow-hidden" style={{ backgroundColor: '#E8E4DE' }}>
+        <footer className="relative overflow-hidden" style={{ backgroundColor: 'var(--background)' }}>
 
             {/* Grid Pattern */}
             <div

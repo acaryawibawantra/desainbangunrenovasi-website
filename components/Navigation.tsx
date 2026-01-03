@@ -139,7 +139,7 @@ export function Navigation() {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.4, ease: "easeInOut" }}
                         className="fixed inset-0 z-40"
-                        style={{ backgroundColor: '#1A4A4A' }}
+                        style={{ backgroundColor: 'var(--color-gray-dark)' }}
                     >
                         {/* Menu Items - Right Aligned */}
                         <motion.nav

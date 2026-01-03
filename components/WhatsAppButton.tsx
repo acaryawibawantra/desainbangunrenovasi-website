@@ -23,7 +23,8 @@ export function WhatsAppButton() {
                 while (current) {
                     const bgColor = window.getComputedStyle(current).backgroundColor;
                     // Check for cream/light colors
-                    if (bgColor.includes('232, 228, 222') || // #E8E4DE
+                    if (bgColor.includes('232, 228, 222') || // Old #E8E4DE
+                        bgColor.includes('249, 248, 246') || // New #F9F8F6
                         bgColor.includes('248, 248, 248') ||
                         bgColor.includes('255, 255, 255')) {
                         setIsOnLightBg(true);

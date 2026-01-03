@@ -83,7 +83,7 @@ export function Hero() {
                         {/* Panel 2 - From Left (Teal/Green) */}
                         <motion.div
                             className="fixed inset-0 z-[51]"
-                            style={{ backgroundColor: '#1A5F5F' }}
+                            style={{ backgroundColor: '#9E4244' }}
                             initial={{ x: 0 }}
                             exit={{ x: '-100%' }}
                             transition={{ duration: 1, delay: 0.25, ease: [0.76, 0, 0.24, 1] }}
@@ -92,7 +92,7 @@ export function Hero() {
                         {/* Panel 3 - From Bottom (Cream) */}
                         <motion.div
                             className="fixed inset-0 z-[50]"
-                            style={{ backgroundColor: '#E8E4DE' }}
+                            style={{ backgroundColor: 'var(--background)' }}
                             initial={{ y: 0 }}
                             exit={{ y: '100%' }}
                             transition={{ duration: 1, delay: 0.4, ease: [0.76, 0, 0.24, 1] }}
@@ -113,9 +113,9 @@ export function Hero() {
                                         animate={{ y: 0, opacity: 1 }}
                                         transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
                                         className="text-5xl md:text-6xl font-bold tracking-wider"
-                                        style={{ color: '#1A5F5F' }}
+                                        style={{ color: '#9E4244' }}
                                     >
-                                        INSIGN
+                                        ASKRA
                                     </motion.div>
                                 </div>
 
@@ -125,7 +125,7 @@ export function Hero() {
                                         <motion.div
                                             key={i}
                                             className="w-2 h-2 rounded-full"
-                                            style={{ backgroundColor: '#1A5F5F' }}
+                                            style={{ backgroundColor: '#9E4244' }}
                                             initial={{ scale: 0 }}
                                             animate={{ scale: [0, 1, 0] }}
                                             transition={{
@@ -197,7 +197,7 @@ export function Hero() {
                         className="text-2xl font-light tracking-wider text-white md:text-3xl"
                         style={{ fontWeight: 300, letterSpacing: '0.1em' }}
                     >
-                        INSIGN
+                        ASKRA
                     </span>
                 </a>
             </motion.h1>

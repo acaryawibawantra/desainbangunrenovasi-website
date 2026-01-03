@@ -92,7 +92,7 @@ export function Tagline() {
             ref={containerRef}
             className="relative min-h-screen flex flex-col items-center justify-center py-20 px-4 md:px-8 overflow-hidden"
             style={{
-                background: 'linear-gradient(135deg, #0F4040 0%, #1A5F5F 30%, #2A7A7A 60%, #1A5F5F 80%, #0F4040 100%)',
+                background: 'linear-gradient(135deg, #6B2D2E 0%, #9E4244 30%, #C56B6D 60%, #9E4244 80%, #6B2D2E 100%)',
             }}
         >
             {/* Background Effects */}
@@ -132,7 +132,7 @@ export function Tagline() {
 
             {/* Header */}
             <p className="absolute top-10 md:top-20 text-white/40 text-xs md:text-sm tracking-[0.4em] font-light uppercase z-10">
-                Workflow
+                Keunggulan Kami
             </p>
 
             {/* Main Content */}

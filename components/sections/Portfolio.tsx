@@ -64,13 +64,13 @@ export function Portfolio() {
             id="portfolio"
             ref={containerRef}
             className="relative min-h-screen overflow-hidden"
-            style={{ backgroundColor: '#E8E4DE' }}
+            style={{ backgroundColor: 'var(--background)' }}
         >
             <div className="sticky top-0 flex h-screen flex-col">
                 {/* Header */}
                 <div
                     className="z-20 px-4 md:px-12 py-6 md:py-16"
-                    style={{ backgroundColor: '#E8E4DE' }}
+                    style={{ backgroundColor: 'var(--background)' }}
                 >
                     <div className="max-w-7xl mx-auto">
                         {/* Title row - VIEW ALL hidden on mobile, shown on md+ */}

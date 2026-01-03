@@ -37,7 +37,7 @@ export function CTA() {
             id="contact"
             className="relative py-24 md:py-32"
             style={{
-                background: 'linear-gradient(135deg, #0F4040 0%, #1A5F5F 30%, #2A7A7A 60%, #1A5F5F 80%, #0F4040 100%)',
+                background: 'linear-gradient(135deg, #6B2D2E 0%, #9E4244 30%, #C56B6D 60%, #9E4244 80%, #6B2D2E 100%)',
             }}
         >
             <div className="mx-auto max-w-7xl px-6 md:px-12">

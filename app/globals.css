@@ -2,12 +2,15 @@
 
 /* INSIGN Color Palette */
 :root {
-  /* Primary Colors */
+  /* Primary Colors - Muted Matte Red Palette (Soft & Elegant) */
   --color-charcoal: #2C2C2C;
   --color-beige: #D4C5B9;
-  --color-teal: #1A5F5F;
-  --color-teal-light: #2A7F7F;
-  --color-teal-dark: #0F4040;
+  --color-teal: #9E4244;
+  /* Muted Brick Red */
+  --color-teal-light: #C56B6D;
+  /* Dusty Red */
+  --color-teal-dark: #6B2D2E;
+  /* Deep Muted Red */
 
   /* Neutral Colors */
   --color-white: #FFFFFF;
@@ -26,10 +29,11 @@
   /* Semantic Colors */
   --color-primary: #2C2C2C;
   --color-secondary: #D4C5B9;
-  --color-accent: #1A5F5F;
+  --color-accent: #9E4244;
 
   /* Background & Text */
-  --background: #E8E4DE;
+  --background: #F9F8F6;
+  /* Lighter, cleaner cream for better contrast with red */
   --foreground: var(--color-charcoal);
 
   /* Shadows */
@@ -39,8 +43,8 @@
   --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
 
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #1A5F5F 0%, #2C2C2C 100%);
-  --gradient-accent: linear-gradient(135deg, #2A7F7F 0%, #1A5F5F 100%);
+  --gradient-primary: linear-gradient(135deg, #9E4244 0%, #2C2C2C 100%);
+  --gradient-accent: linear-gradient(135deg, #C56B6D 0%, #9E4244 100%);
   --gradient-warm: linear-gradient(135deg, #D4C5B9 0%, #C9A961 100%);
   --gradient-overlay: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(44, 44, 44, 0.9) 100%);
 }

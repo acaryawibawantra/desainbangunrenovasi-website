@@ -152,7 +152,7 @@ export function Hero() {
                 transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
                 <Image
-                    src="/images/hero/here-bg2.webp"
+                    src="/images/hero/main.jpg"
                     alt="INSIGN Interior Design"
                     fill
                     className="object-cover"

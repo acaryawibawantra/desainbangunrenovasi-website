@@ -47,7 +47,7 @@ export function Footer() {
                         </h4>
                         <ul className="space-y-4">
                             {[
-                                { label: "Tentang Kami", href: "#about" },
+                                { label: "Tentang Kami", href: "/about" },
                                 { label: "Layanan", href: "#services" },
                                 { label: "Portfolio", href: "#portfolio" },
                                 { label: "Testimoni", href: "#testimonials" },

@@ -96,7 +96,7 @@ export function ContactClient() {
                         transition={{ duration: 0.8, delay: 0.4 }}
                     >
                         <p className="text-white/60 text-xs lg:text-sm mb-4 lg:mb-6 tracking-widest uppercase">
-                            Wujudkan impian Anda bersama INSIGN
+                            Wujudkan impian Anda bersama ASKRA
                         </p>
 
                         <div className="flex items-end justify-between group cursor-pointer">

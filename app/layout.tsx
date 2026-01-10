@@ -11,35 +11,35 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://insign.id"),
+  metadataBase: new URL("https://askra.id"),
   title: {
-    default: "INSIGN | Building Dreams, Crafting Spaces",
-    template: "%s | INSIGN",
+    default: "ASKRA | Desain, Bangun, Renovasi",
+    template: "%s | ASKRA",
   },
-  description: "INSIGN brings architectural vision to life through precision craftsmanship and thoughtful design. Professional contractor services in Jakarta: Bangun Rumah, Renovasi, Jasa Arsitek, Kontraktor.",
+  description: "ASKRA (CV ADI SARANA KREASI) mewujudkan visi arsitektur melalui pengerjaan presisi dan desain yang dipikirkan dengan matang. Layanan kontraktor profesional di Jakarta: Bangun Rumah, Renovasi, Jasa Arsitek, Kontraktor.",
   keywords: ["kontraktor", "arsitek", "bangun rumah", "renovasi", "Jakarta", "konstruksi", "interior design", "arsitektur", "bangun ruko"],
-  authors: [{ name: "INSIGN" }],
-  creator: "INSIGN",
+  authors: [{ name: "ASKRA" }],
+  creator: "ASKRA",
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: "https://insign.id",
-    title: "INSIGN | Building Dreams, Crafting Spaces",
-    description: "Professional contractor and architectural services in Jakarta. We build dreams and craft spaces with precision.",
-    siteName: "INSIGN",
+    url: "https://askra.id",
+    title: "ASKRA | Desain, Bangun, Renovasi",
+    description: "Layanan kontraktor dan arsitektur profesional di Jakarta. Kami membangun impian dan menciptakan ruang dengan presisi.",
+    siteName: "ASKRA",
     images: [
       {
         url: "/og-image.jpg", // Ensure this image exists in public folder
         width: 1200,
         height: 630,
-        alt: "INSIGN - Building Dreams, Crafting Spaces",
+        alt: "ASKRA - Desain, Bangun, Renovasi",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "INSIGN | Building Dreams, Crafting Spaces",
-    description: "Professional contractor and architectural services in Jakarta.",
+    title: "ASKRA | Desain, Bangun, Renovasi",
+    description: "Layanan kontraktor dan arsitektur profesional di Jakarta.",
     images: ["/og-image.jpg"],
   },
   robots: {

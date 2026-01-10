@@ -1,9 +1,10 @@
 export const COMPANY_INFO = {
-    name: "INSIGN",
-    tagline: "Building Dreams, Crafting Spaces",
+    name: "ASKRA",
+    fullName: "CV ADI SARANA KREASI",
+    tagline: "Desain, Bangun, Renovasi",
     location: "Jakarta, Indonesia",
     philosophy:
-        "We seek to create spaces that harmonize form and function. Every project is a testament to precision, quality, and thoughtful design. We believe that great architecture is not just about building structures, but about creating environments where life unfolds beautifully.",
+        "Kami menciptakan ruang yang harmonis antara bentuk dan fungsi. Setiap proyek adalah bukti presisi, kualitas, dan desain yang dipikirkan dengan matang. Kami percaya bahwa arsitektur yang hebat bukan hanya tentang membangun struktur, tetapi tentang menciptakan lingkungan di mana kehidupan berkembang dengan indah.",
 };
 
 export interface ServiceItem {
@@ -260,34 +261,34 @@ export const TESTIMONIALS = [
     {
         id: 1,
         name: "Budi Santoso",
-        role: "Homeowner",
+        role: "Pemilik Rumah",
         content:
-            "INSIGN mengubah visi rumah impian kami menjadi kenyataan. Profesionalisme dan perhatian terhadap detail mereka sangat luar biasa.",
+            "ASKRA mengubah visi rumah impian kami menjadi kenyataan. Profesionalisme dan perhatian terhadap detail mereka sangat luar biasa.",
         image: "/images/testimonials/client-1.jpg",
         projectImage: "/images/portfolio/residential/project-1.png",
     },
     {
         id: 2,
         name: "Sarah Wijaya",
-        role: "Property Developer",
+        role: "Pengembang Properti",
         content:
-            "Kerjasama dengan INSIGN selalu memuaskan. Mereka selalu tepat waktu dan hasil pekerjaannya berkualitas tinggi.",
+            "Kerjasama dengan ASKRA selalu memuaskan. Mereka selalu tepat waktu dan hasil pekerjaannya berkualitas tinggi.",
         image: "/images/testimonials/client-2.jpg",
         projectImage: "/images/portfolio/commercial/project-1.png",
     },
     {
         id: 3,
         name: "Andre Kusuma",
-        role: "Business Owner",
+        role: "Pemilik Bisnis",
         content:
-            "Renovasi kantor kami dikerjakan dengan sangat baik. Tim INSIGN sangat responsif dan hasilnya melebihi ekspektasi.",
+            "Renovasi kantor kami dikerjakan dengan sangat baik. Tim ASKRA sangat responsif dan hasilnya melebihi ekspektasi.",
         image: "/images/testimonials/client-3.jpg",
         projectImage: "/images/portfolio/commercial/project-2.png",
     },
 ];
 
 export const CONTACT_INFO = {
-    email: "info@insign.co.id",
+    email: "info@askra.id",
     phone: "+62 812 3456 7890",
     whatsapp: "+6281234567890",
     address: "JL. Peta Barat No. 61, Jakarta, Indonesia",

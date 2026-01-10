@@ -195,7 +195,7 @@ export function About() {
                             >
                                 <Image
                                     src="/images/about/about-image.png"
-                                    alt="INSIGN Interior"
+                                    alt="ASKRA Interior"
                                     fill
                                     className="object-cover"
                                 />

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const menuItems = [
     { label: "Home", href: "/#hero" },
-    { label: "About", href: "/#about" },
+    { label: "About", href: "/about" },
     { label: "Services", href: "/#services" },
     { label: "Portfolio", href: "/#portfolio" },
     { label: "Testimonials", href: "/#testimonials" },
@@ -65,7 +65,7 @@ export function Navigation() {
     // Delay navigation appearance until after intro animation
     const [showNav, setShowNav] = useState(false);
     useEffect(() => {
-        const timer = setTimeout(() => setShowNav(true), 2000);
+        const timer = setTimeout(() => setShowNav(true), 2800);
         return () => clearTimeout(timer);
     }, []);
 
@@ -182,7 +182,7 @@ export function Navigation() {
                             className="absolute bottom-8 left-8 flex gap-6 md:bottom-12 md:left-12 md:gap-8"
                         >
                             <a
-                                href="mailto:info@insign.co.id"
+                                href="mailto:info@askra.id"
                                 className="text-xs uppercase tracking-widest text-white/40 transition-all duration-300 hover:text-white"
                             >
                                 Email
@@ -207,7 +207,7 @@ export function Navigation() {
 
                         {/* WhatsApp Button - Bottom Right (optional) */}
                         <motion.a
-                            href="https://wa.me/62211234567"
+                            href="https://wa.me/6281234567890"
                             target="_blank"
                             rel="noopener noreferrer"
                             initial={{ opacity: 0, scale: 0.8 }}

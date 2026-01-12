@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { About } from "@/components/sections/About";
+import { AboutClient } from "./AboutClient";
 
 export const metadata: Metadata = {
     title: "About",
@@ -12,9 +12,7 @@ export default function AboutPage() {
     return (
         <>
             <Navigation />
-            <main>
-                <About />
-            </main>
+            <AboutClient />
             <Footer />
         </>
     );

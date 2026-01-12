@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { BeforeAfterSlider } from "@/components/portfolio/BeforeAfterSlider";
 
 interface PortfolioClientProps {
     project: any;
@@ -123,6 +124,46 @@ export function PortfolioClient({ project, relatedProjects }: PortfolioClientPro
                     </motion.div>
                 </div>
             </section>
+
+            {/* Before & After Section - Only for Renovation Projects */}
+            {project.beforeAfter && project.beforeAfter.length > 0 && (
+                <section className="pb-16 md:pb-24 px-6 md:px-12 lg:px-16 bg-gradient-to-b from-[#F4F1EE] to-transparent">
+                    <div className="max-w-7xl mx-auto">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="mb-12"
+                        >
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-charcoal mb-4">
+                                Transformasi Luar Biasa
+                            </h2>
+                            <p className="text-lg text-charcoal/60 max-w-2xl">
+                                Lihat perubahan dramatis dari kondisi sebelum dan sesudah renovasi
+                            </p>
+                        </motion.div>
+
+                        <div className="space-y-12 md:space-y-16">
+                            {project.beforeAfter.map((item: any, index: number) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 40 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.8, delay: index * 0.2 }}
+                                >
+                                    <BeforeAfterSlider
+                                        before={item.before}
+                                        after={item.after}
+                                        title={item.title}
+                                    />
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {/* Gallery Section */}
             <section className="pb-16 md:pb-24 px-6 md:px-12 lg:px-16">

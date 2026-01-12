@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { PORTFOLIO_PROJECTS, SERVICES } from '@/lib/constants';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://insign.id';
+    const baseUrl = 'https://askra.id';
 
     // Static routes
     const routes = [

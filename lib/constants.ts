@@ -116,6 +116,11 @@ export interface PortfolioProject {
     services: string;
     description: string;
     gallery: string[];
+    beforeAfter?: {
+        before: string;
+        after: string;
+        title?: string;
+    }[];
 }
 
 export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
@@ -185,6 +190,18 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
             "/images/portfolio/residential/project-4.png",
             "/images/portfolio/residential/project-1.png",
             "/images/portfolio/residential/project-3.png",
+        ],
+        beforeAfter: [
+            {
+                before: "/images/portfolio/residential/project-3.png",
+                after: "/images/portfolio/residential/project-4.png",
+                title: "Transformasi Ruang Tamu"
+            },
+            {
+                before: "/images/portfolio/residential/project-2.png",
+                after: "/images/portfolio/residential/project-1.png",
+                title: "Renovasi Dapur Modern"
+            }
         ],
     },
     {

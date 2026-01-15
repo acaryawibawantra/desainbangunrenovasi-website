@@ -127,7 +127,7 @@ export function PortfolioClient({ project, relatedProjects }: PortfolioClientPro
 
             {/* Before & After Section - Only for Renovation Projects */}
             {project.beforeAfter && project.beforeAfter.length > 0 && (
-                <section className="pb-16 md:pb-24 px-6 md:px-12 lg:px-16 bg-gradient-to-b from-[#F4F1EE] to-transparent">
+                <section className="py-16 md:py-24 px-6 md:px-12 lg:px-16 bg-gradient-to-b from-[#F4F1EE] to-transparent">
                     <div className="max-w-7xl mx-auto">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -136,7 +136,7 @@ export function PortfolioClient({ project, relatedProjects }: PortfolioClientPro
                             transition={{ duration: 0.8 }}
                             className="mb-12"
                         >
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-charcoal mb-4">
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-charcoal mb-2 ">
                                 Transformasi Luar Biasa
                             </h2>
                             <p className="text-lg text-charcoal/60 max-w-2xl">

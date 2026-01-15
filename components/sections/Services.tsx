@@ -61,19 +61,20 @@ export function Services() {
             return;
         }
 
-        // Animate section title - DESKTOP ONLY
+        // Animate section title - DESKTOP ONLY (Faster & Better)
         const title = containerRef.current.querySelector('.section-title');
         const subtitle = containerRef.current.querySelector('.section-subtitle');
 
         gsap.fromTo(title,
-            { opacity: 0, y: 50 },
+            { opacity: 0, y: 40 },
             {
                 opacity: 1,
                 y: 0,
-                duration: 1,
+                duration: 0.6,
+                ease: "back.out(1.7)",
                 scrollTrigger: {
                     trigger: containerRef.current,
-                    start: "top 80%",
+                    start: "top 70%",
                     toggleActions: "play none none reverse"
                 }
             }
@@ -84,36 +85,39 @@ export function Services() {
             {
                 opacity: 1,
                 y: 0,
-                duration: 1,
-                delay: 0.2,
+                duration: 0.6,
+                delay: 0.15,
+                ease: "power2.out",
                 scrollTrigger: {
                     trigger: containerRef.current,
-                    start: "top 80%",
+                    start: "top 70%",
                     toggleActions: "play none none reverse"
                 }
             }
         );
 
-        // Animate service cards with stagger
+        // Animate service cards with faster stagger and bounce effect
         cardsRef.current.forEach((card, index) => {
             if (!card) return;
 
             gsap.fromTo(card,
                 {
                     opacity: 0,
-                    y: 80,
-                    scale: 0.9
+                    y: 60,
+                    scale: 0.95,
+                    rotateX: 10
                 },
                 {
                     opacity: 1,
                     y: 0,
                     scale: 1,
-                    duration: 0.8,
-                    delay: index * 0.15,
-                    ease: "power3.out",
+                    rotateX: 0,
+                    duration: 0.5,
+                    delay: index * 0.1,
+                    ease: "back.out(1.4)",
                     scrollTrigger: {
                         trigger: card,
-                        start: "top 85%",
+                        start: "top 80%",
                         toggleActions: "play none none reverse"
                     }
                 }

@@ -226,8 +226,39 @@ export function AboutClient() {
             </section>
 
             {/* Company Philosophy/Values */}
-            <section className="py-20 md:py-32 px-6 md:px-12 lg:px-16">
-                <div className="max-w-7xl mx-auto">
+            <section className="relative py-20 md:py-32 px-6 md:px-12 lg:px-16 overflow-hidden">
+                {/* Gradient Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-teal/5 via-[#F4F1EE] to-rose/5" />
+
+                {/* Floating Gradient Orbs */}
+                <motion.div
+                    animate={{
+                        x: [0, 30, 0],
+                        y: [0, -40, 0],
+                        scale: [1, 1.1, 1],
+                    }}
+                    transition={{
+                        duration: 20,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                    }}
+                    className="absolute top-20 right-10 w-72 h-72 bg-gradient-to-br from-teal/20 to-transparent rounded-full blur-3xl"
+                />
+                <motion.div
+                    animate={{
+                        x: [0, -40, 0],
+                        y: [0, 30, 0],
+                        scale: [1, 1.2, 1],
+                    }}
+                    transition={{
+                        duration: 25,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                    }}
+                    className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-to-tr from-rose/15 to-transparent rounded-full blur-3xl"
+                />
+
+                <div className="max-w-7xl mx-auto relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -235,10 +266,21 @@ export function AboutClient() {
                         transition={{ duration: 0.8 }}
                         className="text-center mb-16 md:mb-20"
                     >
-                        <h2 className="text-3xl md:text-5xl font-bold text-charcoal mb-4">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                            className="inline-block mb-4"
+                        >
+                            <span className="text-sm md:text-base tracking-[0.3em] uppercase text-teal/70 font-semibold">
+                                Our Values
+                            </span>
+                        </motion.div>
+                        <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-charcoal via-teal to-charcoal bg-clip-text text-transparent">
                             Nilai-Nilai Kami
                         </h2>
-                        <p className="text-lg text-charcoal/60 max-w-2xl mx-auto">
+                        <p className="text-lg md:text-xl text-charcoal/60 max-w-2xl mx-auto font-light">
                             Prinsip yang menjadi fondasi setiap proyek kami
                         </p>
                     </motion.div>
@@ -247,23 +289,56 @@ export function AboutClient() {
                         {values.map((value, index) => (
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, y: 40 }}
+                                initial={{ opacity: 0, y: 50 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: index * 0.1 }}
-                                whileHover={{ y: -10 }}
+                                transition={{
+                                    duration: 0.7,
+                                    delay: index * 0.15,
+                                    ease: [0.25, 0.46, 0.45, 0.94]
+                                }}
+                                whileHover={{
+                                    y: -12,
+                                    transition: { duration: 0.3 }
+                                }}
                                 className="group"
                             >
-                                <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 h-full border border-charcoal/5">
-                                    <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                                        {value.icon}
+                                <div className="relative h-full">
+                                    {/* Glow effect on hover */}
+                                    <div className="absolute -inset-0.5 bg-gradient-to-r from-teal to-rose rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+
+                                    {/* Card */}
+                                    <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-8 shadow-lg group-hover:shadow-2xl transition-all duration-500 h-full border border-white/50 group-hover:border-teal/30 overflow-hidden">
+                                        {/* Gradient overlay on hover */}
+                                        <div className="absolute inset-0 bg-gradient-to-br from-teal/0 via-transparent to-rose/0 group-hover:from-teal/5 group-hover:to-rose/5 transition-all duration-500" />
+
+                                        {/* Content */}
+                                        <div className="relative z-10">
+                                            {/* Icon with animated background */}
+                                            <div className="relative mb-6">
+                                                <motion.div
+                                                    whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                                                    transition={{ duration: 0.5 }}
+                                                    className="relative inline-block"
+                                                >
+                                                    <div className="absolute inset-0 bg-gradient-to-br from-teal/20 to-rose/20 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-300" />
+                                                    <div className="relative text-6xl group-hover:scale-110 transition-transform duration-300">
+                                                        {value.icon}
+                                                    </div>
+                                                </motion.div>
+                                            </div>
+
+                                            <h3 className="text-xl md:text-2xl font-bold text-charcoal mb-4 group-hover:text-teal transition-colors duration-300">
+                                                {value.title}
+                                            </h3>
+                                            <p className="text-charcoal/70 text-sm md:text-base leading-relaxed group-hover:text-charcoal/80 transition-colors duration-300">
+                                                {value.description}
+                                            </p>
+                                        </div>
+
+                                        {/* Decorative corner element */}
+                                        <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-gradient-to-br from-teal/10 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
                                     </div>
-                                    <h3 className="text-xl font-bold text-charcoal mb-3">
-                                        {value.title}
-                                    </h3>
-                                    <p className="text-charcoal/60 text-sm leading-relaxed">
-                                        {value.description}
-                                    </p>
                                 </div>
                             </motion.div>
                         ))}

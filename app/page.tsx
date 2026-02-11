@@ -1,7 +1,7 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/sections/Hero";
-import { Tagline } from "@/components/sections/Tagline";
+// import { Tagline } from "@/components/sections/Tagline";
 import { Services } from "@/components/sections/Services";
 import { Portfolio } from "@/components/sections/Portfolio";
 import { Testimonials } from "@/components/sections/Testimonials";
@@ -13,7 +13,7 @@ export default function Home() {
       <Navigation />
       <main>
         <Hero />
-        <Tagline />
+        {/* <Tagline /> */}
         <Services />
         <Portfolio />
         <Testimonials />

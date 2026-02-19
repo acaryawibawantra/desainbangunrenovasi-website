@@ -3,224 +3,239 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useIsMobile } from "@/hooks/useIsMobile";
+
+import Image from "next/image";
 
 const menuItems = [
-    { label: "Home", href: "/#hero" },
     { label: "About", href: "/about" },
     { label: "Services", href: "/#services" },
     { label: "Portfolio", href: "/#portfolio" },
     { label: "Testimonials", href: "/#testimonials" },
+    { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
 ];
 
-// Sections with dark backgrounds where burger should be white
-const darkSections = ["hero", "about", "tagline"];
-
 export function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
-    const [activeSection, setActiveSection] = useState("hero");
-
-    // Close menu when clicking on links
-    const handleLinkClick = () => {
-        setIsOpen(false);
-    };
-
-    // Track active section on scroll
-    useEffect(() => {
-        const handleScroll = () => {
-            // All sections to track (including non-menu sections like tagline)
-            const allSectionsToTrack = ['hero', 'about', 'tagline', 'services', 'portfolio', 'testimonials'];
-            const scrollPosition = window.scrollY + 100;
-
-            // If at very top, force hero
-            if (scrollPosition < 200) {
-                setActiveSection('hero');
-                return;
-            }
-
-            allSectionsToTrack.forEach((sectionId) => {
-                const section = document.getElementById(sectionId);
-                if (section) {
-                    const sectionTop = section.offsetTop;
-                    const sectionBottom = sectionTop + section.offsetHeight;
-
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                        setActiveSection(sectionId);
-                    }
-                }
-            });
-        };
-
-        // Call immediately to detect current section
-        handleScroll();
-
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-    // Determine burger color based on current section
-    const isDarkSection = darkSections.includes(activeSection);
-    const burgerColor = isDarkSection ? '#FFFFFF' : '#2C2C2C';
-
-    // Delay navigation appearance until after intro animation
+    const [scrolled, setScrolled] = useState(false);
     const [showNav, setShowNav] = useState(false);
+    const [isHidden, setIsHidden] = useState(false);
+    const [lastScrollY, setLastScrollY] = useState(0);
+    const isMobile = useIsMobile();
+
+    // Delay nav appearance until after intro animation
     useEffect(() => {
         const timer = setTimeout(() => setShowNav(true), 2800);
         return () => clearTimeout(timer);
     }, []);
 
-    // Hide on scroll down, show on scroll up
-    const [isHidden, setIsHidden] = useState(false);
-    const [lastScrollY, setLastScrollY] = useState(0);
-
+    // Detect scroll position for background change + hide/show
     useEffect(() => {
-        const handleScrollDirection = () => {
+        const handleScroll = () => {
             const currentScrollY = window.scrollY;
+            setScrolled(currentScrollY > 60);
 
-            // Always show at top of page
             if (currentScrollY < 100) {
                 setIsHidden(false);
-            } else if (currentScrollY > lastScrollY) {
-                // Scrolling down
+            } else if (currentScrollY > lastScrollY + 5) {
                 setIsHidden(true);
-            } else {
-                // Scrolling up
+            } else if (currentScrollY < lastScrollY - 5) {
                 setIsHidden(false);
             }
 
             setLastScrollY(currentScrollY);
         };
 
-        window.addEventListener("scroll", handleScrollDirection, { passive: true });
-        return () => window.removeEventListener("scroll", handleScrollDirection);
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
+
+    const handleLinkClick = () => setIsOpen(false);
+
+    // On hero (not scrolled): transparent bg, white text - DESKTOP ONLY
+    // After scroll or on mobile: white bg, dark text
+    const isTransparent = !scrolled && !isOpen && !isMobile;
 
     return (
         <>
-            {/* Hamburger Button - Minimalist Style with Dynamic Color */}
-            <motion.button
-                onClick={() => setIsOpen(!isOpen)}
-                className="fixed top-8 right-8 z-50 flex h-14 w-14 flex-col items-center justify-center gap-[7px] hover:opacity-70"
-                aria-label="Toggle menu"
-                initial={{ opacity: 0, y: 0 }}
+            {/* ── Main Navbar ── */}
+            <motion.header
+                className="fixed top-0 left-0 right-0 z-40"
+                initial={{ opacity: 0, y: -20 }}
                 animate={{
                     opacity: showNav ? 1 : 0,
-                    y: isHidden && !isOpen ? -80 : 0
+                    y: isHidden && !isOpen ? -80 : 0,
                 }}
-                transition={{ duration: 0.3, ease: 'easeInOut' }}
-                style={{ pointerEvents: showNav && !isHidden ? 'auto' : 'none' }}
+                transition={{ duration: 0.35, ease: "easeInOut" }}
+                style={{ pointerEvents: showNav ? "auto" : "none" }}
             >
-                <motion.span
-                    animate={isOpen ? { rotate: 45, y: 9 } : { rotate: 0, y: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="h-[2px] w-8 transition-colors duration-300"
-                    style={{ backgroundColor: isOpen ? '#FFFFFF' : burgerColor }}
-                />
-                <motion.span
-                    animate={isOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
-                    transition={{ duration: 0.2 }}
-                    className="h-[2px] w-8 transition-colors duration-300"
-                    style={{ backgroundColor: isOpen ? '#FFFFFF' : burgerColor }}
-                />
-                <motion.span
-                    animate={isOpen ? { rotate: -45, y: -9 } : { rotate: 0, y: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="h-[2px] w-8 transition-colors duration-300"
-                    style={{ backgroundColor: isOpen ? '#FFFFFF' : burgerColor }}
-                />
-            </motion.button>
+                <div
+                    className="transition-all duration-300"
+                    style={{
+                        backgroundColor: isTransparent ? "transparent" : "rgba(255,255,255,0.97)",
+                        backdropFilter: isTransparent ? "none" : "blur(12px)",
+                        boxShadow: isTransparent ? "none" : "0 1px 0 rgba(0,0,0,0.08)",
+                    }}
+                >
+                    <div className="flex items-center justify-between px-6 md:px-10 h-16 md:h-[72px]">
 
-            {/* Full-Screen Menu Overlay - Samma Studio Style */}
+                        {/* Logo */}
+                        <Link href="/" className="flex items-center gap-3 shrink-0 group">
+                            <div className="relative w-10 h-10 md:w-11 md:h-11">
+                                <Image
+                                    src="/images/logo-fix.png"
+                                    alt="ASKRA KONTRUKSI Logo"
+                                    fill
+                                    className="object-contain"
+                                    sizes="(max-width: 768px) 40px, 44px"
+                                />
+                            </div>
+                            <div className="flex flex-col justify-center">
+                                <span
+                                    className="text-lg md:text-xl font-bold tracking-wide leading-none transition-colors duration-300"
+                                    style={{
+                                        color: isTransparent ? "#FFFFFF" : "#1a1a1a",
+                                        letterSpacing: "0.02em",
+                                    }}
+                                >
+                                    ASKRA KONTRUKSI
+                                </span>
+                                <span
+                                    className="text-[9px] md:text-[10px] uppercase tracking-widest leading-none transition-colors duration-300 mt-1"
+                                    style={{
+                                        color: isTransparent ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.55)",
+                                        letterSpacing: "0.05em"
+                                    }}
+                                >
+                                    CV ADI SARANA KREASI
+                                </span>
+                            </div>
+                        </Link>
+
+                        {/* Desktop Nav Links */}
+                        <nav className="hidden md:flex items-center gap-1">
+                            {menuItems.map((item) => (
+                                <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    className="px-4 py-2 text-sm font-medium transition-colors duration-200 hover:opacity-70"
+                                    style={{
+                                        color: isTransparent ? "rgba(255,255,255,0.85)" : "#2C2C2C",
+                                        letterSpacing: "0.03em",
+                                    }}
+                                >
+                                    {item.label}
+                                </Link>
+                            ))}
+                        </nav>
+
+                        {/* Desktop CTA Button */}
+                        <div className="hidden md:flex items-center">
+                            <Link
+                                href="/contact"
+                                className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold tracking-wide transition-all duration-200 hover:opacity-85"
+                                style={{
+                                    backgroundColor: isTransparent ? "#FFFFFF" : "#1a1a1a",
+                                    color: isTransparent ? "#1a1a1a" : "#FFFFFF",
+                                    letterSpacing: "0.06em",
+                                }}
+                            >
+                                KONSULTASI GRATIS
+                                <span className="text-base leading-none">→</span>
+                            </Link>
+                        </div>
+
+                        {/* Mobile Hamburger */}
+                        <button
+                            onClick={() => setIsOpen(!isOpen)}
+                            className="md:hidden flex flex-col items-center justify-center gap-[6px] w-10 h-10 hover:opacity-70"
+                            aria-label="Toggle menu"
+                        >
+                            <motion.span
+                                animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="h-[2px] w-6 block"
+                                style={{ backgroundColor: isTransparent ? "#FFFFFF" : "#1a1a1a" }}
+                            />
+                            <motion.span
+                                animate={isOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+                                transition={{ duration: 0.2 }}
+                                className="h-[2px] w-6 block"
+                                style={{ backgroundColor: isTransparent ? "#FFFFFF" : "#1a1a1a" }}
+                            />
+                            <motion.span
+                                animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="h-[2px] w-6 block"
+                                style={{ backgroundColor: isTransparent ? "#FFFFFF" : "#1a1a1a" }}
+                            />
+                        </button>
+                    </div>
+                </div>
+            </motion.header>
+
+            {/* ── Mobile Full-Screen Overlay ── */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.4, ease: "easeInOut" }}
-                        className="fixed inset-0 z-40"
-                        style={{ backgroundColor: 'var(--color-gray-dark)' }}
+                        transition={{ duration: 0.35 }}
+                        className="fixed inset-0 z-30 flex flex-col"
+                        style={{ backgroundColor: "#1a1a1a" }}
                     >
-                        {/* Menu Items - Right Aligned */}
-                        <motion.nav
-                            className="flex h-full flex-col items-end justify-center pr-12 md:pr-24 lg:pr-32"
-                        >
+                        <nav className="flex flex-col items-end justify-center flex-1 pr-10 gap-1">
                             {menuItems.map((item, index) => (
                                 <motion.div
                                     key={item.href}
-                                    initial={{ opacity: 0, x: 60 }}
+                                    initial={{ opacity: 0, x: 40 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: 60 }}
-                                    transition={{
-                                        duration: 0.5,
-                                        delay: 0.1 + index * 0.08,
-                                        ease: [0.25, 0.46, 0.45, 0.94]
-                                    }}
-                                    className="overflow-hidden"
+                                    exit={{ opacity: 0, x: 40 }}
+                                    transition={{ duration: 0.4, delay: 0.05 + index * 0.07 }}
                                 >
                                     <Link
                                         href={item.href}
                                         onClick={handleLinkClick}
-                                        className="block py-2 text-4xl font-light text-white/40 transition-all duration-300 hover:text-white md:text-6xl lg:text-7xl"
-                                        style={{
-                                            fontWeight: 300,
-                                            letterSpacing: '-0.02em'
-                                        }}
+                                        className="block py-2 text-4xl font-light text-white/40 hover:text-white transition-colors duration-200"
+                                        style={{ letterSpacing: "-0.02em" }}
                                     >
                                         {item.label}
                                     </Link>
                                 </motion.div>
                             ))}
-                        </motion.nav>
 
-                        {/* Social Links - Bottom Left */}
+                            {/* Mobile CTA */}
+                            <motion.div
+                                initial={{ opacity: 0, x: 40 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: 40 }}
+                                transition={{ duration: 0.4, delay: 0.05 + menuItems.length * 0.07 }}
+                                className="mt-6"
+                            >
+                                <Link
+                                    href="/contact"
+                                    onClick={handleLinkClick}
+                                    className="inline-flex items-center gap-2 border border-white text-white text-sm uppercase tracking-widest px-6 py-3 hover:bg-white hover:text-black transition-all duration-300"
+                                >
+                                    KONSULTASI GRATIS →
+                                </Link>
+                            </motion.div>
+                        </nav>
+
+                        {/* Social links bottom */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 20 }}
                             transition={{ duration: 0.4, delay: 0.5 }}
-                            className="absolute bottom-8 left-8 flex gap-6 md:bottom-12 md:left-12 md:gap-8"
+                            className="flex gap-6 px-10 pb-10"
                         >
-                            <a
-                                href="mailto:info@askra.id"
-                                className="text-xs uppercase tracking-widest text-white/40 transition-all duration-300 hover:text-white"
-                            >
-                                Email
-                            </a>
-                            <a
-                                href="https://linkedin.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-xs uppercase tracking-widest text-white/40 transition-all duration-300 hover:text-white"
-                            >
-                                LinkedIn
-                            </a>
-                            <a
-                                href="https://instagram.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-xs uppercase tracking-widest text-white/40 transition-all duration-300 hover:text-white"
-                            >
-                                Instagram
-                            </a>
+                            <a href="mailto:info@dbr.id" className="text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors">Email</a>
+                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors">Instagram</a>
+                            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" className="text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors">WhatsApp</a>
                         </motion.div>
-
-                        {/* WhatsApp Button - Bottom Right (optional) */}
-                        <motion.a
-                            href="https://wa.me/6281234567890"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.8 }}
-                            transition={{ duration: 0.3, delay: 0.6 }}
-                            className="absolute bottom-8 right-8 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 transition-all duration-300 hover:bg-white/20 md:bottom-12 md:right-12"
-                            aria-label="WhatsApp"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                            </svg>
-                        </motion.a>
                     </motion.div>
                 )}
             </AnimatePresence>

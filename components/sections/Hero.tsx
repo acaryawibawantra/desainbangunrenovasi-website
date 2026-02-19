@@ -13,12 +13,10 @@ export function Hero() {
 
     // Intro animation sequence
     useEffect(() => {
-        // Phase 1: Show loader for dramatic effect
         const loaderTimer = setTimeout(() => {
             setIsLoading(false);
         }, 1500);
 
-        // Phase 2: Start showing content after loader
         const contentTimer = setTimeout(() => {
             setShowContent(true);
         }, 2000);
@@ -30,10 +28,8 @@ export function Hero() {
     }, []);
 
     useEffect(() => {
-        // Skip parallax on mobile for better performance
         if (isMobile) return;
 
-        // Subtle parallax effect on hero image - DESKTOP ONLY
         const handleScroll = () => {
             if (imageRef.current) {
                 const scrolled = window.scrollY;
@@ -44,22 +40,6 @@ export function Hero() {
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, [isMobile]);
-
-    const words = ["Built", "With", "Precision"];
-
-    // Letter animation variants
-    const letterVariants = {
-        hidden: { opacity: 0, y: 50 },
-        visible: (i: number) => ({
-            opacity: 1,
-            y: 0,
-            transition: {
-                delay: i * 0.03,
-                duration: 0.5,
-                ease: [0.25, 0.46, 0.45, 0.94],
-            },
-        }),
-    };
 
     return (
         <section
@@ -80,7 +60,7 @@ export function Hero() {
                             transition={{ duration: 1, delay: 0.1, ease: [0.76, 0, 0.24, 1] }}
                         />
 
-                        {/* Panel 2 - From Left (Teal/Green) */}
+                        {/* Panel 2 - From Left (Brand Color) */}
                         <motion.div
                             className="fixed inset-0 z-[51]"
                             style={{ backgroundColor: '#9E4244' }}
@@ -89,7 +69,7 @@ export function Hero() {
                             transition={{ duration: 1, delay: 0.25, ease: [0.76, 0, 0.24, 1] }}
                         />
 
-                        {/* Panel 3 - From Bottom (Cream) */}
+                        {/* Panel 3 - From Bottom */}
                         <motion.div
                             className="fixed inset-0 z-[50]"
                             style={{ backgroundColor: 'var(--background)' }}
@@ -106,7 +86,6 @@ export function Hero() {
                             transition={{ duration: 0.3 }}
                         >
                             <div className="flex flex-col items-center gap-8">
-                                {/* Logo with stagger animation */}
                                 <div className="overflow-hidden">
                                     <motion.div
                                         initial={{ y: 60, opacity: 0 }}
@@ -119,7 +98,6 @@ export function Hero() {
                                     </motion.div>
                                 </div>
 
-                                {/* Elegant loading indicator */}
                                 <div className="flex gap-2">
                                     {[0, 1, 2].map((i) => (
                                         <motion.div
@@ -143,186 +121,106 @@ export function Hero() {
                 )}
             </AnimatePresence>
 
-            {/* Full-Screen Background Image with Reveal Animation */}
+            {/* Full-Screen Background Image */}
             <motion.div
                 ref={imageRef}
                 className="absolute inset-0"
-                initial={{ scale: 1.2, opacity: 0 }}
+                initial={{ scale: 1.1, opacity: 0 }}
                 animate={!isLoading ? { scale: 1, opacity: 1 } : {}}
                 transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
                 <Image
-                    src="/images/hero/main.jpg"
-                    alt="INSIGN Interior Design"
+                    src="/images/hero/main-cover.jpg"
+                    alt="Desain Bangun Renovasi - Hero"
                     fill
                     className="object-cover"
-                    style={{ opacity: 0.85 }}
                     priority
                 />
-                {/* Dark gradient overlay from bottom */}
-                <motion.div
+                {/* Dark gradient overlay - stronger at bottom-left for text legibility */}
+                <div
                     className="absolute inset-0"
-                    initial={{ opacity: 0 }}
-                    animate={!isLoading ? { opacity: 1 } : {}}
-                    transition={{ duration: 1, delay: 0.3 }}
                     style={{
-                        background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.1) 100%)'
+                        background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.15) 100%)'
                     }}
                 />
             </motion.div>
 
-            {/* Decorative Lines */}
+            {/* ── TOP ROW: SHAPING ─── line ─── EXCELLENCE ── */}
             <motion.div
-                className="absolute top-0 left-1/4 w-px h-full bg-white/5"
-                initial={{ scaleY: 0, originY: 0 }}
-                animate={showContent ? { scaleY: 1 } : {}}
-                transition={{ duration: 1.5, delay: 0.5 }}
-            />
-            <motion.div
-                className="absolute top-0 right-1/4 w-px h-full bg-white/5"
-                initial={{ scaleY: 0, originY: 0 }}
-                animate={showContent ? { scaleY: 1 } : {}}
-                transition={{ duration: 1.5, delay: 0.7 }}
-            />
-
-            {/* Logo - Top Left */}
-            <motion.h1
-                className="absolute top-8 left-8 md:top-12 md:left-12 z-10"
-                initial={{ opacity: 0, scale: 0 }}
-                animate={showContent ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: 1.3 }}
-            >
-                <a href="#hero" className="block">
-                    <span
-                        className="text-2xl font-light tracking-wider text-white md:text-3xl"
-                        style={{ fontWeight: 300, letterSpacing: '0.1em' }}
-                    >
-                        ASKRA
-                    </span>
-                </a>
-            </motion.h1>
-
-            {/* Main Words with Animation */}
-            <div className="absolute inset-0 z-10 flex items-center justify-center overflow-visible">
-                {/* Desktop: Single row | Mobile: 2 rows */}
-                <div className="relative flex flex-col md:flex-row items-center justify-center text-center gap-x-3 md:gap-x-6 lg:gap-x-8">
-                    {/* Mobile Row 1: Built With | Desktop: all in one row */}
-                    <div className="flex flex-row items-center justify-center gap-x-3 md:gap-x-6 lg:gap-x-8">
-                        {words.slice(0, 2).map((word, wordIndex) => (
-                            <motion.div
-                                key={wordIndex}
-                                className="overflow-visible pb-2 md:pb-0"
-                                initial={{ opacity: 0 }}
-                                animate={showContent ? { opacity: 1 } : {}}
-                                transition={{ delay: wordIndex * 0.2 }}
-                            >
-                                <motion.span
-                                    initial={{ y: '100%' }}
-                                    animate={showContent ? { y: 0 } : {}}
-                                    transition={{
-                                        duration: 0.8,
-                                        delay: 0.3 + wordIndex * 0.15,
-                                        ease: [0.25, 0.46, 0.45, 0.94],
-                                    }}
-                                    className="block text-5xl font-bold text-white md:text-7xl lg:text-8xl xl:text-9xl"
-                                    style={{
-                                        fontWeight: 700,
-                                        letterSpacing: '-0.02em',
-                                        textShadow: '0 4px 30px rgba(0,0,0,0.4)',
-                                    }}
-                                >
-                                    {word}
-                                </motion.span>
-                            </motion.div>
-                        ))}
-                    </div>
-
-                    {/* Mobile Row 2: Precision | Desktop: continues same row */}
-                    <motion.div
-                        className="overflow-visible pb-4 md:pb-0"
-                        initial={{ opacity: 0 }}
-                        animate={showContent ? { opacity: 1 } : {}}
-                        transition={{ delay: 0.4 }}
-                    >
-                        <motion.span
-                            initial={{ y: '100%' }}
-                            animate={showContent ? { y: 0 } : {}}
-                            transition={{
-                                duration: 0.8,
-                                delay: 0.6,
-                                ease: [0.25, 0.46, 0.45, 0.94],
-                            }}
-                            className="block text-5xl font-bold text-white md:text-7xl lg:text-8xl xl:text-9xl"
-                            style={{
-                                fontWeight: 700,
-                                letterSpacing: '-0.02em',
-                                textShadow: '0 4px 30px rgba(0,0,0,0.4)',
-                            }}
-                        >
-                            {words[2]}
-                        </motion.span>
-                    </motion.div>
-                </div>
-            </div>
-
-            {/* Horizontal Line Reveal */}
-            <motion.div
-                className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-y-1/2"
-                initial={{ scaleX: 0 }}
-                animate={showContent ? { scaleX: 1 } : {}}
-                transition={{ duration: 1.2, delay: 0.8 }}
-            />
-
-            {/* Subtitle - Appears after animation */}
-            <motion.div
-                className="absolute bottom-32 left-0 right-0 z-10 px-8 text-center md:px-12 lg:px-16"
-                initial={{ opacity: 0, y: 30 }}
-                animate={showContent ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 1 }}
-            >
-                <p
-                    className="mx-auto max-w-xl text-base text-white/70 md:text-lg"
-                    style={{ lineHeight: 1.6 }}
-                >
-                    Translating visions with reality, balancing idealism with practicality, and
-                    <br className="hidden md:block" />
-                    honoring the interplay between humans, space, and nature.
-                </p>
-            </motion.div>
-
-            {/* Scroll Indicator - Bottom Center */}
-            <motion.div
+                className="absolute top-0 left-0 right-0 z-10 flex items-center px-6 md:px-10"
+                style={{ paddingTop: '5.5rem' }}  /* sits just below the navbar */
                 initial={{ opacity: 0 }}
                 animate={showContent ? { opacity: 1 } : {}}
-                transition={{ duration: 0.8, delay: 1.2 }}
-                className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2"
+                transition={{ duration: 0.8, delay: 0.4 }}
             >
-                <div className="flex flex-col items-center gap-3">
-                    {/* Animated arc/semi-circle */}
-                    <motion.div
-                        animate={{ y: [0, 6, 0] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                        className="relative"
-                    >
-                        <svg width="60" height="30" viewBox="0 0 60 30" fill="none">
-                            <path
-                                d="M5 5 C5 5, 30 30, 55 5"
-                                stroke="rgba(255,255,255,0.4)"
-                                strokeWidth="1.5"
-                                fill="none"
-                            />
-                        </svg>
-                    </motion.div>
-                    <span
-                        className="text-xs uppercase tracking-[0.2em] text-white/50"
-                        style={{ letterSpacing: '0.2em' }}
-                    >
-                        Scroll
-                    </span>
-                </div>
+                {/* Left label */}
+                <span
+                    className="text-white/60 text-xs tracking-[0.35em] uppercase shrink-0"
+                    style={{ fontFamily: 'var(--font-sans, sans-serif)' }}
+                >
+                    SHAPING
+                </span>
+
+                {/* Left decorative line */}
+                <motion.div
+                    className="flex-1 h-px mx-4"
+                    style={{ backgroundColor: 'rgba(255,255,255,0.25)' }}
+                    initial={{ scaleX: 0, originX: 0 }}
+                    animate={showContent ? { scaleX: 1 } : {}}
+                    transition={{ duration: 1.2, delay: 0.6 }}
+                />
+
+                {/* Right decorative line */}
+                <motion.div
+                    className="flex-1 h-px mx-4"
+                    style={{ backgroundColor: 'rgba(255,255,255,0.25)' }}
+                    initial={{ scaleX: 0, originX: 1 }}
+                    animate={showContent ? { scaleX: 1 } : {}}
+                    transition={{ duration: 1.2, delay: 0.6 }}
+                />
+
+                {/* Right label */}
+                <span
+                    className="text-white/60 text-xs tracking-[0.35em] uppercase shrink-0"
+                    style={{ fontFamily: 'var(--font-sans, sans-serif)' }}
+                >
+                    EXCELLENCE
+                </span>
+            </motion.div>
+
+            {/* ── BOTTOM-LEFT: Headline + CTA ── */}
+            <motion.div
+                className="absolute bottom-0 left-0 z-10 px-6 pb-16 md:px-10 md:pb-20 max-w-2xl"
+                initial={{ opacity: 0, y: 40 }}
+                animate={showContent ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.9, delay: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+                <h1
+                    className="text-white font-bold leading-tight mb-8"
+                    style={{
+                        fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
+                        letterSpacing: '-0.01em',
+                        textShadow: '0 2px 20px rgba(0,0,0,0.4)',
+                    }}
+                >
+                    Mewujudkan hunian impian
+                    melalui desain berkelanjutan
+                    dan pembangunan berkualitas.
+                </h1>
+
+                {/* CTA Button */}
+                <motion.a
+                    href="#projects"
+                    className="inline-flex items-center gap-3 border border-white text-white text-sm uppercase tracking-widest px-6 py-3 hover:bg-white hover:text-black transition-all duration-300"
+                    style={{ letterSpacing: '0.15em' }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                >
+                    LIHAT PROYEK
+                    <span className="text-base">→</span>
+                </motion.a>
             </motion.div>
 
         </section>
     );
 }
-

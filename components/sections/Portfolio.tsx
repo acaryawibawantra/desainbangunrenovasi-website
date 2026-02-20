@@ -63,7 +63,7 @@ export function Portfolio() {
         <section
             id="portfolio"
             ref={containerRef}
-            className="relative min-h-screen overflow-hidden"
+            className="relative z-10 min-h-screen overflow-hidden"
             style={{ backgroundColor: 'var(--background)' }}
         >
             <div className="sticky top-0 flex h-screen flex-col">

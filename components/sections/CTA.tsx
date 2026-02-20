@@ -35,7 +35,7 @@ export function CTA() {
         <section
             ref={ref}
             id="contact"
-            className="relative py-24 md:py-32"
+            className="relative z-10 py-24 md:py-32"
             style={{
                 background: 'linear-gradient(135deg, #6B2D2E 0%, #9E4244 30%, #C56B6D 60%, #9E4244 80%, #6B2D2E 100%)',
             }}

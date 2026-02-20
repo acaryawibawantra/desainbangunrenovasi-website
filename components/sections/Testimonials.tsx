@@ -26,7 +26,7 @@ export function Testimonials() {
         <section
             id="testimonials"
             ref={ref}
-            className="relative bg-white py-24 md:py-32"
+            className="relative z-10 bg-white py-24 md:py-24"
         >
             <div className="mx-auto max-w-5xl px-6 lg:px-8">
                 <motion.div

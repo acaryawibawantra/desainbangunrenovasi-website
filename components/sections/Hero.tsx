@@ -27,24 +27,11 @@ export function Hero() {
         };
     }, []);
 
-    useEffect(() => {
-        if (isMobile) return;
-
-        const handleScroll = () => {
-            if (imageRef.current) {
-                const scrolled = window.scrollY;
-                imageRef.current.style.transform = `translate3d(0, ${scrolled * 0.3}px, 0)`;
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [isMobile]);
 
     return (
         <section
             id="hero"
-            className="relative min-h-screen overflow-hidden"
+            className="relative h-screen overflow-hidden"
             style={{ backgroundColor: '#1a1a1a' }}
         >
             {/* Preloader Overlay - Multi Panel Animation */}
@@ -121,10 +108,10 @@ export function Hero() {
                 )}
             </AnimatePresence>
 
-            {/* Full-Screen Background Image */}
+            {/* Full-Screen Background Image - FIXED POSITION */}
             <motion.div
                 ref={imageRef}
-                className="absolute inset-0"
+                className="fixed inset-0 w-full h-full z-0 pointer-events-none"
                 initial={{ scale: 1.1, opacity: 0 }}
                 animate={!isLoading ? { scale: 1, opacity: 1 } : {}}
                 transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -190,34 +177,30 @@ export function Hero() {
 
             {/* ── BOTTOM-LEFT: Headline + CTA ── */}
             <motion.div
-                className="absolute bottom-0 left-0 z-10 px-6 pb-16 md:px-10 md:pb-20 max-w-2xl"
+                className="absolute bottom-0 left-0 z-10 px-6 pb-16 md:px-10 md:pb-20 max-w-[90vw] md:max-w-5xl lg:max-w-[70vw]"
                 initial={{ opacity: 0, y: 40 }}
                 animate={showContent ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.9, delay: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-                <h1
-                    className="text-white font-bold leading-tight mb-8"
+                <h2
+                    className="text-white font-semibold tracking-tight mb-10 w-full"
                     style={{
-                        fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
-                        letterSpacing: '-0.01em',
-                        textShadow: '0 2px 20px rgba(0,0,0,0.4)',
+                        fontSize: 'clamp(2.5rem, 4vw, 3rem)',
+                        lineHeight: '1.2'
                     }}
                 >
-                    Mewujudkan hunian impian
-                    melalui desain berkelanjutan
-                    dan pembangunan berkualitas.
-                </h1>
+                    Mewujudkan hunian impian <br className="hidden lg:block" />melalui desain berkelanjutan <br className="hidden md:block" /> dan pembangunan berkualitas.
+                </h2>
 
                 {/* CTA Button */}
                 <motion.a
                     href="#projects"
-                    className="inline-flex items-center gap-3 border border-white text-white text-sm uppercase tracking-widest px-6 py-3 hover:bg-white hover:text-black transition-all duration-300"
-                    style={{ letterSpacing: '0.15em' }}
+                    className="inline-flex items-center gap-4 bg-white text-black text-[13px] font-medium uppercase tracking-[0.15em] px-8 py-4 transition-colors duration-300 hover:bg-white/90"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                 >
-                    LIHAT PROYEK
-                    <span className="text-base">→</span>
+                    <span>LIHAT PROYEK</span>
+                    <span className="text-sm font-light">→</span>
                 </motion.a>
             </motion.div>
 

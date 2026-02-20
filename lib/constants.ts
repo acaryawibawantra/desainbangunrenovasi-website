@@ -24,7 +24,7 @@ export const SERVICES: ServiceItem[] = [
         description:
             "Wujudkan rumah impian Anda dengan desain modern dan konstruksi berkualitas tinggi",
         longDescription: "Kami menyediakan layanan pembangunan rumah dari nol dengan standar kualitas terbaik. Mulai dari perencanaan, desain, hingga konstruksi, tim profesional kami akan mendampingi setiap tahap pembangunan untuk memastikan rumah impian Anda menjadi kenyataan.",
-        image: "/images/services/service-1.png",
+        image: "/images/services/service-1.jpg",
         features: [
             "Konsultasi desain gratis",
             "Material berkualitas premium",
@@ -34,7 +34,7 @@ export const SERVICES: ServiceItem[] = [
             "Laporan progress berkala"
         ],
         gallery: [
-            "/images/services/service-1.png",
+            "/images/services/service-1.jpg",
             "/images/portfolio/residential/project-1.png",
             "/images/portfolio/residential/project-2.png",
         ],
@@ -45,7 +45,7 @@ export const SERVICES: ServiceItem[] = [
         description:
             "Transformasi ruang lama menjadi modern dengan sentuhan profesional",
         longDescription: "Layanan renovasi kami mengubah ruang lama menjadi hunian modern yang fungsional dan estetis. Dari renovasi minor hingga total makeover, kami menangani semua jenis proyek renovasi dengan presisi dan perhatian terhadap detail.",
-        image: "/images/services/service-2.png",
+        image: "/images/services/service-2.jpg",
         features: [
             "Evaluasi kondisi bangunan",
             "Desain renovasi custom",
@@ -66,7 +66,7 @@ export const SERVICES: ServiceItem[] = [
         description:
             "Desain arsitektur inovatif yang menggabungkan estetika dan fungsi",
         longDescription: "Tim arsitek profesional kami menciptakan desain yang unik dan fungsional, disesuaikan dengan kebutuhan dan gaya hidup Anda. Kami menggabungkan kreativitas dengan kepraktisan untuk menghasilkan ruang yang indah dan nyaman dihuni.",
-        image: "/images/services/service-3.png",
+        image: "/images/services/service-3.jpg",
         features: [
             "Desain 2D & 3D rendering",
             "Konsultasi gaya arsitektur",
@@ -81,27 +81,27 @@ export const SERVICES: ServiceItem[] = [
             "/images/portfolio/commercial/project-2.png",
         ],
     },
-    {
-        id: "kontraktor",
-        title: "Kontraktor",
-        description:
-            "Tim profesional yang menangani proyek Anda dari awal hingga selesai",
-        longDescription: "Sebagai kontraktor berpengalaman, kami menangani seluruh aspek proyek konstruksi Anda. Dari perencanaan hingga penyelesaian, kami memastikan setiap detail dikerjakan dengan standar kualitas tertinggi dan tepat waktu.",
-        image: "/images/services/service-4.png",
-        features: [
-            "Manajemen proyek profesional",
-            "Tim kerja terlatih",
-            "Peralatan modern",
-            "Standar safety tinggi",
-            "Kontrol kualitas ketat",
-            "Harga kompetitif"
-        ],
-        gallery: [
-            "/images/services/service-4.png",
-            "/images/portfolio/commercial/project-3.png",
-            "/images/portfolio/commercial/project-1.png",
-        ],
-    },
+    // {
+    //     id: "kontraktor",
+    //     title: "Kontraktor",
+    //     description:
+    //         "Tim profesional yang menangani proyek Anda dari awal hingga selesai",
+    //     longDescription: "Sebagai kontraktor berpengalaman, kami menangani seluruh aspek proyek konstruksi Anda. Dari perencanaan hingga penyelesaian, kami memastikan setiap detail dikerjakan dengan standar kualitas tertinggi dan tepat waktu.",
+    //     image: "/images/services/service-4.png",
+    //     features: [
+    //         "Manajemen proyek profesional",
+    //         "Tim kerja terlatih",
+    //         "Peralatan modern",
+    //         "Standar safety tinggi",
+    //         "Kontrol kualitas ketat",
+    //         "Harga kompetitif"
+    //     ],
+    //     gallery: [
+    //         "/images/services/service-4.png",
+    //         "/images/portfolio/commercial/project-3.png",
+    //         "/images/portfolio/commercial/project-1.png",
+    //     ],
+    // },
 ];
 
 export interface PortfolioProject {

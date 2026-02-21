@@ -26,6 +26,8 @@ export function Portfolio() {
 
     useEffect(() => {
         if (!containerRef.current || !scrollRef.current) return;
+        // Disable scroll-driven animation on mobile — let user swipe natively
+        if (isMobile) return;
 
         // Calculate total scroll width
         const scrollWidth = scrollRef.current.scrollWidth - window.innerWidth;
@@ -37,13 +39,10 @@ export function Portfolio() {
                     trigger: containerRef.current,
                     start: "top top",
                     end: () => `+=${scrollWidth}`,
-                    // Higher scrub value for mobile = smoother but less precise
-                    scrub: isMobile ? 2 : 1,
+                    scrub: 1,
                     pin: true,
                     anticipatePin: 1,
                     invalidateOnRefresh: true,
-                    // Reduce frequency of updates on mobile
-                    fastScrollEnd: isMobile,
                 },
             });
 
@@ -63,7 +62,7 @@ export function Portfolio() {
         <section
             id="portfolio"
             ref={containerRef}
-            className="relative z-10 min-h-screen overflow-hidden"
+            className={`relative z-10 ${isMobile ? '' : 'min-h-screen'} overflow-hidden`}
             style={{ backgroundColor: 'var(--background)' }}
         >
             <div className="sticky top-0 flex h-screen flex-col">
@@ -159,7 +158,7 @@ export function Portfolio() {
                 </div>
 
                 {/* Horizontal Scroll Container */}
-                <div className="flex flex-1 items-center overflow-hidden">
+                <div className={`flex flex-1 items-center ${isMobile ? 'overflow-x-auto' : 'overflow-hidden'}`}>
                     <div ref={scrollRef} className="flex gap-6 lg:gap-8 px-6 md:px-12">
                         {filteredProjects.map((project) => (
                             <Link

@@ -8,10 +8,10 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 export function Services() {
     return (
-        <section id="services" className="relative w-full bg-[#F5F3F0]">
+        <section id="services" className="relative w-full bg-[#9E4244]">
             {/* Section Header */}
-            <div className="pt-24 pb-16 md:pt-16 md:pb-24 text-center relative z-10 bg-[#F5F3F0] px-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 text-[11px] font-bold tracking-[0.2em] text-charcoal uppercase border border-charcoal/20 rounded-sm bg-white/50">
+            <div className="pt-24 pb-16 md:pt-16 md:pb-24 text-center relative z-10 bg-[#9E4244] px-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 text-[11px] font-bold tracking-[0.2em] text-white uppercase border border-white/20 rounded-sm bg-white/10">
                     <svg className="w-4 h-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <rect x="3" y="3" width="7" height="7"></rect>
                         <rect x="14" y="3" width="7" height="7"></rect>
@@ -20,7 +20,7 @@ export function Services() {
                     </svg>
                     <span>LAYANAN KAMI</span>
                 </div>
-                <h5 className="text-3xl md:text-4xl lg:text-5xl font-medium text-charcoal max-w-4xl mx-auto leading-tight tracking-tight">
+                <h5 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white max-w-4xl mx-auto leading-tight tracking-tight">
                     Apa yang kami kerjakan—<br className="hidden sm:block" />
                     temukan solusi untuk hunian Anda
                 </h5>

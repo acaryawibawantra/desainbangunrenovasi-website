@@ -12,7 +12,7 @@ function Word({ children, progress, range }: { children: string; progress: Motio
     const y = useTransform(progress, range, [5, 0]);
 
     return (
-        <span className="relative inline-block mr-[0.25em] mt-[0.25em]">
+        <span className="relative inline-block mt-[0.25em]">
             <span className="absolute opacity-10 text-white/20 select-none">{children}</span>
             <motion.span style={{ opacity, y }} className="text-white relative inline-block transition-transform duration-700 ease-out">{children}</motion.span>
         </span>
@@ -70,7 +70,7 @@ export function Tagline() {
             className="relative z-10 flex justify-center w-full -mt-24 md:mt-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 2, duration: 1 }}
+            transition={{ delay: 3, duration: 1 }}
         >
             {/* Background extension to cover white body below Hero image gap */}
             <div className="absolute inset-x-0 bottom-0 top-24 md:hidden bg-[#1a1a1a] -z-10" />
@@ -85,21 +85,27 @@ export function Tagline() {
                 }}
                 className="w-[90%] min-h-[70vh] pt-32 pb-24 md:pt-40 md:pb-32 flex flex-col items-center justify-center overflow-hidden"
             >
-                <div className="mx-auto max-w-5xl text-left px-6 md:px-12 w-full">
-                    <p ref={textRef} className="flex flex-wrap justify-start text-2xl font-small leading-tight md:text-5xl lg:text-6xl tracking-tight mb-16">
-                        {words.map((word, i) => {
-                            const start = i / words.length;
-                            const end = start + (1 / words.length);
-                            return (
-                                <Word key={i} progress={textProgress} range={[start, end]}>
-                                    {word}
-                                </Word>
-                            );
-                        })}
-                    </p>
+                <div className="mx-auto max-w-[1400px] px-6 md:px-12 w-full flex flex-col xl:flex-row gap-16 xl:gap-24 items-center">
+                    {/* Left Side: Tagline Text */}
+                    <div className="w-full xl:w-3/5">
+                        <p ref={textRef} className="block text-justify font-light leading-[1.3] text-xl md:text-3xl lg:text-4xl xl:text-[2.75rem] tracking-tight m-0">
+                            {words.map((word, i) => {
+                                const start = i / words.length;
+                                const end = start + (1 / words.length);
+                                return (
+                                    <span key={i}>
+                                        <Word progress={textProgress} range={[start, end]}>
+                                            {word}
+                                        </Word>
+                                        {" "}
+                                    </span>
+                                );
+                            })}
+                        </p>
+                    </div>
 
-                    {/* Statistics Section */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 border-t border-white/20 pt-16 px-4 w-full mt-16 text-left">
+                    {/* Right Side: Statistics Section */}
+                    <div className="w-full xl:w-2/5 flex flex-col gap-12 xl:border-l xl:border-t-0 border-t border-white/20 xl:pl-16 pt-12 xl:pt-0">
                         <StatItem
                             value={10}
                             label="Tahun Berdiri"
@@ -109,7 +115,7 @@ export function Tagline() {
                             value={50}
                             label="Proyek Selesai"
                             suffix="+"
-                            description="dari konsep arsitektur hingga serah terima bangunan kepada klien."
+                            description="dari konsep arsitektur hingga serah terima bangunan."
                         />
                     </div>
                 </div>

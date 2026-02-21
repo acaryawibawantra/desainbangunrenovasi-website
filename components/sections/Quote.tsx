@@ -7,7 +7,7 @@ export function Quote() {
     const [sliderPosition, setSliderPosition] = useState(50);
 
     return (
-        <section className="relative w-full bg-white pt-12 md:pt-20 overflow-hidden">
+        <section className="relative w-full bg-white pt-12 md:pt-20 pb-20 md:pb-32 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
                 <div className="text-center max-w-4xl mx-auto mb-8 md:mb-24">
                     <h4 className="text-2xl md:text-3xl lg:text-4xl font-light text-gray-500 leading-snug tracking-tight">
@@ -75,12 +75,13 @@ export function Quote() {
 
             </div>
 
-            {/* Subtitle */}
-            <div className="max-w-3xl mx-auto px-6 mt-16 pb-4 text-center">
+            {/* Subtitle 
+            <div className="max-w-3xl mx-auto px-6 mt-16 pb-8 text-center">
                 <p className="text-lg md:text-l lg:text-2xl font-light text-red-900 leading-relaxed italic">
                     "Rumah bukan hanya tentang atap dan dinding, tapi tentang kehangatan pelukan yang kita bagi di dalamnya"
                 </p>
             </div>
+            */}
         </section>
     );
 }

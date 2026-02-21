@@ -67,7 +67,7 @@ export function Tagline() {
         <motion.section
             id="tagline"
             ref={containerRef}
-            className="relative z-10 flex justify-center w-full -mt-24 md:mt-0"
+            className="relative z-10 flex justify-center w-full -mt-24 md:mt-0 bg-[#9E4244]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 3, duration: 1 }}
@@ -81,9 +81,8 @@ export function Tagline() {
                     borderTopLeftRadius: borderRadius,
                     borderTopRightRadius: borderRadius,
                     backgroundColor,
-                    boxShadow: '0 -20px 60px rgba(0,0,0,0.2)'
                 }}
-                className="w-[90%] min-h-[70vh] pt-32 pb-24 md:pt-40 md:pb-32 flex flex-col items-center justify-center overflow-hidden"
+                className="w-[90%] min-h-[70vh] pt-32 pb-24 md:pt-40 md:pb-24 flex flex-col items-center justify-center overflow-hidden"
             >
                 <div className="mx-auto max-w-[1400px] px-6 md:px-12 w-full flex flex-col xl:flex-row gap-16 xl:gap-24 items-center">
                     {/* Left Side: Tagline Text */}

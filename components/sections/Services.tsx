@@ -10,7 +10,7 @@ export function Services() {
     return (
         <section id="services" className="relative w-full bg-[#9E4244]">
             {/* Section Header */}
-            <div className="pt-24 pb-16 md:pt-16 md:pb-24 text-center relative z-10 bg-[#9E4244] px-6">
+            <div className="pt-8 pb-16 md:pt-8 md:pb-24 text-center relative z-10 bg-[#9E4244] px-6">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 text-[11px] font-bold tracking-[0.2em] text-white uppercase border border-white/20 rounded-sm bg-white/10">
                     <svg className="w-4 h-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <rect x="3" y="3" width="7" height="7"></rect>

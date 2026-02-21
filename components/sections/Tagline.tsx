@@ -59,15 +59,22 @@ export function Tagline() {
         ["#1A1A1A", "#9E4244"]
     );
 
+    // Parallax upward effect
     // Split text for word animation
     const words = taglineText.split(" ");
 
     return (
-        <section
+        <motion.section
             id="tagline"
             ref={containerRef}
-            className="relative z-10 flex justify-center w-full mt-0"
+            className="relative z-10 flex justify-center w-full -mt-24 md:mt-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2, duration: 1 }}
         >
+            {/* Background extension to cover white body below Hero image gap */}
+            <div className="absolute inset-x-0 bottom-0 top-24 md:hidden bg-[#1a1a1a] -z-10" />
+
             <motion.div
                 style={{
                     width,
@@ -107,7 +114,7 @@ export function Tagline() {
                     </div>
                 </div>
             </motion.div>
-        </section>
+        </motion.section>
     );
 }
 

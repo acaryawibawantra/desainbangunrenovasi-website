@@ -13,8 +13,13 @@ export function Hero() {
 
     // Intro animation sequence
     useEffect(() => {
+        // Lock scroll to top during loading to prevent seeing other sections
+        document.body.style.overflow = 'hidden';
+        window.scrollTo(0, 0);
+
         const loaderTimer = setTimeout(() => {
             setIsLoading(false);
+            document.body.style.overflow = 'unset';
         }, 1500);
 
         const contentTimer = setTimeout(() => {
@@ -24,6 +29,7 @@ export function Hero() {
         return () => {
             clearTimeout(loaderTimer);
             clearTimeout(contentTimer);
+            document.body.style.overflow = 'unset';
         };
     }, []);
 
@@ -31,7 +37,7 @@ export function Hero() {
     return (
         <section
             id="hero"
-            className="relative h-screen overflow-hidden"
+            className="relative h-[110vh] md:h-screen overflow-hidden"
             style={{ backgroundColor: '#1a1a1a' }}
         >
             {/* Preloader Overlay - Multi Panel Animation */}
@@ -40,7 +46,7 @@ export function Hero() {
                     <>
                         {/* Panel 1 - From Top (White) */}
                         <motion.div
-                            className="fixed inset-0 z-[52]"
+                            className="fixed inset-0 z-[999]"
                             style={{ backgroundColor: '#FFFFFF' }}
                             initial={{ y: 0 }}
                             exit={{ y: '-100%' }}
@@ -49,7 +55,7 @@ export function Hero() {
 
                         {/* Panel 2 - From Left (Brand Color) */}
                         <motion.div
-                            className="fixed inset-0 z-[51]"
+                            className="fixed inset-0 z-[998]"
                             style={{ backgroundColor: '#9E4244' }}
                             initial={{ x: 0 }}
                             exit={{ x: '-100%' }}
@@ -58,7 +64,7 @@ export function Hero() {
 
                         {/* Panel 3 - From Bottom */}
                         <motion.div
-                            className="fixed inset-0 z-[50]"
+                            className="fixed inset-0 z-[997]"
                             style={{ backgroundColor: 'var(--background)' }}
                             initial={{ y: 0 }}
                             exit={{ y: '100%' }}
@@ -67,7 +73,7 @@ export function Hero() {
 
                         {/* Center Content - Logo & Loader */}
                         <motion.div
-                            className="fixed inset-0 z-[53] flex items-center justify-center"
+                            className="fixed inset-0 z-[1000] flex items-center justify-center"
                             initial={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.3 }}
@@ -177,7 +183,7 @@ export function Hero() {
 
             {/* ── BOTTOM-LEFT: Headline + CTA ── */}
             <motion.div
-                className="absolute bottom-0 left-0 z-10 px-6 pb-16 md:px-10 md:pb-20 max-w-[90vw] md:max-w-5xl lg:max-w-[70vw]"
+                className="absolute bottom-[10vh] md:bottom-0 left-0 z-10 px-6 pb-16 md:px-10 md:pb-20 max-w-[90vw] md:max-w-5xl lg:max-w-[70vw]"
                 initial={{ opacity: 0, y: 40 }}
                 animate={showContent ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.9, delay: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -185,7 +191,7 @@ export function Hero() {
                 <h2
                     className="text-white font-semibold tracking-tight mb-10 w-full"
                     style={{
-                        fontSize: 'clamp(2.5rem, 4vw, 3rem)',
+                        fontSize: 'clamp(1.75rem, 5vw, 3rem)',
                         lineHeight: '1.2'
                     }}
                 >

@@ -67,7 +67,7 @@ export function Tagline() {
         <motion.section
             id="tagline"
             ref={containerRef}
-            className="relative z-10 flex justify-center w-full -mt-24 md:mt-0 bg-[#9E4244]"
+            className="relative z-10 flex justify-center w-full -mt-24 md:mt-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 3, duration: 1 }}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Lenis from "@studio-freight/lenis";
+import { usePathname } from "next/navigation";
 
 export function SmoothScrollProvider({
     children,
@@ -9,6 +10,8 @@ export function SmoothScrollProvider({
     children: React.ReactNode;
 }) {
     const [isMobile, setIsMobile] = useState(false);
+    const pathname = usePathname();
+    const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
 
     useEffect(() => {
         // Detect mobile
@@ -34,6 +37,8 @@ export function SmoothScrollProvider({
             infinite: false,
         });
 
+        setLenisInstance(lenis);
+
         // RAF loop for Lenis - use performance timestamp
         function raf(time: number) {
             lenis.raf(time);
@@ -45,9 +50,17 @@ export function SmoothScrollProvider({
         // Cleanup
         return () => {
             lenis.destroy();
+            setLenisInstance(null);
             window.removeEventListener('resize', checkMobile);
         };
     }, [isMobile]);
+
+    // Reset scroll position on route change
+    useEffect(() => {
+        if (lenisInstance) {
+            lenisInstance.scrollTo(0, { immediate: true });
+        }
+    }, [pathname, lenisInstance]);
 
     return <>{children}</>;
 }

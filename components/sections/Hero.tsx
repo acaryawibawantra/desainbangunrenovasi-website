@@ -1,36 +1,35 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function Hero() {
     const imageRef = useRef<HTMLDivElement>(null);
-    const [isLoading, setIsLoading] = useState(true);
     const [showContent, setShowContent] = useState(false);
     const isMobile = useIsMobile();
 
-    // Intro animation sequence
     useEffect(() => {
-        // Lock scroll to top during loading to prevent seeing other sections
-        document.body.style.overflow = 'hidden';
-        window.scrollTo(0, 0);
+        // Calculate how long to wait before showing content
+        let delay = 100; // Default minimal delay for instant transitions
 
-        const loaderTimer = setTimeout(() => {
-            setIsLoading(false);
-            document.body.style.overflow = 'unset';
-        }, 1500);
+        if (typeof window !== "undefined") {
+            const loadTime = (window as any).__appLoadTime;
+            if (loadTime) {
+                const elapsed = Date.now() - loadTime;
+                // If it's the initial load, wait for 3000ms preloader + 200ms extra
+                if (elapsed < 3000) {
+                    delay = (3000 - elapsed) + 200;
+                }
+            }
+        }
 
         const contentTimer = setTimeout(() => {
             setShowContent(true);
-        }, 2000);
+        }, delay);
 
-        return () => {
-            clearTimeout(loaderTimer);
-            clearTimeout(contentTimer);
-            document.body.style.overflow = 'unset';
-        };
+        return () => clearTimeout(contentTimer);
     }, []);
 
 
@@ -40,86 +39,13 @@ export function Hero() {
             className="relative h-[110vh] md:h-screen overflow-hidden"
             style={{ backgroundColor: '#1a1a1a' }}
         >
-            {/* Preloader Overlay - Multi Panel Animation */}
-            <AnimatePresence>
-                {isLoading && (
-                    <>
-                        {/* Panel 1 - From Top (White) */}
-                        <motion.div
-                            className="fixed inset-0 z-[999]"
-                            style={{ backgroundColor: '#FFFFFF' }}
-                            initial={{ y: 0 }}
-                            exit={{ y: '-100%' }}
-                            transition={{ duration: 1, delay: 0.1, ease: [0.76, 0, 0.24, 1] }}
-                        />
-
-                        {/* Panel 2 - From Left (Brand Color) */}
-                        <motion.div
-                            className="fixed inset-0 z-[998]"
-                            style={{ backgroundColor: '#9E4244' }}
-                            initial={{ x: 0 }}
-                            exit={{ x: '-100%' }}
-                            transition={{ duration: 1, delay: 0.25, ease: [0.76, 0, 0.24, 1] }}
-                        />
-
-                        {/* Panel 3 - From Bottom */}
-                        <motion.div
-                            className="fixed inset-0 z-[997]"
-                            style={{ backgroundColor: 'var(--background)' }}
-                            initial={{ y: 0 }}
-                            exit={{ y: '100%' }}
-                            transition={{ duration: 1, delay: 0.4, ease: [0.76, 0, 0.24, 1] }}
-                        />
-
-                        {/* Center Content - Logo & Loader */}
-                        <motion.div
-                            className="fixed inset-0 z-[1000] flex items-center justify-center"
-                            initial={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <div className="flex flex-col items-center gap-8">
-                                <div className="overflow-hidden">
-                                    <motion.div
-                                        initial={{ y: 60, opacity: 0 }}
-                                        animate={{ y: 0, opacity: 1 }}
-                                        transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-                                        className="text-5xl md:text-6xl font-bold tracking-wider"
-                                        style={{ color: '#9E4244' }}
-                                    >
-                                        ASKRA
-                                    </motion.div>
-                                </div>
-
-                                <div className="flex gap-2">
-                                    {[0, 1, 2].map((i) => (
-                                        <motion.div
-                                            key={i}
-                                            className="w-2 h-2 rounded-full"
-                                            style={{ backgroundColor: '#9E4244' }}
-                                            initial={{ scale: 0 }}
-                                            animate={{ scale: [0, 1, 0] }}
-                                            transition={{
-                                                duration: 1,
-                                                delay: i * 0.15,
-                                                repeat: Infinity,
-                                                ease: 'easeInOut'
-                                            }}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-                        </motion.div>
-                    </>
-                )}
-            </AnimatePresence>
 
             {/* Full-Screen Background Image - FIXED POSITION */}
             <motion.div
                 ref={imageRef}
                 className="fixed inset-0 w-full h-full z-0 pointer-events-none"
                 initial={{ scale: 1.1, opacity: 0 }}
-                animate={!isLoading ? { scale: 1, opacity: 1 } : {}}
+                animate={showContent ? { scale: 1, opacity: 1 } : {}}
                 transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
                 <Image
@@ -200,7 +126,7 @@ export function Hero() {
 
                 {/* CTA Button */}
                 <motion.a
-                    href="#projects"
+                    href="#portfolio"
                     className="inline-flex items-center gap-4 bg-white text-black text-[13px] font-medium uppercase tracking-[0.15em] px-8 py-4 transition-colors duration-300 hover:bg-white/90"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}

@@ -20,9 +20,8 @@ export function Services() {
                     </svg>
                     <span>LAYANAN KAMI</span>
                 </div>
-                <h5 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white max-w-4xl mx-auto leading-tight tracking-tight">
-                    Apa yang kami kerjakan—<br className="hidden sm:block" />
-                    temukan solusi untuk hunian Anda
+                <h5 className="text-[1.2rem] sm:text-3xl md:text-4xl lg:text-5xl font-medium text-white max-w-[95%] sm:max-w-4xl mx-auto leading-[1.3] md:leading-tight tracking-tight text-balance">
+                    Apa yang kami kerjakan <br /> temukan solusi untuk hunian Anda
                 </h5>
             </div>
 
@@ -118,7 +117,7 @@ function StickyCard({ service, index, total }: { service: any; index: number; to
                     href={`/services/${service.id}`}
                     className="group inline-flex items-center gap-3 px-8 py-3 rounded-full font-medium transition-all duration-300 border border-white text-white text-sm tracking-widest uppercase hover:bg-white hover:text-black"
                 >
-                    <span>Pelajari Lebih Lanjut</span>
+                    <span>Lihat Proyek</span>
                     <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>

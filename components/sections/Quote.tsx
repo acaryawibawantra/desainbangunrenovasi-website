@@ -9,11 +9,11 @@ export function Quote() {
     return (
         <section className="relative w-full bg-white pt-12 md:pt-20 pb-20 md:pb-32 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-                <div className="text-center max-w-4xl mx-auto mb-8 md:mb-24">
-                    <h4 className="text-2xl md:text-3xl lg:text-4xl font-light text-gray-500 leading-snug tracking-tight">
-                        Selamat datang di dunia kreativitas kami, di mana setiap proyek <span className="text-red-900 font-medium">dimulai dengan sebuah mimpi</span>
-                        <br className="hidden sm:block" />
-                        dan berakhir dengan <span className="text-red-900 font-medium">ruang yang terasa seperti rumah.</span>
+                <div className="text-center max-w-[95%] sm:max-w-4xl mx-auto mb-8 md:mb-24 px-2">
+                    <h4 className="text-[1.1rem] sm:text-2xl md:text-3xl lg:text-4xl font-light text-gray-700 tracking-tight leading-[1.3] text-balance">
+                        Bermula dari mimpi, berakhir dengan
+                        <br />
+                        kehangatan ruang yang nyaman bagi Anda.
                     </h4>
                 </div>
             </div>

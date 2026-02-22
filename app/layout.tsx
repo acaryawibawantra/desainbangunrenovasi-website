@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { Preloader } from "@/components/Preloader";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -63,6 +64,7 @@ export default function RootLayout({
   return (
     <html lang="id" className={inter.variable} suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <Preloader />
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
         <WhatsAppButton />
       </body>

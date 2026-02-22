@@ -77,7 +77,7 @@ export function Hero() {
                     className="text-white/60 text-xs tracking-[0.35em] uppercase shrink-0"
                     style={{ fontFamily: 'var(--font-sans, sans-serif)' }}
                 >
-                    SHAPING
+                    DESAIN
                 </span>
 
                 {/* Left decorative line */}
@@ -88,6 +88,14 @@ export function Hero() {
                     animate={showContent ? { scaleX: 1 } : {}}
                     transition={{ duration: 1.2, delay: 0.6 }}
                 />
+
+                {/* Center label */}
+                <span
+                    className="text-white/60 text-xs tracking-[0.35em] uppercase shrink-0"
+                    style={{ fontFamily: 'var(--font-sans, sans-serif)' }}
+                >
+                    BANGUN
+                </span>
 
                 {/* Right decorative line */}
                 <motion.div
@@ -103,7 +111,7 @@ export function Hero() {
                     className="text-white/60 text-xs tracking-[0.35em] uppercase shrink-0"
                     style={{ fontFamily: 'var(--font-sans, sans-serif)' }}
                 >
-                    EXCELLENCE
+                    RENOVASI
                 </span>
             </motion.div>
 

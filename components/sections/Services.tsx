@@ -124,8 +124,20 @@ function StickyCard({ service, index, total }: { service: any; index: number; to
                 </Link>
             </div>
 
+            {/* Scroll Indicator */}
+            <div className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/70">
+                <span className="text-[9px] md:text-[10px] uppercase tracking-[0.3em]">Scroll</span>
+                <div className="w-[1px] h-10 md:h-16 bg-white/20 relative overflow-hidden">
+                    <motion.div
+                        className="absolute top-0 left-0 w-full h-1/2 bg-white"
+                        animate={{ y: ["-100%", "200%"] }}
+                        transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+                    />
+                </div>
+            </div>
+
             {/* Number indicator */}
-            <div className="absolute bottom-12 right-12 z-10 text-white/50 text-2xl font-light">
+            <div className="absolute bottom-8 md:bottom-12 right-6 md:right-12 z-10 text-white/50 text-xl md:text-2xl font-light">
                 {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
             </div>
         </motion.div>

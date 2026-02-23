@@ -85,7 +85,7 @@ export function Navigation() {
                             <div className="relative w-10 h-10 md:w-11 md:h-11">
                                 <Image
                                     src="/images/logo-fix.png"
-                                    alt="ASKRA KONTRUKSI Logo"
+                                    alt="ASKRA KONSTRUKSI Logo"
                                     fill
                                     className="object-contain"
                                     sizes="(max-width: 768px) 40px, 44px"
@@ -99,7 +99,7 @@ export function Navigation() {
                                         letterSpacing: "0.02em",
                                     }}
                                 >
-                                    ASKRA KONTRUKSI
+                                    ASKRA KONSTRUKSI
                                 </span>
                                 <span
                                     className="text-[9px] md:text-[10px] uppercase tracking-widest leading-none transition-colors duration-300 mt-1"

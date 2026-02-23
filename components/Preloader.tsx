@@ -61,7 +61,7 @@ export function Preloader() {
                                 transition={{ duration: 0.7, delay: 0.3, ease: [0.76, 0, 0.24, 1] }}
                                 className="text-3xl md:text-5xl font-bold tracking-widest text-[#9E4244] uppercase text-center"
                             >
-                                Askra Kontruksi
+                                Askra Konstruksi
                             </motion.h1>
                         </div>
 

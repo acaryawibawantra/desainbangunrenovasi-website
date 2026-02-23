@@ -117,7 +117,7 @@ export function Hero() {
 
             {/* ── BOTTOM-LEFT: Headline + CTA ── */}
             <motion.div
-                className="absolute bottom-[10vh] md:bottom-0 left-0 z-10 px-6 pb-16 md:px-10 md:pb-20 max-w-[90vw] md:max-w-5xl lg:max-w-[70vw]"
+                className="absolute bottom-[15vh] md:bottom-0 left-0 z-10 px-6 pb-20 md:px-10 md:pb-24 max-w-[90vw] md:max-w-5xl lg:max-w-[70vw]"
                 initial={{ opacity: 0, y: 40 }}
                 animate={showContent ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.9, delay: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -129,7 +129,9 @@ export function Hero() {
                         lineHeight: '1.2'
                     }}
                 >
-                    Mewujudkan hunian impian <br className="hidden lg:block" />melalui desain berkelanjutan <br className="hidden md:block" /> dan pembangunan berkualitas.
+                    Mewujudkan Hunian Impian Melalui<br className="hidden md:block" />
+                    <span className="md:hidden"> </span>Desain Presisi, Bangunan Kokoh &<br className="hidden md:block" />
+                    <span className="md:hidden"> </span>Renovasi Tanpa Batas.
                 </h2>
 
                 {/* CTA Button */}

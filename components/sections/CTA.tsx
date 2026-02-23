@@ -32,10 +32,10 @@ export function CTA() {
                         <p className="text-white/40 text-xs font-semibold tracking-[0.25em] uppercase mb-4">
                             Mulai Proyek Anda
                         </p>
-                        <p className="text-2xl md:text-3xl lg:text-5xl font-semibold leading-[1.15] text-white">
+                        <p className="text-2xl md:text-2xl lg:text-5xl font-semibold leading-[1.15] text-white">
                             Wujudkan hunian<br />
                             impian Anda.<br />
-                            <span className="text-white/40 font-light">Bersama Askra Kontruksi</span>
+                            <span className="text-white/20 font-light">Bersama Askra Konstruksi</span>
                         </p>
                     </motion.div>
 

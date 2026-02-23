@@ -19,8 +19,8 @@ export interface ServiceItem {
 
 export const SERVICES: ServiceItem[] = [
     {
-        id: "bangun-rumah",
-        title: "Jasa Bangun Rumah",
+        id: "kontraktor",
+        title: "Kontraktor",
         description:
             "Wujudkan rumah impian Anda dengan desain modern dan konstruksi berkualitas tinggi",
         longDescription: "Kami menyediakan layanan pembangunan rumah dari nol dengan standar kualitas terbaik. Mulai dari perencanaan, desain, hingga konstruksi, tim profesional kami akan mendampingi setiap tahap pembangunan untuk memastikan rumah impian Anda menjadi kenyataan.",
@@ -40,8 +40,8 @@ export const SERVICES: ServiceItem[] = [
         ],
     },
     {
-        id: "renovasi",
-        title: "Renovasi",
+        id: "interior",
+        title: "Interior",
         description:
             "Transformasi ruang lama menjadi modern dengan sentuhan profesional",
         longDescription: "Layanan renovasi kami mengubah ruang lama menjadi hunian modern yang fungsional dan estetis. Dari renovasi minor hingga total makeover, kami menangani semua jenis proyek renovasi dengan presisi dan perhatian terhadap detail.",

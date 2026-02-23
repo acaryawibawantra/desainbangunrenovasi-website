@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, MotionValue, useInView, animate } from "framer-motion";
 
-const taglineText = "ASKRA Kontruksi adalah perusahaan yang bergerak di bidang konstruksi yang berdedikasi untuk memberikan hasil terbaik bagi klien kami.";
+const taglineText = "ASKRA Konstruksi  adalah perusahaan yang bergerak di bidang konstruksi yang berdedikasi untuk memberikan hasil terbaik bagi klien kami.";
 
 function Word({ children, progress, range }: { children: string; progress: MotionValue<number>; range: [number, number] }) {
     // Apply a slightly smoother easing on the opacity

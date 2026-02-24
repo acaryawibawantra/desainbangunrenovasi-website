@@ -47,7 +47,7 @@ export function CTA() {
                         className="flex flex-col gap-4 lg:items-end flex-shrink-0"
                     >
                         <a
-                            href="https://wa.me/6281234567890?text=Halo%20ASKRA%2C%20saya%20ingin%20konsultasi%20proyek%20saya."
+                            href="https://wa.me/6281289777917?text=Halo%20ASKRA%2C%20saya%20ingin%20konsultasi%20proyek%20saya."
                             target="_blank"
                             rel="noopener noreferrer"
                             className="group inline-flex items-center gap-3 bg-white text-[#7A2E30] hover:bg-white/90 transition-all duration-300 px-8 py-4 font-semibold text-sm tracking-wide hover:scale-[1.02]"

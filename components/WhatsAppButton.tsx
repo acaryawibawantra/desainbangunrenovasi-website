@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export function WhatsAppButton() {
     const [isOnLightBg, setIsOnLightBg] = useState(false);
-    const whatsappNumber = "6281234567890"; // Ganti dengan nomor WhatsApp Anda
+    const whatsappNumber = "6281289777917"; // Ganti dengan nomor WhatsApp Anda
     const message = "Halo, saya tertarik untuk konsultasi tentang proyek.";
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 

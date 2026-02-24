@@ -306,8 +306,8 @@ export const TESTIMONIALS = [
 
 export const CONTACT_INFO = {
     email: "info@askra.id",
-    phone: "+62 812 3456 7890",
-    whatsapp: "+6281234567890",
+    phone: "+62 812-8977-7917",
+    whatsapp: "+6281289777917",
     address: "JL. Peta Barat No. 61, Jakarta, Indonesia",
     note: "Dengan perjanjian",
 };

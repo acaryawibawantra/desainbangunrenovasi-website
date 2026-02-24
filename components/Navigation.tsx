@@ -234,7 +234,7 @@ export function Navigation() {
                         >
                             <a href="mailto:info@dbr.id" className="text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors">Email</a>
                             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors">Instagram</a>
-                            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" className="text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors">WhatsApp</a>
+                            <a href="https://wa.me/6281289777917" target="_blank" rel="noopener noreferrer" className="text-xs uppercase tracking-widest text-white/40 hover:text-white transition-colors">WhatsApp</a>
                         </motion.div>
                     </motion.div>
                 )}

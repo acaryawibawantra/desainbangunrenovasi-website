@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, MotionValue, useInView, animate } from "framer-motion";
 
-const taglineText = "ASKRA Konstruksi  adalah perusahaan yang bergerak di bidang konstruksi yang berdedikasi untuk memberikan hasil terbaik bagi klien kami.";
+const taglineText = "ASKRA Konstruksi adalah perusahaan yang bergerak di bidang konstruksi dan jasa arsitektur yang berdedikasi penuh untuk memberikan hasil terbaik dan solusi inovatif bagi setiap klien kami.";
 
 function Word({ children, progress, range }: { children: string; progress: MotionValue<number>; range: [number, number] }) {
     // Apply a slightly smoother easing on the opacity
@@ -23,6 +23,22 @@ export function Tagline() {
     const containerRef = useRef<HTMLDivElement>(null);
     const textRef = useRef<HTMLParagraphElement>(null);
     const [isMobile, setIsMobile] = useState(false);
+    const [showContent, setShowContent] = useState(false);
+
+    useEffect(() => {
+        let delay = 100;
+        if (typeof window !== "undefined") {
+            const loadTime = (window as any).__appLoadTime;
+            if (loadTime) {
+                const elapsed = Date.now() - loadTime;
+                if (elapsed < 3000) {
+                    delay = (3000 - elapsed) + 200;
+                }
+            }
+        }
+        const timer = setTimeout(() => setShowContent(true), delay);
+        return () => clearTimeout(timer);
+    }, []);
 
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -69,8 +85,8 @@ export function Tagline() {
             ref={containerRef}
             className="relative z-10 flex justify-center w-full -mt-24 md:mt-0"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 3, duration: 1 }}
+            animate={{ opacity: showContent ? 1 : 0 }}
+            transition={{ duration: 1 }}
         >
             {/* Background extension to cover white body below Hero image gap */}
             <div className="absolute inset-x-0 bottom-0 top-24 md:hidden bg-[#1a1a1a] -z-10" />

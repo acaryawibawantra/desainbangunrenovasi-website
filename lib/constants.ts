@@ -22,7 +22,7 @@ export const SERVICES: ServiceItem[] = [
         id: "kontraktor",
         title: "Kontraktor",
         description:
-            "Wujudkan rumah impian Anda dengan desain modern dan konstruksi berkualitas tinggi",
+            "Kami mewujudkan aktualisasi desain dan kontruksi sesuai dengan perencanaan dan manajemen kontruksi",
         longDescription: "Kami menyediakan layanan pembangunan rumah dari nol dengan standar kualitas terbaik. Mulai dari perencanaan, desain, hingga konstruksi, tim profesional kami akan mendampingi setiap tahap pembangunan untuk memastikan rumah impian Anda menjadi kenyataan.",
         image: "/images/services/service-1.jpg",
         features: [
@@ -39,6 +39,8 @@ export const SERVICES: ServiceItem[] = [
             "/images/portfolio/residential/project-2.png",
         ],
     },
+    //commented out
+    /*
     {
         id: "interior",
         title: "Interior",
@@ -60,11 +62,12 @@ export const SERVICES: ServiceItem[] = [
             "/images/portfolio/residential/project-4.png",
         ],
     },
+    */
     {
         id: "arsitek",
         title: "Jasa Arsitek",
         description:
-            "Desain arsitektur inovatif yang menggabungkan estetika dan fungsi",
+            "Melayani konsultasi perencanaan dari konsep awal dengan rancangan gambar yang sesuai ide dan kebutuhan. Dan memastikan proyek berjalan sesuai rencana.",
         longDescription: "Tim arsitek profesional kami menciptakan desain yang unik dan fungsional, disesuaikan dengan kebutuhan dan gaya hidup Anda. Kami menggabungkan kreativitas dengan kepraktisan untuk menghasilkan ruang yang indah dan nyaman dihuni.",
         image: "/images/services/service-3.jpg",
         features: [

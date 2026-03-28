@@ -139,9 +139,9 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         services: "Jasa Bangun Rumah",
         description: "Sebuah hunian modern yang menggabungkan elemen kontemporer dengan sentuhan tropis. Villa ini dirancang untuk memaksimalkan pencahayaan alami dan ventilasi, menciptakan ruang hidup yang nyaman dan elegan.",
         gallery: [
-            "/images/portfolio/residential/client-projects/modern-villa-jakarta-hero.png",
-            "/images/portfolio/residential/project-2.png",
-            "/images/portfolio/residential/project-3.png",
+            "/images/portfolio/residential/client-projects/A1.jpg",
+            "/images/portfolio/residential/client-projects/A2.jpg",
+            "/images/portfolio/residential/client-projects/A3.jpg",
         ],
     },
     {

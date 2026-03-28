@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     siteName: "ASKRA",
     images: [
       {
-        url: "/og-image.jpg", // Ensure this image exists in public folder
+        url: "/logo.png", // Ensure this image exists in public folder
         width: 1200,
         height: 630,
         alt: "ASKRA - Desain, Bangun, Renovasi",

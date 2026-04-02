@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { BeforeAfterSlider } from "@/components/portfolio/BeforeAfterSlider";
@@ -14,6 +15,8 @@ interface PortfolioClientProps {
 }
 
 export function PortfolioClient({ project, relatedProjects }: PortfolioClientProps) {
+    const [selectedMedia, setSelectedMedia] = useState<string | null>(null);
+
     return (
         <main className="min-h-screen" style={{ backgroundColor: 'var(--background)' }}>
             <Navigation />
@@ -177,15 +180,27 @@ export function PortfolioClient({ project, relatedProjects }: PortfolioClientPro
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.8, delay: index * 0.1 }}
-                                className={`relative overflow-hidden rounded-lg ${index === 0 ? 'md:col-span-2 aspect-[16/9]' : 'aspect-[4/3]'
+                                onClick={() => setSelectedMedia(image)}
+                                className={`relative flex items-center justify-center cursor-pointer group overflow-hidden rounded-lg ${index === 0 ? 'md:col-span-2 aspect-[16/9]' : 'aspect-[4/3]'
                                     }`}
                             >
-                                <Image
-                                    src={image}
-                                    alt={`${project.title} - Image ${index + 1}`}
-                                    fill
-                                    className="object-cover transition-transform duration-700 hover:scale-105"
-                                />
+                                {image.endsWith('.mp4') ? (
+                                    <video
+                                        src={image}
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
+                                        className="object-cover w-full h-full absolute inset-0 transition-transform duration-700 hover:scale-105"
+                                    />
+                                ) : (
+                                    <Image
+                                        src={image}
+                                        alt={`${project.title} - Image ${index + 1}`}
+                                        fill
+                                        className="object-cover transition-transform duration-700 hover:scale-105"
+                                    />
+                                )}
                             </motion.div>
                         ))}
                     </div>
@@ -258,6 +273,57 @@ export function PortfolioClient({ project, relatedProjects }: PortfolioClientPro
             <CTA />
 
             <Footer />
+
+            {/* Lightbox Overlay */}
+            <AnimatePresence>
+                {selectedMedia && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setSelectedMedia(null)}
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 md:p-8 cursor-zoom-out backdrop-blur-sm"
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                            className="relative w-full max-w-6xl max-h-[90vh] aspect-auto flex items-center justify-center"
+                            onClick={(e) => e.stopPropagation()} // Prevent close when clicking the media
+                        >
+                            {/* Close Button */}
+                            <button
+                                onClick={() => setSelectedMedia(null)}
+                                className="absolute -top-12 right-0 text-white/50 hover:text-white transition-colors p-2"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+
+                            {selectedMedia.endsWith('.mp4') ? (
+                                <video
+                                    src={selectedMedia}
+                                    controls
+                                    autoPlay
+                                    loop
+                                    className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
+                                />
+                            ) : (
+                                <div className="relative w-full h-[85vh]">
+                                    <Image
+                                        src={selectedMedia}
+                                        alt="Gallery Full Image"
+                                        fill
+                                        className="object-contain"
+                                    />
+                                </div>
+                            )}
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </main>
     );
 }

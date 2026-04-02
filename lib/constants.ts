@@ -129,10 +129,10 @@ export interface PortfolioProject {
 export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     {
         id: 1,
-        slug: "modern-villa-residence",
-        title: "Modern Villa Residence",
+        slug: "modern-house-residence",
+        title: "Modern House Residence",
         category: "residential",
-        image: "/images/portfolio/residential/client-projects/modern-villa-jakarta-hero.png",
+        image: "/images/portfolio/residential/hero1.jpg",
         location: "Jakarta Selatan",
         year: "2024",
         area: "450 sqm",
@@ -142,6 +142,16 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
             "/images/portfolio/residential/client-projects/A1.jpg",
             "/images/portfolio/residential/client-projects/A2.jpg",
             "/images/portfolio/residential/client-projects/A3.jpg",
+            "/images/portfolio/residential/client-projects/A4.jpg",
+            "/images/portfolio/residential/client-projects/A5.jpg",
+            "/images/portfolio/residential/client-projects/A6.jpg",
+            "/images/portfolio/residential/client-projects/A7.jpg",
+            "/images/portfolio/residential/client-projects/A8.jpg",
+            "/images/portfolio/residential/client-projects/A9.jpg",
+            "/images/portfolio/residential/client-projects/A10.jpg",
+            "/images/portfolio/residential/client-projects/A11.mp4",
+
+
         ],
     },
     {

@@ -83,7 +83,7 @@ export function Tagline() {
         <motion.section
             id="tagline"
             ref={containerRef}
-            className="relative z-10 flex justify-center w-full -mt-24 md:mt-0"
+            className="relative z-10 flex justify-center w-full -mt-20 md:mt-0 font-bold"
             initial={{ opacity: 0 }}
             animate={{ opacity: showContent ? 1 : 0 }}
             transition={{ duration: 1 }}
@@ -103,7 +103,7 @@ export function Tagline() {
                 <div className="mx-auto max-w-[1400px] px-6 md:px-12 w-full flex flex-col xl:flex-row gap-16 xl:gap-24 items-center">
                     {/* Left Side: Tagline Text */}
                     <div className="w-full xl:w-3/5">
-                        <p ref={textRef} className="block text-justify font-light leading-[1.3] text-xl md:text-3xl lg:text-4xl xl:text-[2.75rem] tracking-tight m-0">
+                        <p ref={textRef} className="block text-center font-light leading-[1.3] text-xl md:text-3xl lg:text-4xl xl:text-[2.75rem] tracking-tight m-0">
                             {words.map((word, i) => {
                                 const start = i / words.length;
                                 const end = start + (1 / words.length);

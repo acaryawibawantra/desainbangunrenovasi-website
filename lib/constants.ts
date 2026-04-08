@@ -34,35 +34,11 @@ export const SERVICES: ServiceItem[] = [
             "Laporan progress berkala"
         ],
         gallery: [
-            "/images/services/service-1.jpg",
-            "/images/portfolio/residential/project-1.png",
-            "/images/portfolio/residential/project-2.png",
+            "/images/portfolio/residential/client-projects/modern-house/A2.jpg",
+            "/images/portfolio/residential/client-projects/modern-house2/A1.jpg",
+            "/images/portfolio/residential/client-projects/tropical-house/B2.jpg",
         ],
     },
-    //commented out
-    /*
-    {
-        id: "interior",
-        title: "Interior",
-        description:
-            "Transformasi ruang lama menjadi modern dengan sentuhan profesional",
-        longDescription: "Layanan renovasi kami mengubah ruang lama menjadi hunian modern yang fungsional dan estetis. Dari renovasi minor hingga total makeover, kami menangani semua jenis proyek renovasi dengan presisi dan perhatian terhadap detail.",
-        image: "/images/services/service-2.jpg",
-        features: [
-            "Evaluasi kondisi bangunan",
-            "Desain renovasi custom",
-            "Pengurusan izin renovasi",
-            "Pengerjaan tepat waktu",
-            "Minimalisir gangguan",
-            "Hasil berkualitas tinggi"
-        ],
-        gallery: [
-            "/images/services/service-2.png",
-            "/images/portfolio/residential/project-3.png",
-            "/images/portfolio/residential/project-4.png",
-        ],
-    },
-    */
     {
         id: "arsitek",
         title: "Jasa Arsitek",
@@ -79,10 +55,11 @@ export const SERVICES: ServiceItem[] = [
             "Revisi desain fleksibel"
         ],
         gallery: [
-            "/images/services/service-3.png",
-            "/images/portfolio/commercial/project-1.png",
-            "/images/portfolio/commercial/project-2.png",
+            "/images/portfolio/arsitek/C3.jpg",
+            "/images/portfolio/arsitek/C2.png",
+            "/images/portfolio/arsitek/C1.png",
         ],
+
     },
     // {
     //     id: "kontraktor",
@@ -163,7 +140,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         location: "Bintaro",
         year: "2024",
         area: "380 sqm",
-        services: "Jasa Arsitek",
+        services: "Jasa Bangun Rumah",
         description: "Pool house dengan desain tropis yang menghadirkan suasana resort di rumah. Konsep open-living dengan kolam renang sebagai focal point menciptakan koneksi sempurna antara ruang dalam dan luar.",
         gallery: [
             "/images/portfolio/residential/client-projects/tropical-house/B2.jpg",
@@ -179,8 +156,8 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     },
     {
         id: 3,
-        slug: "contemporary-family-home",
-        title: "Contemporary Family Home",
+        slug: "family-home",
+        title: "Family Home",
         category: "residential",
         image: "/images/portfolio/residential/client-projects/modern-house2/A1.jpg",
         location: "BSD City",

@@ -14,7 +14,7 @@ export function CTA() {
             id="contact"
             className="relative z-10 overflow-hidden"
             style={{
-                background: 'linear-gradient(150deg, #4A1516 0%, #7A2E30 40%, #9E4244 70%, #6B2D2E 100%)',
+                background: 'linear-gradient(150deg, #4A1516 0%, #C94B48 40%, #C94B48 70%, #6B2D2E 100%)',
             }}
         >
             {/* Subtle top border */}

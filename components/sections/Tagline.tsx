@@ -23,25 +23,8 @@ export function Tagline() {
     const containerRef = useRef<HTMLDivElement>(null);
     const textRef = useRef<HTMLParagraphElement>(null);
     const [isMobile, setIsMobile] = useState(false);
-    const [showContent, setShowContent] = useState(false);
-
     useEffect(() => {
-        let delay = 100;
-        if (typeof window !== "undefined") {
-            const loadTime = (window as any).__appLoadTime;
-            if (loadTime) {
-                const elapsed = Date.now() - loadTime;
-                if (elapsed < 3000) {
-                    delay = (3000 - elapsed) + 200;
-                }
-            }
-        }
-        const timer = setTimeout(() => setShowContent(true), delay);
-        return () => clearTimeout(timer);
-    }, []);
-
-    useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        const checkMobile = () => setIsMobile(window.innerWidth < 748);
         checkMobile();
         window.addEventListener("resize", checkMobile);
         return () => window.removeEventListener("resize", checkMobile);
@@ -72,7 +55,7 @@ export function Tagline() {
     const backgroundColor = useTransform(
         containerProgress,
         [0, 1],
-        ["#1A1A1A", "#9E4244"]
+        ["#1A1A1A", "#C94B48"]
     );
 
     // Parallax upward effect
@@ -83,10 +66,7 @@ export function Tagline() {
         <motion.section
             id="tagline"
             ref={containerRef}
-            className="relative z-10 flex justify-center w-full -mt-20 md:mt-0 font-bold"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: showContent ? 1 : 0 }}
-            transition={{ duration: 1 }}
+            className="relative z-10 flex justify-center w-full -mt-24 md:mt-0"
         >
             {/* Background extension to cover white body below Hero image gap */}
             <div className="absolute inset-x-0 bottom-0 top-24 md:hidden bg-[#1a1a1a] -z-10" />
@@ -103,7 +83,7 @@ export function Tagline() {
                 <div className="mx-auto max-w-[1400px] px-6 md:px-12 w-full flex flex-col xl:flex-row gap-16 xl:gap-24 items-center">
                     {/* Left Side: Tagline Text */}
                     <div className="w-full xl:w-3/5">
-                        <p ref={textRef} className="block text-center font-light leading-[1.3] text-xl md:text-3xl lg:text-4xl xl:text-[2.75rem] tracking-tight m-0">
+                        <p ref={textRef} className="block text-justify font-semibold leading-[1.3] text-xl md:text-3xl lg:text-4xl xl:text-[2.75rem] tracking-tight m-0">
                             {words.map((word, i) => {
                                 const start = i / words.length;
                                 const end = start + (1 / words.length);

@@ -78,7 +78,7 @@ export function Tagline() {
                     borderTopRightRadius: borderRadius,
                     backgroundColor,
                 }}
-                className="w-[90%] min-h-[70vh] pt-32 pb-24 md:pt-40 md:pb-24 flex flex-col items-center justify-center overflow-hidden"
+                className="w-[90%] min-h-[50vh] md:min-h-[70vh] pt-16 pb-16 md:pt-40 md:pb-24 flex flex-col items-center justify-center overflow-hidden"
             >
                 <div className="mx-auto max-w-[1400px] px-6 md:px-12 w-full flex flex-col xl:flex-row gap-16 xl:gap-24 items-center">
                     {/* Left Side: Tagline Text */}

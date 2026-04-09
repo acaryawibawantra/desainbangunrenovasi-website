@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { PORTFOLIO_PROJECTS } from "@/lib/constants";
 
 interface ServiceClientProps {
     service: any;
@@ -115,23 +116,41 @@ export function ServiceClient({ service, relatedProjects, otherServices }: Servi
                         Gallery
                     </motion.h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                        {service.gallery.map((image: string, index: number) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.8, delay: index * 0.1 }}
-                                className="relative aspect-[4/3] overflow-hidden rounded-lg"
-                            >
-                                <Image
-                                    src={image}
-                                    alt={`${service.title} - Image ${index + 1}`}
-                                    fill
-                                    className="object-cover transition-transform duration-700 hover:scale-105"
-                                />
-                            </motion.div>
-                        ))}
+                        {service.gallery.map((image: string, index: number) => {
+                            const linkedProject = PORTFOLIO_PROJECTS.find(p => p.gallery.includes(image) || p.image === image);
+                            
+                            const MotionDiv = (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 40 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.8, delay: index * 0.1 }}
+                                    className={`relative aspect-[4/3] overflow-hidden rounded-lg group ${linkedProject ? 'cursor-pointer' : ''}`}
+                                >
+                                    <Image
+                                        src={image}
+                                        alt={`${service.title} - Image ${index + 1}`}
+                                        fill
+                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                    />
+                                    {linkedProject && (
+                                        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                            <span className="text-white text-sm font-medium tracking-wider uppercase border border-white/50 px-4 py-2 rounded-full backdrop-blur-sm">
+                                                Lihat Proyek
+                                            </span>
+                                        </div>
+                                    )}
+                                </motion.div>
+                            );
+
+                            return linkedProject ? (
+                                <Link key={index} href={`/portfolio/${linkedProject.slug}`} className="block">
+                                    {MotionDiv}
+                                </Link>
+                            ) : (
+                                <div key={index}>{MotionDiv}</div>
+                            );
+                        })}
                     </div>
                 </div>
             </section>

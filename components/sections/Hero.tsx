@@ -49,7 +49,7 @@ export function Hero() {
                 transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
                 <Image
-                    src="/images/hero/main-cover.jpg"
+                    src="/images/hero/image-hero.jpg"
                     alt="Desain Bangun Renovasi - Hero"
                     fill
                     className="object-cover"

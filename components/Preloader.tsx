@@ -19,7 +19,7 @@ export function Preloader() {
         const timer = setTimeout(() => {
             setIsLoading(false);
             document.body.style.overflow = "unset";
-        }, 3000);
+        }, 2000);
 
         return () => {
             clearTimeout(timer);
@@ -94,13 +94,13 @@ export function Preloader() {
                             className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-48 sm:w-64 h-[2px] bg-[#9E4244]/10 rounded-full overflow-hidden"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            transition={{ delay: 1 }}
+                            transition={{ delay: 0.6 }}
                         >
                             <motion.div
                                 className="h-full bg-[#9E4244]"
                                 initial={{ width: "0%" }}
                                 animate={{ width: "100%" }}
-                                transition={{ duration: 2.2, delay: 0.4, ease: "easeInOut" }}
+                                transition={{ duration: 1.4, delay: 0.2, ease: "easeInOut" }}
                             />
                         </motion.div>
                     </div>

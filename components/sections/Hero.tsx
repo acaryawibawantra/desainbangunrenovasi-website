@@ -18,9 +18,9 @@ export function Hero() {
             const loadTime = (window as any).__appLoadTime;
             if (loadTime) {
                 const elapsed = Date.now() - loadTime;
-                // If it's the initial load, wait for 3000ms preloader + 200ms extra
-                if (elapsed < 3000) {
-                    delay = (3000 - elapsed) + 200;
+                // If it's the initial load, wait for 2000ms preloader + 200ms extra
+                if (elapsed < 2000) {
+                    delay = (2000 - elapsed) + 200;
                 }
             }
         }

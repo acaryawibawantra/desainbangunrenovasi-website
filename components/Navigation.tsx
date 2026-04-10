@@ -24,9 +24,8 @@ export function Navigation() {
     const [lastScrollY, setLastScrollY] = useState(0);
     const isMobile = useIsMobile();
 
-    // Delay nav appearance until after intro animation
     useEffect(() => {
-        const timer = setTimeout(() => setShowNav(true), 2800);
+        const timer = setTimeout(() => setShowNav(true), 1800);
         return () => clearTimeout(timer);
     }, []);
 
@@ -184,7 +183,7 @@ export function Navigation() {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.35 }}
                         className="fixed inset-0 z-30 flex flex-col"
-                        style={{ backgroundColor: "#1a1a1a" }}
+                        style={{ backgroundColor: "#C94B48" }}
                     >
                         <nav className="flex flex-col items-end justify-center flex-1 pr-10 gap-1">
                             {menuItems.map((item, index) => (

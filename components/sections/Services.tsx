@@ -8,21 +8,15 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 export function Services() {
     return (
-        <section id="services" className="relative w-full bg-[#C94B48]">
+        <section id="services" className="relative w-full bg-[#F5F3F0]">
             {/* Section Header */}
-            <div className="pt-24 pb-16 md:pt-16 md:pb-24 text-center relative z-10 bg-[#C94B48] px-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 text-[11px] font-bold tracking-[0.2em] text-white uppercase border border-white/20 rounded-sm bg-white/10">
-                    <svg className="w-4 h-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="3" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="14" width="7" height="7"></rect>
-                        <rect x="3" y="14" width="7" height="7"></rect>
-                    </svg>
+            <div className="pt-8 pb-12 md:pt-16 md:pb-24 text-center relative z-10 bg-[#e8e5e0] px-6 flex flex-col items-center">
+                <div className="inline-flex items-center gap-2 px-2 py-1 mb-6 text-[0.65rem] font-bold tracking-[0.14em] text-[#786e62] uppercase border border-[#b4a997] rounded-[3px]">
                     <span>LAYANAN KAMI</span>
                 </div>
-                <h5 className="text-[1.2rem] sm:text-3xl md:text-4xl lg:text-5xl font-medium text-white max-w-[95%] sm:max-w-4xl mx-auto leading-[1.3] md:leading-tight tracking-tight text-balance">
-                    Apa yang kami kerjakan <br /> temukan solusi untuk hunian Anda
-                </h5>
+                <h2 className="text-[1.6rem] sm:text-3xl md:text-4xl lg:text-[2.8rem] font-medium text-[#1c1814] max-w-4xl mx-auto leading-[1.2] md:leading-[1.15] tracking-[-0.02em] text-balance">
+                    Apa yang kami kerjakan <br className="hidden sm:block" /> temukan solusi untuk hunian Anda
+                </h2>
             </div>
 
             {/* Sticky Cards Container */}

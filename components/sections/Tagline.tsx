@@ -1,165 +1,166 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform, MotionValue, useInView, animate } from "framer-motion";
+import { motion, useInView, animate, Variants, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import s from "./Tagline.module.css";
 
-const taglineText = "ASKRA Konstruksi adalah perusahaan yang bergerak di bidang konstruksi dan jasa arsitektur yang berdedikasi penuh untuk memberikan hasil terbaik dan solusi inovatif bagi setiap klien kami.";
+/* ─── data ─── */
+const stats = [
+    { value: 10, suffix: "+", desc: "Tahun berdiri dengan dedikasi penuh di industri konstruksi." },
+    { value: 50, suffix: "+", desc: "Proyek selesai dari perencanaan arsitektur hingga serah terima." },
+    { value: 30, suffix: "+", desc: "Tenaga ahli berpengalaman di bidang konstruksi dan arsitektur." },
+];
 
-function Word({ children, progress, range }: { children: string; progress: MotionValue<number>; range: [number, number] }) {
-    // Apply a slightly smoother easing on the opacity
-    const opacity = useTransform(progress, range, [0.15, 1]);
-    // Optional: You can also use transform like Y position to make it feel smoother
-    const y = useTransform(progress, range, [5, 0]);
+const QUOTE = "Konstruksi bukan sekadar bangunan — ini adalah warisan yang kami bangun bersama Anda.";
 
-    return (
-        <span className="relative inline-block mt-[0.25em]">
-            <span className="absolute opacity-10 text-white/20 select-none">{children}</span>
-            <motion.span style={{ opacity, y }} className="text-white relative inline-block transition-transform duration-700 ease-out">{children}</motion.span>
-        </span>
-    );
-}
-
+/* ─── component ─── */
 export function Tagline() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const textRef = useRef<HTMLParagraphElement>(null);
+    const ref = useRef<HTMLElement>(null);
+    const inView = useInView(ref, { once: true, margin: "-60px" });
+
     const [isMobile, setIsMobile] = useState(false);
     useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth < 748);
-        checkMobile();
-        window.addEventListener("resize", checkMobile);
-        return () => window.removeEventListener("resize", checkMobile);
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const { scrollYProgress: containerProgress } = useScroll({
-        target: containerRef,
+    const { scrollYProgress } = useScroll({
+        target: ref,
         offset: ["start 0.9", "start 0.3"],
     });
 
-    const { scrollYProgress: textProgress } = useScroll({
-        target: textRef,
-        offset: ["start 0.8", "start 0.4"],
-    });
-
     const width = useTransform(
-        containerProgress,
+        scrollYProgress,
         [0, 1],
         [isMobile ? "95%" : "90%", "100%"]
     );
 
-    const borderRadius = useTransform(
-        containerProgress,
+    const borderTopRadius = useTransform(
+        scrollYProgress,
         [0, 1],
         [isMobile ? "1.5rem" : "3rem", "0rem"]
     );
 
-    const backgroundColor = useTransform(
-        containerProgress,
-        [0, 1],
-        ["#1A1A1A", "#C94B48"]
-    );
-
-    // Parallax upward effect
-    // Split text for word animation
-    const words = taglineText.split(" ");
+    const stagger: Variants = {
+        hidden: {},
+        show: { transition: { staggerChildren: 0.12 } },
+    };
+    const item: Variants = {
+        hidden: { opacity: 0, y: 20 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+    };
 
     return (
-        <motion.section
-            id="tagline"
-            ref={containerRef}
-            className="relative z-10 flex justify-center w-full -mt-24 md:mt-0"
-        >
-            {/* Background extension to cover white body below Hero image gap */}
-            <div className="absolute inset-x-0 bottom-0 top-24 md:hidden bg-[#1a1a1a] -z-10" />
-
+        <section ref={ref} className="w-full flex justify-center relative z-10 -mt-12 md:mt-0 overflow-hidden bg-[#111111] md:bg-transparent">
             <motion.div
+                id="tagline"
+                className={s.section}
                 style={{
                     width,
-                    borderTopLeftRadius: borderRadius,
-                    borderTopRightRadius: borderRadius,
-                    backgroundColor,
+                    borderTopLeftRadius: borderTopRadius,
+                    borderTopRightRadius: borderTopRadius,
                 }}
-                className="w-[90%] min-h-[50vh] md:min-h-[70vh] pt-16 pb-16 md:pt-40 md:pb-24 flex flex-col items-center justify-center overflow-hidden"
             >
-                <div className="mx-auto max-w-[1400px] px-6 md:px-12 w-full flex flex-col xl:flex-row gap-16 xl:gap-24 items-center">
-                    {/* Left Side: Tagline Text */}
-                    <div className="w-full xl:w-3/5">
-                        <p ref={textRef} className="block text-justify font-semibold leading-[1.3] text-xl md:text-3xl lg:text-4xl xl:text-[2.75rem] tracking-tight m-0">
-                            {words.map((word, i) => {
-                                const start = i / words.length;
-                                const end = start + (1 / words.length);
-                                return (
-                                    <span key={i}>
-                                        <Word progress={textProgress} range={[start, end]}>
-                                            {word}
-                                        </Word>
-                                        {" "}
-                                    </span>
-                                );
-                            })}
-                        </p>
-                    </div>
+                <div className={s.inner}>
 
-                    {/* Right Side: Statistics Section */}
-                    <div className="w-full xl:w-2/5 flex flex-col gap-12 xl:border-l xl:border-t-0 border-t border-white/20 xl:pl-16 pt-12 xl:pt-0">
-                        <StatItem
-                            value={10}
-                            label="Tahun Berdiri"
-                            description="memberikan layanan konstruksi dan desain dengan penuh dedikasi."
-                        />
-                        <StatItem
-                            value={50}
-                            label="Proyek Selesai"
-                            suffix="+"
-                            description="dari konsep arsitektur hingga serah terima bangunan."
-                        />
-                    </div>
-                </div>
+                    {/* ══ LEFT ══ */}
+                    <motion.div
+                        className={s.left}
+                        variants={stagger}
+                        initial="hidden"
+                        animate={inView ? "show" : "hidden"}
+                    >
+                        <motion.div className={s.headerRow} variants={item}>
+                            <h2 className={s.heading}>CV. ASKRA Konstruksi</h2>
+                        </motion.div>
+
+                        <motion.p className={s.desc} variants={item}>
+                            ASKRA Konstruksi adalah perusahaan yang bergerak di bidang konstruksi dan jasa
+                            arsitektur yang berdedikasi penuh untuk memberikan hasil terbaik dan solusi
+                            inovatif bagi setiap klien kami.
+                        </motion.p>
+
+                        <motion.div className={s.imgWrap} variants={item}>
+                            <Image
+                                src="/images/hero/image-hero.jpg"
+                                alt="ASKRA Konstruksi – proyek unggulan"
+                                width={900}
+                                height={580}
+                                priority
+                                className={s.img}
+                            />
+                        </motion.div>
+                    </motion.div>
+
+                    {/* ══ RIGHT — 2×2 grid ══ */}
+                    <motion.div
+                        className={s.grid}
+                        variants={item}
+                        initial="hidden"
+                        animate={inView ? "show" : "hidden"}
+                    >
+                        {/* top-left */}
+                        <div className={`${s.cell} ${s.cellBorderRight} ${s.cellBorderBottom}`}>
+                            <div className={s.numRow}>
+                                <Counter value={stats[0].value} inView={inView} />
+                                <span className={s.suffix}>{stats[0].suffix}</span>
+                            </div>
+                            <p className={s.cellDesc}>{stats[0].desc}</p>
+                        </div>
+
+                        {/* top-right */}
+                        <div className={`${s.cell} ${s.cellBorderBottom}`}>
+                            <div className={s.numRow}>
+                                <Counter value={stats[1].value} inView={inView} />
+                                <span className={s.suffix}>{stats[1].suffix}</span>
+                            </div>
+                            <p className={s.cellDesc}>{stats[1].desc}</p>
+                        </div>
+
+                        {/* bottom-left */}
+                        <div className={`${s.cell} ${s.cellBorderRight}`}>
+                            <div className={s.numRow}>
+                                <Counter value={stats[2].value} inView={inView} />
+                                <span className={s.suffix}>{stats[2].suffix}</span>
+                            </div>
+                            <p className={s.cellDesc}>{stats[2].desc}</p>
+                        </div>
+
+                        {/* bottom-right: dark quote */}
+                        <div className={s.darkCell}>
+                            <p className={s.quote}>{QUOTE}</p>
+                            <Link href="/about" className={s.cta}>
+                                <span className={s.ctaDot} />
+                                Tentang Kami
+                            </Link>
+                        </div>
+                    </motion.div>
+
+                </div>{/* ── close .inner ── */}
             </motion.div>
-        </motion.section>
+        </section>
     );
 }
 
-function StatItem({ value, label, suffix = "", description }: { value: number; label: string; suffix?: string; description?: string }) {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true });
-
-    return (
-        <div ref={ref} className="flex flex-col xl:flex-row xl:items-center gap-6 xl:gap-12 border-l-4 border-white pl-6 md:pl-8">
-            <div className="flex flex-col flex-shrink-0">
-                <div className="text-7xl md:text-8xl lg:text-[8rem] font-light text-white flex items-start leading-none tracking-tighter">
-                    <Counter value={value} isInView={isInView} />
-                    <span className="text-4xl md:text-5xl lg:text-6xl font-light mt-2 ml-1">{suffix}</span>
-                </div>
-                <div className="text-lg md:text-xl text-white/90 mt-4 md:mt-6 font-light">
-                    {label}
-                </div>
-            </div>
-            {description && (
-                <div className="text-base md:text-lg text-white/70 xl:max-w-xs font-light tracking-wide leading-relaxed">
-                    {description}
-                </div>
-            )}
-        </div>
-    );
-}
-
-function Counter({ value, isInView }: { value: number; isInView: boolean }) {
-    const nodeRef = useRef<HTMLSpanElement>(null);
+/* ─── counter ─── */
+function Counter({ value, inView }: { value: number; inView: boolean }) {
+    const ref = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
-        const node = nodeRef.current;
-        if (!node || !isInView) return;
-
-        const controls = animate(0, value, {
-            duration: 2,
+        if (!ref.current || !inView) return;
+        const ctrl = animate(0, value, {
+            duration: 1.8,
             ease: "easeOut",
-            onUpdate: (latest) => {
-                node.textContent = Math.round(latest).toString();
+            onUpdate: (v) => {
+                if (ref.current) ref.current.textContent = Math.round(v).toString();
             },
         });
+        return () => ctrl.stop();
+    }, [value, inView]);
 
-        return () => controls.stop();
-    }, [value, isInView]);
-
-    return <span ref={nodeRef}>0</span>;
+    return <span ref={ref}>0</span>;
 }

@@ -2,6 +2,7 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { Tagline } from "@/components/sections/Tagline";
+import { FullImage } from "@/components/sections/FullImage";
 import { Services } from "@/components/sections/Services";
 import { Portfolio } from "@/components/sections/Portfolio";
 import { Quote } from "@/components/sections/Quote";
@@ -15,6 +16,7 @@ export default function Home() {
       <main>
         <Hero />
         <Tagline />
+        <FullImage />
         <Services />
         <Portfolio />
         <Quote />
